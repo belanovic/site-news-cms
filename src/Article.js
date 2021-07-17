@@ -452,7 +452,7 @@ export default function Article({ setShowCmsOverlay }) {
 
             <div className="loadingArticle" style={{
                 display: contentLoaded === true || isNewArticle === true ? 'none' : 'block',
-                fontSize: '7rem',
+                fontSize: '5rem',
                 fontWeight: 'bold',
                 textAlign: 'center', 
                 pointerEvents: 'none'
