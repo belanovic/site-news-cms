@@ -15,7 +15,7 @@ export default function AllArticles() {
         setShowHomepageBtn, 
         setAllArticlesBtn, setNewArticleBtn, setShowFrontend } = useContext(context);
     const [pageNum, setPageNum] = useState(1);
-    const [imgName, setImgName] = useState('');
+    const [imgName, setImgName] = useState(''); 
     
     useEffect(async function () {
        
