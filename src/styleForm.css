@@ -1,0 +1,102 @@
+/* Form */
+
+.form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 2em;
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Ftypewriter6.jpg?alt=media&token=4be6d1d9-f64f-4ca0-a733-94969d18ef15');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: bottom;
+}
+
+.form {
+    margin: 0 10px 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+    box-shadow: 0 0 53px 10px rgb(0, 0, 0);
+    background: rgba(255, 255, 255, 1);
+}
+.form-title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.25rem;
+    width: 100%;
+    padding-bottom: 2em;
+}
+.sign-in, .sign-up {
+    width: 50%;
+    text-align: center;
+    caret-color: transparent;
+    font-size: 1.5rem;
+}
+.sign-in:hover, .sign-up:hover {
+    cursor: pointer;
+}
+.sign-in {
+    padding: 1em 0 1em 0;
+}
+.sign-up {
+    padding: 1em 0 1em 0;
+}
+.form-title .sign-up.isActive {
+    font-weight: bold;
+    color: green;
+}
+.form-title .sign-in.isActive {
+    font-weight: bold;
+    color: green;
+}
+.form-title .notActive {
+    background: rgba(197, 197, 197, 0.5);
+}
+.form-element {
+    margin: 0 2em 1em 2em;
+}
+.form-element label {
+    display: block;
+    margin-bottom: 0.4em;
+}
+.form-element > input {
+    font-size: 1.5rem;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+}
+
+.form-element > label {
+    font-size: 1rem;
+    text-align: center;
+}
+.form-send {
+    flex: 1;
+    width: 87%;
+}
+.form-send-button {
+    display: inline-block;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    padding: 0.6em 0.6em 0.6em 0.6em;
+    width: 100%;
+    color: white;
+    background: green;
+    margin-bottom: 1em;
+}
+.form-send-button:active {
+    transform: scale(0.99, 0.92);
+}
+.form-send-button:hover {
+    cursor: pointer;
+    background: rgb(0, 150, 0);
+}
+
+.form-element-condition span {
+    color: red;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
