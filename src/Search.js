@@ -1,6 +1,7 @@
 import react, { useState, useContext, useEffect } from 'react';
 import { context } from './newsContext.js';
 import { getAllArticles, getByCategory } from './getDatabase';
+import './style/search.css';
 
 export default function Search({ setPageNum }) {
 

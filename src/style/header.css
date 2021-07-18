@@ -1,0 +1,120 @@
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(180deg, rgb(133, 1, 1), rgb(216, 0, 0) );
+    padding: 0.7em 1em 0.7em 1em;
+}
+
+.header-links-frontend a {
+    text-decoration: none;
+}
+.header-links-frontend-title {
+    color: white;
+    margin: 0;
+    font-style: italic;
+    display: inline-block;
+}
+.fa-react {
+    color: white;
+}
+.header-title {
+    flex: 0 0 10%;
+}
+.header-title a {
+    text-decoration: none;
+}
+.header-title-text {
+    font-size: 3rem;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: 2px
+}
+
+.header-links {
+    flex: 0 0 40%;
+}
+.header-links > * {
+    margin-right: 1em;
+}
+
+.right-box {
+    flex: 0 0 40%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.header-homepageBtn a, .header-allArticlesBtn a, .header-newArticleBtn a {
+    text-decoration: none;
+}
+
+.header-homepageBtn-text, .header-allArticlesBtn-text, .header-newArticleBtn-text {
+    font-size: 1.175rem;
+    color: white;
+    text-align: center;
+    padding: 0.2em 1em 0.2em 1em;
+}
+
+.header-homepageBtn {
+    background: red;
+}
+
+.header-homepageBtn:hover {
+    background: rgb(255, 76, 76)
+}
+
+.header-allArticlesBtn {
+    background: red;
+}
+
+.header-allArticlesBtn:hover {
+    background: rgb(255, 76, 76)
+}
+
+.header-newArticleBtn {
+    background: green;
+    margin-right: 4em;
+}
+
+.header-newArticleBtn:hover {
+    background:rgb(0, 150, 0)
+}
+
+.header-homepageBtn:active, .header-allArticlesBtn:active, .header-newArticleBtn:active {
+    transform: scale(0.95, 0.90);
+}
+
+.login {
+    cursor: pointer;
+    position: relative;
+}
+
+.fa-user-edit {
+    font-size: 1.5rem;
+    color: white;
+}
+.login-info {
+    color: white;
+    position: absolute;
+    width: 9em;
+
+    right: 70%;
+    line-height: 1.5;
+    text-align: center;
+    background: rgb(0, 110, 0);
+    letter-spacing: 1px;
+    padding: 0.3em 0.5em 0.3em 0.5em;
+    border-radius: 15px;
+    display: none;
+}
+
+.login-info-title {
+    font-size: 0.8rem;
+}
+.login:hover .login-info {
+    display: block;
+}

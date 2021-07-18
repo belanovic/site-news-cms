@@ -1,0 +1,14 @@
+.footer {
+    color: white;
+    background: rgb(46, 46, 46);
+    padding: 1em 0 1em 0;
+}
+
+.footer {
+    margin-top: auto;
+}
+
+.footer-copyright {
+    text-align: center;
+    font-size: 1rem;
+}

@@ -1,0 +1,27 @@
+.imgCropper {
+    display: flex;
+    align-items: flex-start;
+}
+
+.crop-btn {
+    margin-right: 1em;
+    margin-left: 1em;
+    font-size: 1rem;
+    padding: 0.1em 0.3em 0.1em 0.3em;
+}
+.crop-btn:hover {
+    cursor: pointer;
+}
+
+
+.ReactCrop div {
+    width: 620px;
+}
+
+.ReactCrop div img {
+    width: 100%;
+}
+
+.previewCanvas {
+    display: none;
+}

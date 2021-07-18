@@ -1,4 +1,5 @@
 import react, {useContext, useEffect, useState} from 'react';
+import './style/tags.css';
 
 export default function Tags({tagsArr, setTagsArr}) {
     

@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
+import './style/image-cropper.css';
 
 function generateDownload(canvas, crop, setImgURL, setImgFile, setImgName) {
   if (!crop || !canvas) {

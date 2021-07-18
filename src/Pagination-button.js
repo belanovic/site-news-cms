@@ -1,4 +1,5 @@
 import React from 'react';
+import './style/pagination.css';
 
 export default function PaginationButton({sign, clickHandler, pageNum, setPageNum, currentBtn}){
     return (

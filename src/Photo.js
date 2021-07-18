@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { context } from './newsContext';
 import ImgCropper from './ImgCropper.js';
 import GenericThumb from './GenericThumb.js';
+import './style/image.css';
 
 export default function Photo({ imgURL, setImgURL, setImgName, setImgFile,
     tabPhotoVisibility, imgDescription, inputHandler, cathegory }) {

@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+}
+.cms {
+    display: flex;
+    flex-direction: column;
+}
+
+.cmsOverlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(173, 185, 3, 0.3);
+}
+
+.textdiv {
+    min-height: 50px;
+    width: 400px;
+    background: yellow;
+}

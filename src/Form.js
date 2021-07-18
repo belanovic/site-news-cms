@@ -1,9 +1,10 @@
 import react, { useState, useEffect, useContext, useRef } from 'react';
 import { context } from './newsContext';
-import './styleForm.css';
+import './style/form.css';
 import {registerUser} from './getUser.js';
 import {loginUser} from './getUser.js';
 import Profile from './Profile.js';
+import './style/form.css';
 
 export default function Form() {
 

@@ -1,0 +1,33 @@
+.tags-row {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+.tag {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    position: relative;
+    margin-right: 1em;
+    margin-bottom: 0.2em;
+    font-size: 1.25rem;
+    padding: 0.2em 0.6em 0.2em 0.6em;
+    letter-spacing: 1px;
+    background: rgb(93, 93, 93);
+    color: white;
+    border-radius: 15%;
+}
+.tag::before {
+    content: '#';
+}
+.tag .fa-times {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 0.75rem;
+}
+
+.tag .fa-times:hover {
+    cursor: pointer;
+    color: rgb(139, 0, 0);
+}

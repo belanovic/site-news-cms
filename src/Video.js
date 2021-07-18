@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { context } from './newsContext';
 import ChooseVideo from './ChooseVideo';
+import './style/video.css';
 
 export default function Video({ videoURL, setVideoName, setVideoFile, setVideoURL }) {
     /* console.log(videoURL) */

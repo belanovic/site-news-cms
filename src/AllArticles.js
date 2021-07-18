@@ -6,6 +6,8 @@ import Pagination from './Pagination.js';
 import {DatePublished, DateCreated, DateUpdated} from './Time.js';
 import Publish from './Publish.js';
 import Search from './Search.js';
+import './style/all-articles.css';
+import './style/all-articles-item.css';
 
 const NEWS_PER_PAGE = 10;    
 

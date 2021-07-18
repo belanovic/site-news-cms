@@ -17,6 +17,8 @@ import TextEditor from './TextEditor.js';
 import Line from './Line';
 import Note from './Note';
 import Scraper from './Scraper';
+import './style/article.css';
+import './style/article-navigation.css';
 
 
 const storage = firebase.storage();
@@ -454,7 +456,7 @@ export default function Article({ setShowCmsOverlay }) {
                 display: contentLoaded === true || isNewArticle === true ? 'none' : 'block',
                 fontSize: '5rem',
                 fontWeight: 'bold',
-                textAlign: 'center',   
+                textAlign: 'center',
                 pointerEvents: 'none'
             }}>Loading...</div>
 

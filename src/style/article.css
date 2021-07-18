@@ -1,0 +1,5 @@
+.article {
+    display: flex;
+    flex-direction: column;
+    background: rgb(212, 212, 212);
+}

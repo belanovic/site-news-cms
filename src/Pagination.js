@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import PaginationButton from './Pagination-button';
 import { context } from './newsContext';
+import './style/pagination.css';
 
 export default function Pagination({ pageNum, setPageNum, isLastPage, NEWS_PER_PAGE }) {
     const { listAllArticles } = useContext(context);

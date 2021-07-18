@@ -1,0 +1,39 @@
+.order-date.hidden {
+    display: none;
+}
+.order-date.show {
+    display: flex;
+    flex-wrap: wrap;
+    border-left: 5px solid green;
+    border-right: 5px solid green;
+    border-bottom: 5px solid green;
+}
+.order-selected-articles {
+    overflow: hidden;
+    line-height: 1;
+    flex: 2 2 100%;
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+
+}
+.order-selected-articles option {   
+    width: 100%;
+}
+
+.order-dateElement .dateInput {
+    width: 5em;
+}
+
+.order-date-save {
+    flex: 2
+}
+.order-date-save button {
+    width: 100%;
+}
+.order-date-display {
+    flex: 2
+}
+.order-date-display button {
+    width: 100%;
+}

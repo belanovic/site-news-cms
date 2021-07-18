@@ -3,7 +3,9 @@ import { getFrontpageNews, updateFrontpage, getByDate } from './getDatabase';
 import { context } from './newsContext.js';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import SearchDate from './SearchDate';
-import { useToggle } from './customHooks.js'
+import { useToggle } from './customHooks.js';
+import './style/order.css';
+import './style/order-date.css';
 
 export default function Order() {
 
