@@ -1,0 +1,49 @@
+.profile {
+    letter-spacing: 1.5px;
+}
+
+.profile-element {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(143, 143, 143, 0.5);
+    margin-bottom: 3em;
+    padding: 0.7em 1em 0.7em 1em;
+    box-shadow: 10px 10px 15px 0px rgb(63, 63, 63);
+}
+.profile-element-description {
+    font-weight: bold;
+    color: black;
+    margin-bottom: 0.5em;
+}
+
+.profile-element .data {
+    
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-shadow: 3px 3px black;
+}
+
+
+
+.profile-signOut {
+    display: block;
+    width: 80%;
+    margin: auto;
+    border: none;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    padding: 0.6em 0.6em 0.6em 0.6em;
+    color: white;
+    background: rgba(0, 98, 0, 0.7);
+    box-shadow: 5px 5px 5px 0px rgb(63, 63, 63);
+}
+.profile-signOut:active {
+    transform: scale(0.99, 0.92);
+}
+.profile-signOut:hover {
+    cursor: pointer;
+    background: rgba(0, 150, 0, 0.7);
+}

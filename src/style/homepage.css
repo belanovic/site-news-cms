@@ -20,6 +20,7 @@
 .homepage-newArticleBtn, .homepage-allArticlesBtn, .homepage-frontpage-order {
     flex: 0 0 30%;
     border: 5px double rgb(133, 1, 1);
+
     border-radius: 10%;
     box-shadow: 0 0 50px 0px black;
     background: rgb(189, 0, 0, 0.5);
@@ -29,6 +30,7 @@
 }
 .homepage-newArticleBtn:hover, .homepage-allArticlesBtn:hover, .homepage-frontpage-order:hover {
     background: rgb(1, 122, 1, 0.5);
+    
 }
 .homepage-newArticleBtn a, .homepage-allArticlesBtn a, .homepage-frontpage-order a {
     text-decoration: none;
