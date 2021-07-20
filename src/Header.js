@@ -1,17 +1,17 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { context } from './newsContext.js';
 import './style/header.css';
 
 export default function Header() {
 
-    const { showHomepageBtn, allArticlesBtn, 
+       const { showHomepageBtn, allArticlesBtn, showOrderBtn,
             newArticleBtn, showFrontend, setFormVisible, 
-            loggedIn,loggedUser, loggedUsername } = useContext(context);
+            activeLink,
+            loggedIn, loggedUser, loggedUsername } = useContext(context);
 
     return (
         <header className="header">
-
             <div className="header-links">
                 <div className="header-links-frontend" style = {{display: showFrontend}} >
                     <a href = 'https://site-news-frontend.netlify.app/' target = "_blanc">
@@ -28,18 +28,28 @@ export default function Header() {
                     <Link to="/">
                         <div
                             className="header-homepageBtn-text"
-                        >Homepage</div>
+                        ><i class="fas fa-home"></i>Homepage</div>
                     </Link>
                 </div>
-
+ 
                 <div
-                    className="header-allArticlesBtn"
+                    className={`header-allArticlesBtn ${activeLink === 'allArticles' && 'activeLink'}`}
                     style={{ display: allArticlesBtn }}
                 >
                     <Link to={`/allArticles`}>
                         <div
                             className="header-allArticlesBtn-text"
-                        >All articles</div>
+                        ><i class="fas fa-list-ul"></i>All articles</div>
+                    </Link>
+                </div>
+                <div
+                    className={`header-orderBtn ${activeLink === 'order' && 'activeLink'}`}
+                    style={{ display: showOrderBtn }}
+                >
+                    <Link to={`/order`}>
+                        <div
+                            className="header-orderBtn-text"
+                        ><i class="fas fa-stream"></i>Order articles</div>
                     </Link>
                 </div>
 
@@ -55,13 +65,14 @@ export default function Header() {
 
             <div className = "right-box">
                 <div
-                    className="header-newArticleBtn"
+                    className={`header-newArticleBtn ${activeLink === 'article' && 'activeLink'}`}
                     style={{ display: newArticleBtn }}
                 >
                     <Link to="/oneArticle/new">
+                        
                         <div
                             className="header-newArticleBtn-text"
-                        >New article</div>
+                        ><i class="fas fa-feather-alt"></i>New article</div>
                     </Link>
                 </div>
                 <div className="login">

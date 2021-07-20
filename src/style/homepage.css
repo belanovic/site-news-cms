@@ -2,9 +2,12 @@
     /* height: 100%; */
     flex: 1;
     padding: 0.1px;
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Ftypewriter6.jpg?alt=media&token=4be6d1d9-f64f-4ca0-a733-94969d18ef15');
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnewspaper6.jpg?alt=media&token=cf4a9604-2519-42ca-a882-c47072a061d6');
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnp1.png?alt=media&token=d99118a0-dd8e-4013-a977-0c00d4d5e9e0');
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnp2.jpg?alt=media&token=5b93c0c0-cd2e-4e6c-9cef-1f25c8bcaa69');
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnp3.jpg?alt=media&token=6900d3fa-4dc3-4e2d-ac76-bffdc6a06e19');
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnp4.jpg?alt=media&token=baf725c8-de57-457e-9128-ee9f0825a581');
+
     background-position-x: right;
     background-position-y: bottom;
     

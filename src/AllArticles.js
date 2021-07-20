@@ -14,8 +14,9 @@ const NEWS_PER_PAGE = 10;
 export default function AllArticles() {
 
     const { listAllArticles, setListAllArticles, listLoaded, setListLoaded, 
-        setShowHomepageBtn, 
-        setAllArticlesBtn, setNewArticleBtn, setShowFrontend } = useContext(context);
+        setActiveLink, setShowHomepageBtn, 
+        setAllArticlesBtn, setNewArticleBtn, setShowOrderBtn,
+        setShowFrontend} = useContext(context);
     const [pageNum, setPageNum] = useState(1);
     const [imgName, setImgName] = useState('');  
     
@@ -26,12 +27,16 @@ export default function AllArticles() {
 
     useEffect(function () {
 
-        setShowHomepageBtn('inline-block');
-        setAllArticlesBtn('none');
-        setNewArticleBtn('inline-block');
-        setShowFrontend('none'); 
+    setActiveLink('allArticles');
     })
 
+    useEffect(() => {
+        setShowHomepageBtn('inline-block');
+        setAllArticlesBtn('inline-block');
+        setNewArticleBtn('inline-block');
+        setShowOrderBtn('inline-block');
+        setShowFrontend('none');
+    })
 
     return (
         <>

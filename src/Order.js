@@ -14,7 +14,9 @@ export default function Order() {
     const [activeArrow, setActiveArrow] = useState('');
     const [doubleSelectedArticle, setDoubleSelectedArticle] = useState('');
     const [newsByDateAllComp, setNewsByDateAllComp] = useState([]);
-    const { setShowHomepageBtn, setAllArticlesBtn, setNewArticleBtn, setShowFrontend } = useContext(context);
+    const { setActiveLink, setShowHomepageBtn, setAllArticlesBtn, 
+        setNewArticleBtn, setShowOrderBtn,
+        setShowFrontend } = useContext(context);
 
     const onDragEnd = (result) => {
         const { destination, source, reason } = result;
@@ -69,10 +71,7 @@ export default function Order() {
     }
 
     useEffect(() => {
-        setShowHomepageBtn('inline-block');
-        setAllArticlesBtn('inline-block');
-        setNewArticleBtn('inline-block');
-        setShowFrontend('none');
+        setActiveLink('order');
     })
 
     useEffect(async () => {
@@ -89,6 +88,14 @@ export default function Order() {
         const result = await getByDate(d);
         setNewsByDateAllComp(result);
     }, [])
+
+    useEffect(() => {
+        setShowHomepageBtn('inline-block');
+        setAllArticlesBtn('inline-block');
+        setNewArticleBtn('inline-block');
+        setShowOrderBtn('inline-block');
+        setShowFrontend('none');
+    })
 
     return (
 

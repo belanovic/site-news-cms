@@ -9,7 +9,11 @@ import './style/form.css';
 export default function Form() {
 
     const { alphabet, isLoggedIn, setLoggedIn, 
-            loggedUser, setLoggedUser, setLoggedUsername } = useContext(context);
+            loggedUser, setLoggedUser, setLoggedUsername,
+            setShowHomepageBtn, setAllArticlesBtn, 
+            setNewArticleBtn, setShowOrderBtn,
+            setShowFrontend
+        } = useContext(context);
 
     const [signInisActive, setSignInIsActive] = useState(true);
     const [signUpisActive, setSignUpIsActive] = useState(false);
@@ -71,6 +75,14 @@ export default function Form() {
         const newUser = await registerUser(firstName, lastName, usernameSignUp, passwordSignUp, email);
         console.log(newUser);
     }
+
+    useEffect(() => {
+        setShowHomepageBtn('inline-block');
+        setAllArticlesBtn('inline-block');
+        setNewArticleBtn('inline-block');
+        setShowOrderBtn('inline-block');
+        setShowFrontend('none');
+    })
 
     return (
         <>

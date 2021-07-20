@@ -13,7 +13,9 @@ function Provider(props) {
     
     const [showHomepageBtn, setShowHomepageBtn] = useState('none');
     const [allArticlesBtn, setAllArticlesBtn] = useState('none');
-    const [newArticleBtn, setNewArticleBtn] = useState('none');
+    const [newArticleBtn, setNewArticleBtn] = useState('none');    
+    const [showOrderBtn, setShowOrderBtn] = useState('none');    
+    const [activeLink, setActiveLink] = useState('none');
     const [showFrontend, setShowFrontend] = useState('none');
     const [formVisible, setFormVisible] = useState(false);
     const [isLoggedIn, setLoggedIn] = useState(false);
@@ -58,6 +60,10 @@ function Provider(props) {
             setAllArticlesBtn,
             newArticleBtn,
             setNewArticleBtn,
+            showOrderBtn, 
+            setShowOrderBtn,
+            activeLink, 
+            setActiveLink,
             showFrontend,
             setShowFrontend,
             formVisible,

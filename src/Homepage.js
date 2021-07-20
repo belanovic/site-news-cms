@@ -8,12 +8,13 @@ import './style/homepage.css';
 
 export default function Homepage() {
 
-    const { setShowHomepageBtn, setAllArticlesBtn, setNewArticleBtn, setShowFrontend } = useContext(context);
+    const { setShowHomepageBtn, setShowOrderBtn, setAllArticlesBtn, setNewArticleBtn, setShowFrontend } = useContext(context);
 
     useEffect(() => {
         setShowHomepageBtn('none');
         setAllArticlesBtn('none');
         setNewArticleBtn('none');
+        setShowOrderBtn('none');
         setShowFrontend('block');
     })
 

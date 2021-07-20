@@ -1,13 +1,13 @@
 .order {
     padding: 2em;
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnewspaper6.jpg?alt=media&token=cf4a9604-2519-42ca-a882-c47072a061d6');
 }
 
 .order-articles {
     width: 75%;
     margin: auto;
     margin-bottom: 1em;
-    box-shadow: 0 0 15px 0px;
-    background: white;
+    background: transparent;
 }
 
 .order-articles-item-elements {
@@ -18,6 +18,8 @@
     display: flex;
     align-items: center;
     color: white;
+    border-radius: 15px;
+    box-shadow: -5px 5px 30px 0px rgb(0, 0, 0);
     background: linear-gradient(180deg, rgb(69, 70, 69),rgb(90, 90, 106));
 }
 
@@ -58,7 +60,7 @@
 
 .order-articles-item-space {
     height: 2em;    
-    background: white;
+    background: transparent;
 }
 /* .order-articles-item:nth-child(1) {
     border-top: 2px solid black;
