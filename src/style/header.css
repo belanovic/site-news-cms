@@ -35,7 +35,7 @@
     font-family: 'Times New Roman', Times, serif;
 }
 .header-links {
-    flex: 0 0 40%;
+    flex: 0 0 40%; 
 }
 .header-links > * {
     margin-right: 1em;

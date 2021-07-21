@@ -19,7 +19,7 @@ export default function Header() {
                             <i className="fab fa-react"></i>
                             <span>www.vesti.com</span>
                         </div>
-                    </a>
+                    </a> 
                 </div>
                 <div
                     className="header-homepageBtn"
