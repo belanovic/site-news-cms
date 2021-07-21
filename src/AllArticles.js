@@ -52,7 +52,7 @@ export default function AllArticles() {
                         <div className = "allArticles-columnNames-publish allArticles-columnNames-text">Objavi</div>
                         <div className = "allArticles-columnNames-delete allArticles-columnNames-text">Izbriši</div>
                     </div>
-                    {listAllArticles.map((oneArticle, i) => {
+                    {listAllArticles.sort((a, b) => new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime()).map((oneArticle, i) => {
                         const isOnLastPage = (i + 1 > listAllArticles.length - (listAllArticles.length % 10));
                         return ((i + 1) <= pageNum * NEWS_PER_PAGE && (i + 1) > pageNum * NEWS_PER_PAGE - NEWS_PER_PAGE) &&
 

@@ -149,7 +149,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                 let photoURL;
                 if(imgURL === 'generic') {
                     photoURL = 'generic'
-                } else {
+                } else { 
                     photoURL = await uploadImageDB(imgName, imgFile);
                 }
 
