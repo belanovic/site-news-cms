@@ -26,7 +26,7 @@
 .header-title {
     flex: 0 0 10%;
 }
-.header-title a {
+.header-title a { 
     text-decoration: none;
 }
 .header-title-text {
