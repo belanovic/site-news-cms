@@ -7,6 +7,7 @@
     border-left: 5px solid green;
     border-right: 5px solid green;
     border-bottom: 5px solid green;
+    border-radius: 5px;
 }
 .order-selected-articles {
     overflow: hidden;

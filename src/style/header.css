@@ -21,6 +21,7 @@
 }
 .fa-react {
     color: white;
+    margin-right: 0.3em;
 }
 .header-title {
     flex: 0 0 10%;
@@ -31,10 +32,8 @@
 .header-title-text {
     font-size: 3rem;
     color: white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    letter-spacing: 2px
+    font-family: 'Times New Roman', Times, serif;
 }
-
 .header-links {
     flex: 0 0 40%;
 }

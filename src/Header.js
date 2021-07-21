@@ -17,7 +17,7 @@ export default function Header() {
                     <a href = 'https://site-news-frontend.netlify.app/' target = "_blanc">
                         <div className="header-links-frontend-title">
                             <i className="fab fa-react"></i>
-                            <span>Vesti</span>
+                            <span>www.vesti.com</span>
                         </div>
                     </a>
                 </div>
@@ -68,8 +68,7 @@ export default function Header() {
                     className={`header-newArticleBtn ${activeLink === 'article' && 'activeLink'}`}
                     style={{ display: newArticleBtn }}
                 >
-                    <Link to="/oneArticle/new">
-                        
+                    <Link to="/oneArticleNew/new">
                         <div
                             className="header-newArticleBtn-text"
                         ><i class="fas fa-feather-alt"></i>New article</div>

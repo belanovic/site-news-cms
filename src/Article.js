@@ -23,7 +23,7 @@ import './style/article-navigation.css';
 
 const storage = firebase.storage();
 
-export default function Article({ setShowCmsOverlay }) {
+export default function Article({ setShowCmsOverlay, isNew }) {
 
     const [tabPublishVisibility, setTabPublishVisibility] = useState('none')
     const [tabTextVisibility, setTabTextVisibility] = useState('block')
@@ -69,8 +69,7 @@ export default function Article({ setShowCmsOverlay }) {
         articleImgLoaded, setArticleImgLoaded,
         setActiveLink, articleDataLoaded, setArticleDataLoaded,
         setShowHomepageBtn, setAllArticlesBtn,
-        setNewArticleBtn, setShowOrderBtn,
-        setShowFrontend,
+        setNewArticleBtn, setShowOrderBtn, setShowFrontend
     } = useContext(context);
 
     let contentLoaded = articleDataLoaded === true && (articleImgLoaded === true || imgURL === 'generic');
@@ -439,25 +438,16 @@ export default function Article({ setShowCmsOverlay }) {
                 setImgFile={setImgFile}
                 cathegory = {category}
             />
-
-            <div className="article-video" style={{ display: tabVideoVisibility }}>
-                <div className="videoDescription">
-                    <label htmlFor="videoDescription">Opis video-snimka</label>
-                    <input
-                        id="videoDescription"
-                        name="videoDescription"
-                        type="text"
-                        value={videoDescription}
-                        onChange={inputHandler}
-                    ></input>
-                </div>
-                <Video
-                    videoURL={videoURL}
-                    setVideoURL={setVideoURL}
-                    setVideoName={setVideoName}
-                    setVideoFile={setVideoFile}
-                />
-            </div>
+            <Video
+                videoURL={videoURL}
+                setVideoURL={setVideoURL}
+                setVideoName={setVideoName}
+                setVideoFile={setVideoFile}
+                value={videoDescription}
+                onChange={inputHandler}
+                tabVideoVisibility = {tabVideoVisibility}
+            />
+       
 
             <div className="loadingArticle" style={{
                 display: contentLoaded === true || isNewArticle === true ? 'none' : 'block',

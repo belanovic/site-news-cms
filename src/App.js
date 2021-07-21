@@ -13,7 +13,7 @@ import SearchDate from './SearchDate';
 
 export default function App() {
     const cmsOverlay = useRef(null);
-    const { showCmsOverlay, setShowCmsOverlay, isLoggedIn } = useContext(context);
+    const { showCmsOverlay, setShowCmsOverlay, isLoggedIn, isNewArticle } = useContext(context);
 
     return (<>
         {isLoggedIn ?
@@ -32,7 +32,10 @@ export default function App() {
                         <AllArticles />
                     </Route>
                     <Route path='/oneArticle/:id'>
-                        <Article setShowCmsOverlay={setShowCmsOverlay} />
+                        <Article key = 'notNew' setShowCmsOverlay={setShowCmsOverlay} />
+                    </Route>
+                    <Route path='/oneArticleNew/:id'>
+                        <Article key = 'new' setShowCmsOverlay={setShowCmsOverlay} />
                     </Route>
                     <Route path='/delete/:id'>
                         <Delete />

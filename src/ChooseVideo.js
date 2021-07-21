@@ -18,7 +18,7 @@ export default function ChooseVideo({ setVideoName, setVideoFile, setVideoURL })
 
     return (
         <div className = "inputVideo">
-        <label htmlFor = "videoFile">Izaberi video</label>
+        {/* <label htmlFor = "videoFile">Izaberi video</label> */}
         <input
             id = "videoFile"
             type="file"
