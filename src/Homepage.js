@@ -15,7 +15,7 @@ export default function Homepage() {
         setAllArticlesBtn('none');
         setNewArticleBtn('none');
         setShowOrderBtn('none');
-        setShowFrontend('block');
+        setShowFrontend('block'); 
     })
 
     return (
