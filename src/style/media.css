@@ -6,10 +6,14 @@
         height: 100%;
         flex-direction: column;
         justify-content: space-around;
-        margin-top: 2em
+        margin-top: 2em;
+        width: 60%;
+    }
+    .homepage-newArticleBtn, .homepage-allArticlesBtn, .homepage-frontpage-order {
+        margin-bottom: 3em;
     }
     .header-links-frontend-title {
-        font-size: 2re
+        font-size: 2rem
     }
     .homepage-newArticleBtn-text, .homepage-allArticlesBtn-text, .homepage-frontpage-order-text {
         font-size: 2.5rem;
