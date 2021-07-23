@@ -16,6 +16,7 @@
 .header-links-frontend-title {
     color: white;
     margin: 0;
+    font-size: 1rem;
     font-style: italic;
     display: inline-block;
 }
