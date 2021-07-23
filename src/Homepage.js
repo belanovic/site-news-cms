@@ -25,21 +25,21 @@ export default function Homepage() {
                     <Link to={`/allArticles`}>
                         <div
                             className="homepage-allArticlesBtn-text"
-                        >List of all articles</div>
+                        ><i className="fas fa-list-ul"></i>List of all articles</div>
                     </Link>
                 </div>
                 <div className="homepage-newArticleBtn">
                     <Link to="/oneArticle/new">
                         <div
                             className="homepage-newArticleBtn-text"
-                        >Create new article</div>
+                        ><i className="fas fa-feather-alt"></i>Create new article</div>
                     </Link>
                 </div>
                 <div className="homepage-frontpage-order">
                     <Link to="/order">
                         <div
                             className="homepage-frontpage-order-text"
-                        >Set the frontpage</div>
+                        ><i className="fas fa-stream"></i>Set the frontpage</div>
                     </Link>
                 </div>
             </div>
