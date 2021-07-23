@@ -11,13 +11,13 @@
         margin-bottom: 10em;
     }
     .homepage-newArticleBtn, .homepage-allArticlesBtn, .homepage-frontpage-order {
-        margin-bottom: 4em;
+        margin-bottom: 3em;
     }
     .header-links-frontend-title {
         font-size: 1rem
     }
     .homepage-newArticleBtn-text, .homepage-allArticlesBtn-text, .homepage-frontpage-order-text {
-        font-size: 2.5rem;
+        font-size: 2rem;
         padding: 2em 0.5em 2em 0.5em;
     }
     
