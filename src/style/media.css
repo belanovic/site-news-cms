@@ -7,7 +7,7 @@
         flex-direction: column;
         justify-content: space-around;
         margin-top: 2em;
-        width: 70%;
+        width: 80%;
     }
     .homepage-newArticleBtn, .homepage-allArticlesBtn, .homepage-frontpage-order {
         margin-bottom: 4em;
