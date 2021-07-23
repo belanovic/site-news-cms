@@ -104,3 +104,22 @@
     cursor: pointer;
     color: red;
 }
+
+@media all and (max-width: 768px) {
+     
+    .order-articles {
+        width: 100%;
+    }
+    .order-articles-item-elements {
+        font-size: 0.5rem;
+    }
+    .order-send-button {
+        width: 40%;
+    }
+    .order-articles-item-number {
+        width: 1.5em;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        font-size: 1.5rem;
+    }
+}

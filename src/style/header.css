@@ -124,3 +124,16 @@
 .login:hover .login-info {
     display: block;
 }
+
+@media all and (max-width: 768px) {
+
+    .header-links-frontend-title {
+        font-size: 1rem
+    }
+    .header-title-text {
+        font-size: 2rem;
+    }
+    .header-newArticleBtn {
+        margin-right: 1em;
+    }
+}

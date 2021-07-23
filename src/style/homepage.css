@@ -44,3 +44,22 @@
     padding: 3em 0.5em 3em 0.5em;
     text-align: center;
 }
+
+@media all and (max-width: 768px) {
+
+    .homepage-links {
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-around;
+        margin-top: 4em;
+        width: 75%;
+        margin-bottom: 10em;
+    }
+    .homepage-newArticleBtn, .homepage-allArticlesBtn, .homepage-frontpage-order {
+        margin-bottom: 3em;
+    }
+    .homepage-newArticleBtn-text, .homepage-allArticlesBtn-text, .homepage-frontpage-order-text {
+        font-size: 2rem;
+        padding: 2em 0.5em 2em 0.5em;
+    }
+}
