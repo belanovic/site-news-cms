@@ -136,4 +136,8 @@
     .header-newArticleBtn {
         margin-right: 1em;
     }
+    .header-newArticleBtn span {
+
+        font-size: 1rem;
+    }
 }

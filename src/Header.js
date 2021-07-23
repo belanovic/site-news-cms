@@ -71,7 +71,7 @@ export default function Header() {
                     <Link to="/oneArticleNew/new">
                         <div
                             className="header-newArticleBtn-text"
-                        ><i className="fas fa-feather-alt"></i>New article</div>
+                        ><i className="fas fa-feather-alt"></i><span>New article</span></div>
                     </Link>
                 </div>
                 <div className="login">
