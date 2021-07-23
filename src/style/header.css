@@ -128,7 +128,7 @@
 @media all and (max-width: 768px) {
 
     .header-links-frontend-title {
-        font-size: 1rem
+        font-size: 1rem;
     }
     .header-title-text {
         font-size: 2rem;
@@ -136,7 +136,13 @@
     .header-newArticleBtn {
         margin-right: 1em;
     }
-    .header-newArticleBtn span {
+    .header-homepageBtn-text, .header-orderBtn-text, .header-allArticlesBtn-text, .header-newArticleBtn-text {
+        padding: 0.2em 0.5em 0.2em 0.5em;
+    }
+    .header-homepageBtn-text span, .header-orderBtn-text span, .header-allArticlesBtn-text span, .header-newArticleBtn-text span{
         display: none;
+    }
+    .fa-feather-alt, .fa-home, .fa-list-ul, .fa-stream {
+        font-size: 1.5rem;
     }
 }

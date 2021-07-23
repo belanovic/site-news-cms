@@ -28,7 +28,7 @@ export default function Header() {
                     <Link to="/">
                         <div
                             className="header-homepageBtn-text"
-                        ><i className="fas fa-home"></i>Homepage</div>
+                        ><i className="fas fa-home"></i><span>Homepage</span></div>
                     </Link>
                 </div>
  
@@ -39,7 +39,7 @@ export default function Header() {
                     <Link to={`/allArticles`}>
                         <div
                             className="header-allArticlesBtn-text"
-                        ><i className="fas fa-list-ul"></i>All articles</div>
+                        ><i className="fas fa-list-ul"></i><span>All articles</span></div>
                     </Link>
                 </div>
                 <div
@@ -49,7 +49,7 @@ export default function Header() {
                     <Link to={`/order`}>
                         <div
                             className="header-orderBtn-text"
-                        ><i className="fas fa-stream"></i>Order articles</div>
+                        ><i className="fas fa-stream"></i><span>Order articles</span></div>
                     </Link>
                 </div>
 
