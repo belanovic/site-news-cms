@@ -8,21 +8,44 @@ import Publish from './Publish.js';
 import Search from './Search.js';
 import './style/all-articles.css';
 import './style/all-articles-item.css';
+import {alphabet} from './cirilizatorDecirilizator.js';
 
-const NEWS_PER_PAGE = 10;    
+const NEWS_PER_PAGE = 10; 
 
 export default function AllArticles() {
 
     const { listAllArticles, setListAllArticles, listLoaded, setListLoaded, 
-        setActiveLink, setShowHomepageBtn, 
+        setActiveLink, setShowHomepageBtn, activeCriteria, setActiveCriteria,
         setAllArticlesBtn, setNewArticleBtn, setShowOrderBtn,
         setShowFrontend} = useContext(context);
     const [pageNum, setPageNum] = useState(1);
-    const [imgName, setImgName] = useState('');  
+
+    const sortArticles = () => {
+        setListAllArticles((prev) => {
+
+            if(activeCriteria[0] === 'title') {
+                console.log(alphabet);
+                prev.sort((a, b) => {
+                    return  activeCriteria[1] === 'down'? alphabet.indexOf(a.title.split('')[0].toLowerCase()) - alphabet.indexOf(b.title.split('')[0].toLowerCase()) :
+                                                          alphabet.indexOf(b.title.split('')[0].toLowerCase()) - alphabet.indexOf(a.title.split('')[0].toLowerCase())
+                })
+                return [...prev]
+            }
+            prev.sort((a, b) => {
+                return activeCriteria[1] === 'down'? new Date(b[activeCriteria[0]]).getTime() - new Date(a[activeCriteria[0]]).getTime() :
+                                                     new Date(a[activeCriteria[0]]).getTime() - new Date(b[activeCriteria[0]]).getTime()
+            })
+            console.log('posle');
+            console.log(prev);
+            return [...prev]
+        })
+    }
     
     useEffect(async function () {
        
-        return () => setListLoaded(false);
+        return () => {
+            setListLoaded(false)
+        };
     }, [])
 
     useEffect(function () {
@@ -30,6 +53,7 @@ export default function AllArticles() {
     setActiveLink('allArticles');
     })
 
+    useEffect(() => sortArticles(), [activeCriteria])
     useEffect(() => {
         setShowHomepageBtn('inline-block');
         setAllArticlesBtn('inline-block');
@@ -42,17 +66,57 @@ export default function AllArticles() {
         <>
             {listLoaded === true ?
                 <div className="allArticles">
-                    <Search setPageNum = {setPageNum} />
+                    <Search setPageNum = {setPageNum} sortArticles = {sortArticles} />
                     <div className = "allArticles-columnNames">
-                        <div className = "allArticles-columnNames-title allArticles-columnNames-text">Naslov</div>
-                        <div className = "allArticles-columnNames-note allArticles-columnNames-text">Napomena</div>
-                        <div className = "allArticles-columnNames-dateCreated allArticles-columnNames-text">Vreme kreiranja</div>
-                        <div className = "allArticles-columnNames-dateUpdated allArticles-columnNames-text">Poslednja izmena </div>
-                        <div className = "allArticles-columnNames-datePublished allArticles-columnNames-text">Vreme objave</div>
-                        <div className = "allArticles-columnNames-publish allArticles-columnNames-text">Objavi</div>
-                        <div className = "allArticles-columnNames-delete allArticles-columnNames-text">Izbriši</div>
+                        <div 
+                            className = "allArticles-columnNames-title allArticles-columnNames-text">
+                                <i className= {`fas fa-arrow-down ${activeCriteria[2] === 1? 'activeArrow' : ''}`} 
+                                   onClick = {() => setActiveCriteria(['title', 'down', 1])}>
+                                </i>
+                                <span>Naslov</span>
+                                <i className= {`fas fa-arrow-up ${activeCriteria[2] === 2? 'activeArrow' : ''}`}
+                                   onClick = {() => setActiveCriteria(['title', 'up', 2])}>
+                                </i>
+                        </div>
+
+                        <div 
+                            className = "allArticles-columnNames-note allArticles-columnNames-text">
+                                <span>Napomena</span>
+                        </div>
+                        <div 
+                            className = "allArticles-columnNames-dateUpdated allArticles-columnNames-text" >
+                                <i className= {`fas fa-arrow-down ${activeCriteria[2] === 3? 'activeArrow' : ''}`}
+                                   onClick = {() => setActiveCriteria(['dateUpdated', 'down', 3])}></i>
+                                <span>Poslednja izmena </span>
+                                <i className= {`fas fa-arrow-up ${activeCriteria[2] === 4? 'activeArrow' : ''}`} 
+                                   onClick = {() => setActiveCriteria(['dateUpdated', 'up', 4])}></i>
+                        </div>
+                        <div 
+                            className = "allArticles-columnNames-dateCreated allArticles-columnNames-text">
+                                <i className= {`fas fa-arrow-down ${activeCriteria[2] === 5? 'activeArrow' : ''}`}
+                                   onClick = {() => setActiveCriteria(['dateCreated', 'down', 5])}></i>
+                                <span>Vreme kreiranja</span>
+                                <i className= {`fas fa-arrow-up ${activeCriteria[2] === 6? 'activeArrow' : ''}`}
+                                   onClick = {() => setActiveCriteria(['dateCreated', 'up', 6])}></i>
+                        </div>
+                        <div 
+                            className = "allArticles-columnNames-datePublished allArticles-columnNames-text">
+                                <i className= {`fas fa-arrow-down ${activeCriteria[2] === 7? 'activeArrow' : ''}`}
+                                   onClick = {() => setActiveCriteria(['datePublished', 'down', 7])}></i>
+                                <span>Vreme objave</span>
+                                <i className= {`fas fa-arrow-up ${activeCriteria[2] === 8? 'activeArrow' : ''}`}
+                                   onClick = {() => setActiveCriteria(['datePublished', 'up', 8])}></i>
+                        </div>
+                        <div 
+                            className = "allArticles-columnNames-publish allArticles-columnNames-text">
+                                <span>Objavi</span>
+                        </div>
+                        <div 
+                            className = "allArticles-columnNames-delete allArticles-columnNames-text">
+                                <span>Izbriši</span>
+                        </div>
                     </div>
-                    {listAllArticles.sort((a, b) => new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime()).map((oneArticle, i) => {
+                    {listAllArticles.map((oneArticle, i) => {
                         const isOnLastPage = (i + 1 > listAllArticles.length - (listAllArticles.length % 10));
                         return ((i + 1) <= pageNum * NEWS_PER_PAGE && (i + 1) > pageNum * NEWS_PER_PAGE - NEWS_PER_PAGE) &&
 
@@ -63,8 +127,8 @@ export default function AllArticles() {
                                         </Link>
                                     </div>
                                     <div className = "allArticles-item-note allArticles-item-part">{oneArticle.note}</div>
-                                    <DateCreated timeCreated = {oneArticle.dateCreated}/>
                                     <DateUpdated timeUpdated = {oneArticle.dateUpdated}/>
+                                    <DateCreated timeCreated = {oneArticle.dateCreated}/>
                                     <DatePublished timePublished = {oneArticle.datePublished} published = {oneArticle.published}/>
                 
                                     <Publish id={oneArticle._id} published = {oneArticle.published} />

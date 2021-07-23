@@ -158,10 +158,10 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                     vest.videoURL = videoURL;
                 }
                 vest.imgURL = photoURL;
-                vest.dateCreated = Date();
-                vest.dateUpdated = Date();
+                vest.dateCreated = new Date();
+                vest.dateUpdated = new Date();
                 if (published) {
-                    vest.datePublished = Date();
+                    vest.datePublished = new Date();
                 }
                 let response = await postArticle(vest);
                 let deployedArticle = await response.text(response);
@@ -188,10 +188,10 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                     vest.videoURL = videoURL;
                 }
 
-                vest.dateUpdated = Date();
+                vest.dateUpdated = new Date();
 
                 if (published === true && alreadyPublished === false) {
-                    vest.datePublished = Date()
+                    vest.datePublished = new Date()
                 }
                 let response = await updateArticle(vest);
                 let updatedArticle = await response.json();

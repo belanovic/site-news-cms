@@ -3,7 +3,7 @@ import { context } from './newsContext.js';
 import { getAllArticles, getByCategory } from './getDatabase';
 import './style/search.css';
 
-export default function Search({ setPageNum }) {
+export default function Search({ setPageNum, sortArticles }) {
 
     
     const { listAllArticles, setListAllArticles, defaultCathegory, setDefaultCathegory,
@@ -25,12 +25,14 @@ export default function Search({ setPageNum }) {
             const allNews = await getAllArticles();
             console.log(allNews);
             const promiseResolveA = await setListAllArticles(allNews);
+            sortArticles();
             const promiseResolveB = await setListLoaded(true);
             setPageNum(1)
         } else {
             const allNews = await getByCategory(cathegory);
             console.log(allNews);
             const promiseResolveA = await setListAllArticles(allNews);
+            sortArticles();
             const promiseResolveB = await setListLoaded(true);
             setPageNum(1);
         }
@@ -40,11 +42,13 @@ export default function Search({ setPageNum }) {
         if (cathegory === 'allArticles') {
             const allNews = await getAllArticles();
             const promiseResolveA = await setListAllArticles(allNews);
+            sortArticles();
             const promiseResolveB = await setListLoaded(true);
             setPageNum(1)
         } else {
             const allNews = await getByCategory(cathegory);
             const promiseResolveA = await setListAllArticles(allNews);
+            sortArticles();
             const promiseResolveB = await setListLoaded(true);
             setPageNum(1);
         }

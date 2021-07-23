@@ -1,4 +1,4 @@
-export default function cirilizatorDecirilizator(operacija, tekst) {
+export function cirilizatorDecirilizator(operacija, tekst) {
     if (!tekst) return;
     const abeceda = ['a', 'b', 'c', 'č', 'ć', 'd', 'dž', 'đ', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'lj', 'm', 'n', 'nj', 'o', 'p', 'r', 's', 'š', 't', 'u', 'v', 'z', 'ž'];
     const azbuka = ['а', 'б', 'ц', 'ч', 'ћ', 'д', 'џ', 'ђ', 'е', 'ф', 'г', 'х', 'и', 'ј', 'к', 'л', 'љ', 'м', 'н', 'њ', 'о', 'п', 'р', 'с', 'ш', 'т', 'у', 'в', 'з', 'ж'];
@@ -28,3 +28,4 @@ export default function cirilizatorDecirilizator(operacija, tekst) {
         return decirilizator(tekst)
     }
 }
+export const alphabet = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'č', 'ć', 'd', 'dž', 'đ', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'lj', 'm', 'n', 'nj', 'o', 'p', 'r', 's', 'š', 't', 'u', 'v', 'z', 'ž', 'а', 'б', 'ц', 'ч', 'ћ', 'д', 'џ', 'ђ', 'е', 'ф', 'г', 'х', 'и', 'ј', 'к', 'л', 'љ', 'м', 'н', 'њ', 'о', 'п', 'р', 'с', 'ш', 'т', 'у', 'в', 'з', 'ж' ];

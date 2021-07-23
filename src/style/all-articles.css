@@ -8,13 +8,13 @@
     display: flex;
 } 
 .allArticles-columnNames > * {
-    padding: 0.2em 0 0.2em 0;
-    border-bottom: 3px solid black;
+    padding: 0.7em  0.2em 0.7em  0.2em;
     border-right: 1px solid black;
+    border-bottom: 3px solid black;
 }
 
 .allArticles-columnNames-title {
-    flex: 0 0 50%;
+    flex: 0 0 45%;
     text-align: center;
 }
 .allArticles-columnNames-note,
@@ -28,4 +28,19 @@
 .allArticles-columnNames-publish {
     flex: 0 0 5%;
     text-align: center;
+}
+
+.allArticles-columnNames-text span {
+    padding: 0 0.5em 0 0.5em
+}
+.fa-arrow-up, .fa-arrow-down {
+    cursor: pointer;
+    transition: transform 250ms;
+}
+.fa-arrow-up:hover, .fa-arrow-down:hover {
+    color: rgb(0, 167, 0);
+}
+.activeArrow {
+    color:rgb(0, 167, 0);
+    transform: scale(1.7)
 }

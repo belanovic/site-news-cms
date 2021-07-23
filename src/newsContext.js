@@ -21,6 +21,7 @@ function Provider(props) {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [loggedUser, setLoggedUser] = useState('');
     const [defaultCathegory, setDefaultCathegory] = useState('allArticles');
+    const [activeCriteria, setActiveCriteria] = useState(['dateUpdated', 'down', 3]);
 
     useEffect(() => {
         setLoggedIn((prev) => {
@@ -36,7 +37,7 @@ function Provider(props) {
         console.log('in local storage ' + localStorage.getItem('x-auth-token'))
     }, [isLoggedIn]) */
 
-/*     useEffect(async () => {
+   /*  useEffect(async () => {
         const n = listAllArticles;
         n.sort((a, b) => a.position - b.position);
         console.log(n)
@@ -73,7 +74,9 @@ function Provider(props) {
             loggedUser,
             setLoggedUser,
             defaultCathegory,
-            setDefaultCathegory
+            setDefaultCathegory,
+            activeCriteria, 
+            setActiveCriteria
 
         }}>
             {props.children}
