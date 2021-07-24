@@ -15,7 +15,7 @@ export default function Order() {
     const [doubleSelectedArticle, setDoubleSelectedArticle] = useState('');
     const [newsByDateAllComp, setNewsByDateAllComp] = useState([]);
     const { setActiveLink, setShowHomepageBtn, setAllArticlesBtn, 
-        setNewArticleBtn, setShowOrderBtn,
+        setNewArticleBtn, setShowOrderBtn,setShowMenu,
         setShowFrontend } = useContext(context);
 
     const onDragEnd = (result) => {
@@ -94,6 +94,7 @@ export default function Order() {
         setAllArticlesBtn('inline-block');
         setNewArticleBtn('inline-block');
         setShowOrderBtn('inline-block');
+        setShowMenu('block');
         setShowFrontend('none');
     })
 

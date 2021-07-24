@@ -12,7 +12,7 @@ export default function Form() {
             loggedUser, setLoggedUser, setLoggedUsername,
             setShowHomepageBtn, setAllArticlesBtn, 
             setNewArticleBtn, setShowOrderBtn,
-            setShowFrontend
+            setShowFrontend, setShowMenu
         } = useContext(context);
 
     const [signInisActive, setSignInIsActive] = useState(true);
@@ -81,6 +81,7 @@ export default function Form() {
         setAllArticlesBtn('inline-block');
         setNewArticleBtn('inline-block');
         setShowOrderBtn('inline-block');
+        setShowMenu('block');
         setShowFrontend('none');
     })
 

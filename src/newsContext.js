@@ -15,6 +15,7 @@ function Provider(props) {
     const [allArticlesBtn, setAllArticlesBtn] = useState('none');
     const [newArticleBtn, setNewArticleBtn] = useState('none');    
     const [showOrderBtn, setShowOrderBtn] = useState('none');    
+    const [showMenu, setShowMenu] = useState('none');
     const [activeLink, setActiveLink] = useState('none');
     const [showFrontend, setShowFrontend] = useState('none');
     const [formVisible, setFormVisible] = useState(false);
@@ -76,7 +77,9 @@ function Provider(props) {
             defaultCathegory,
             setDefaultCathegory,
             activeCriteria, 
-            setActiveCriteria
+            setActiveCriteria,
+            showMenu, 
+            setShowMenu
 
         }}>
             {props.children}

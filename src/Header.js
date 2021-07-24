@@ -4,15 +4,19 @@ import { context } from './newsContext.js';
 import './style/header.css';
 
 export default function Header() {
-
-       const { showHomepageBtn, allArticlesBtn, showOrderBtn,
+       const [showLinks, setShowLinks] = useState(false)
+       const { showHomepageBtn, setAllArticlesBtn, allArticlesBtn, showOrderBtn,
             newArticleBtn, showFrontend, setFormVisible, 
-            activeLink,
+            activeLink,showMenu,
             loggedIn, loggedUser, loggedUsername } = useContext(context);
-
+       let displayLinks = showLinks === true? 'block' : 'none';
     return (
         <header className="header">
             <div className="header-links">
+                <i  className= {showLinks === true? "fas fa-times" : "fas fa-bars"}
+                    onClick = {() => {setShowLinks(prev => !prev)}}
+                    style = {{display: showMenu}}     
+                ></i>
                 <div className="header-links-frontend" style = {{display: showFrontend}} >
                     <a href = 'https://site-news-frontend.netlify.app/' target = "_blanc">
                         <div className="header-links-frontend-title">
@@ -23,7 +27,7 @@ export default function Header() {
                 </div>
                 <div
                     className="header-homepageBtn"
-                    style={{ display: showHomepageBtn }}
+                    style={{ display: showHomepageBtn && displayLinks }}
                 >
                     <Link to="/">
                         <div
@@ -34,7 +38,7 @@ export default function Header() {
  
                 <div
                     className={`header-allArticlesBtn ${activeLink === 'allArticles' && 'activeLink'}`}
-                    style={{ display: allArticlesBtn }}
+                    style={{ display: allArticlesBtn && displayLinks }}
                 >
                     <Link to={`/allArticles`}>
                         <div
@@ -44,7 +48,7 @@ export default function Header() {
                 </div>
                 <div
                     className={`header-orderBtn ${activeLink === 'order' && 'activeLink'}`}
-                    style={{ display: showOrderBtn }}
+                    style={{ display: showOrderBtn && displayLinks }}
                 >
                     <Link to={`/order`}>
                         <div
@@ -52,7 +56,6 @@ export default function Header() {
                         ><i className="fas fa-stream"></i><span>Order articles</span></div>
                     </Link>
                 </div>
-
             </div>
 
             <div className="header-title">

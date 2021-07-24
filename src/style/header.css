@@ -49,6 +49,15 @@
     align-items: center;
 }
 
+.fa-bars, .fa-times {
+    display: none;
+    color: white;
+    font-size: 1.5rem;
+}
+.fa-bars:hover, .fa-times:hover {
+    cursor: pointer;
+}
+
 .header-homepageBtn a, .header-allArticlesBtn a, .header-newArticleBtn a, .header-orderBtn a {
     text-decoration: none;
 }
@@ -126,7 +135,7 @@
 }
 
 @media all and (max-width: 768px) {
-
+    
     .header-links-frontend-title {
         font-size: 1rem;
     }
@@ -136,13 +145,21 @@
     .header-newArticleBtn {
         margin-right: 1em;
     }
+    .header-newArticleBtn-text span {
+        display: none;
+    }
+    .header-homepageBtn, .header-orderBtn, .header-allArticlesBtn, .header-newArticleBtn {
+        margin-bottom: 0.8em;
+    }
     .header-homepageBtn-text, .header-orderBtn-text, .header-allArticlesBtn-text, .header-newArticleBtn-text {
         padding: 0.2em 0.2em 0.2em 0.2em;
-    }
-    .header-homepageBtn-text span, .header-orderBtn-text span, .header-allArticlesBtn-text span, .header-newArticleBtn-text span{
-        display: none;
+        text-align: left;
     }
     .fa-feather-alt, .fa-home, .fa-list-ul, .fa-stream {
         font-size: 1.25rem;
+    }
+    .fa-bars, .fa-times {
+        display: block;
+        margin-bottom: 1em;
     }
 }

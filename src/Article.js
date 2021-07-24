@@ -65,7 +65,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     const { id } = useParams();
     const [isNewArticle, setIsNewArticle] = useState(true);
     const { listAllArticles, setListAllArticles,
-        listLoaded, setListLoaded,
+        listLoaded, setListLoaded,setShowMenu,
         articleImgLoaded, setArticleImgLoaded,
         setActiveLink, articleDataLoaded, setArticleDataLoaded,
         setShowHomepageBtn, setAllArticlesBtn,
@@ -311,6 +311,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
         setAllArticlesBtn('inline-block');
         setNewArticleBtn('inline-block');
         setShowOrderBtn('inline-block');
+        setShowMenu('block');
         setShowFrontend('none');
     })
 

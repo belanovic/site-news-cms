@@ -17,7 +17,7 @@ export default function AllArticles() {
     const { listAllArticles, setListAllArticles, listLoaded, setListLoaded, 
         setActiveLink, setShowHomepageBtn, activeCriteria, setActiveCriteria,
         setAllArticlesBtn, setNewArticleBtn, setShowOrderBtn,
-        setShowFrontend} = useContext(context);
+        setShowFrontend, setShowMenu} = useContext(context);
     const [pageNum, setPageNum] = useState(1);
 
     const sortArticles = () => {
@@ -59,6 +59,7 @@ export default function AllArticles() {
         setAllArticlesBtn('inline-block');
         setNewArticleBtn('inline-block');
         setShowOrderBtn('inline-block');
+        setShowMenu('block');
         setShowFrontend('none');
     })
 
