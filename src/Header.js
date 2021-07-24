@@ -16,7 +16,7 @@ export default function Header() {
                 <i  className= {showLinks === true? "fas fa-times" : "fas fa-bars"}
                     onClick = {() => {setShowLinks(prev => !prev)}}
                     style = {{display: showMenu}}     
-                ></i>
+                ></i> 
                 <div className="header-links-frontend" style = {{display: showFrontend}} >
                     <a href = 'https://site-news-frontend.netlify.app/' target = "_blanc">
                         <div className="header-links-frontend-title">
