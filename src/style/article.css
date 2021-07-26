@@ -76,5 +76,9 @@
     .article-text-editor {
         width: 100%;
         margin-right: 0px;
+        order: 3;
+    }
+    .article-text {
+        order: 1;
     }
 }
