@@ -40,3 +40,17 @@
     width: 40em;
 }
 
+@media all and (max-width: 748px) {
+    .generic-thumb {
+        width: 100%;
+    }
+    .article-photo-container {
+        flex-direction: column;
+    }
+    .article-photo-img {
+        width: 100%;
+    }
+    .inputImage {
+        margin: 0.5em 0 1em 0;
+    }
+}

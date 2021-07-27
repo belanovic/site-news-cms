@@ -103,7 +103,7 @@ export default function ImgCropper({ setImgURL, setImgFile, setImgName }) {
         Kropuj fotografiju
       </button>
       <div className="imgContainer">
-        <div>
+        <div className = "inputImage">
           <input type="file" accept="image/*" onChange={onSelectFile} />
         </div>
         <ReactCrop

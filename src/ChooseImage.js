@@ -35,7 +35,7 @@ export default function ChooseImage({ setImgName, setImgFile, setImgURL }) {
     }
 
     return (
-        <div>
+        <div className = "inputImage">
             <input
                 type="file"
                 onChange={uploadHandler}>

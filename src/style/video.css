@@ -34,3 +34,23 @@
     padding: 0.2em 0.5em 0.2em 0.5em;
     width: 40em;
 }
+
+@media all and (max-width: 748px) {
+
+    .article-video {
+        padding: 1em;
+    }
+  
+    .video-container {
+        flex-direction: column;
+    }
+    .video {
+        width: 100%;
+    }
+    .inputVideo {
+        margin: 1em 0 0 0;
+    }
+    .inputVideo input {
+        margin: 0;
+    }
+}

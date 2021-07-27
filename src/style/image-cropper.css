@@ -25,3 +25,19 @@
 .previewCanvas {
     display: none;
 }
+
+@media all and (max-width: 748px) {
+    .article-photo {
+        padding: 0 1em 0 1em;
+    }
+    .imgCropper {
+        flex-direction: column;
+     
+    }
+    .ReactCrop div {
+        width: 100%;
+    }
+    .crop-btn {
+        margin: 1em 0 0.5em 0;
+    }
+}
