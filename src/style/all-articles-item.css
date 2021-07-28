@@ -72,7 +72,7 @@
 }
 
 @media all and (max-width: 748px) {
-    .allArticles-item {
+    .allArticles-item { 
        flex-direction: column;
     }
     
