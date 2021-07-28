@@ -4,7 +4,7 @@ import { context } from './newsContext.js';
 import './style/header.css'; 
 
 export default function Header() {
-       const [showLinks, setShowLinks] = useState(true);
+       const [showLinks, setShowLinks] = useState(false);
        const { newArticleBtn, showFrontend, setFormVisible,
             activeLink,showMenu, loggedIn, loggedUser, 
             loggedUsername } = useContext(context);
