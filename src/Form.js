@@ -10,8 +10,7 @@ export default function Form() {
 
     const { alphabet, isLoggedIn, setLoggedIn, 
             loggedUser, setLoggedUser, setLoggedUsername,
-            setShowHomepageBtn, setAllArticlesBtn, 
-            setNewArticleBtn, setShowOrderBtn,
+            setNewArticleBtn, setActiveLink,
             setShowFrontend, setShowMenu
         } = useContext(context);
 
@@ -77,12 +76,12 @@ export default function Form() {
     }
 
     useEffect(() => {
-        setShowHomepageBtn('inline-block');
-        setAllArticlesBtn('inline-block');
+
+
         setNewArticleBtn('inline-block');
-        setShowOrderBtn('inline-block');
         setShowMenu('block');
         setShowFrontend('none');
+        setActiveLink('none')
     })
 
     return (

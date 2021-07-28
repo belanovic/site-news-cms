@@ -25,12 +25,12 @@ export default function Delete() {
     const { listAllArticles, setListAllArticles,
         listLoaded, setListLoaded,
         articleImgLoaded, setArticleImgLoaded,
-        /* articleVideoLoaded, setArticleVideoLoaded, */
+        articleVideoLoaded, setArticleVideoLoaded,
         articleDataLoaded, setArticleDataLoaded,
         showCmsOverlay, setShowCmsOverlay
     } = useContext(context);
 
-    let contentLoaded = articleDataLoaded === true && articleImgLoaded === true;
+    let contentLoaded = articleDataLoaded === true;
 
     const findSelectedArticle = () => {
         const selectedArticle = listAllArticles.find((prom) => prom._id === id);
@@ -68,7 +68,7 @@ export default function Delete() {
         findSelectedArticle();
         return () => {
             setArticleImgLoaded(false);
-            /* setArticleVideoLoaded(false); */
+            setArticleVideoLoaded(false);
             setArticleDataLoaded(false);
         }
     }, [])

@@ -15,8 +15,7 @@ const NEWS_PER_PAGE = 10;
 export default function AllArticles() {
 
     const { listAllArticles, setListAllArticles, listLoaded, setListLoaded, 
-        setActiveLink, setShowHomepageBtn, activeCriteria, setActiveCriteria,
-        setAllArticlesBtn, setNewArticleBtn, setShowOrderBtn,
+        setActiveLink, activeCriteria, setActiveCriteria,setNewArticleBtn ,
         setShowFrontend, setShowMenu} = useContext(context);
     const [pageNum, setPageNum] = useState(1);
 
@@ -55,10 +54,8 @@ export default function AllArticles() {
 
     useEffect(() => sortArticles(), [activeCriteria])
     useEffect(() => {
-        setShowHomepageBtn('inline-block');
-        setAllArticlesBtn('inline-block');
+
         setNewArticleBtn('inline-block');
-        setShowOrderBtn('inline-block');
         setShowMenu('block');
         setShowFrontend('none');
     })

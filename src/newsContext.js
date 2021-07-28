@@ -11,10 +11,7 @@ function Provider(props) {
     /* const [articleVideoLoaded, setArticleVideoLoaded] = useState(false); */
     const [showCmsOverlay, setShowCmsOverlay] = useState('none');
     
-    const [showHomepageBtn, setShowHomepageBtn] = useState('none');
-    const [allArticlesBtn, setAllArticlesBtn] = useState('none');
     const [newArticleBtn, setNewArticleBtn] = useState('none');    
-    const [showOrderBtn, setShowOrderBtn] = useState('none');    
     const [showMenu, setShowMenu] = useState('none');
     const [activeLink, setActiveLink] = useState('none');
     const [showFrontend, setShowFrontend] = useState('none');
@@ -56,14 +53,8 @@ function Provider(props) {
             setArticleImgLoaded,
             showCmsOverlay,
             setShowCmsOverlay,
-            showHomepageBtn,
-            setShowHomepageBtn,
-            allArticlesBtn,
-            setAllArticlesBtn,
             newArticleBtn,
             setNewArticleBtn,
-            showOrderBtn, 
-            setShowOrderBtn,
             activeLink, 
             setActiveLink,
             showFrontend,

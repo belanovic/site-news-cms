@@ -48,7 +48,6 @@
     justify-content: flex-end;
     align-items: center;
 }
-
 .fa-bars, .fa-times {
     display: none;
     color: white;
@@ -56,6 +55,13 @@
 }
 .fa-bars:hover, .fa-times:hover {
     cursor: pointer;
+}
+
+.header-links-navigation {
+    display: 'none';
+}
+.header-links-navigation-buttons {
+    display: flex;
 }
 
 .header-homepageBtn a, .header-allArticlesBtn a, .header-newArticleBtn a, .header-orderBtn a {
@@ -146,6 +152,13 @@
         margin-right: 1em;
     }
     .header-newArticleBtn-text span {
+        display: none;
+    }
+    .header-links-navigation-buttons {
+        flex-direction: column;
+    }
+
+    .header-links-navigation-buttons.hidden {
         display: none;
     }
     .header-homepageBtn, .header-orderBtn, .header-allArticlesBtn, .header-newArticleBtn {

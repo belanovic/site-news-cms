@@ -68,8 +68,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
         listLoaded, setListLoaded,setShowMenu,
         articleImgLoaded, setArticleImgLoaded,
         setActiveLink, articleDataLoaded, setArticleDataLoaded,
-        setShowHomepageBtn, setAllArticlesBtn,
-        setNewArticleBtn, setShowOrderBtn, setShowFrontend
+        setNewArticleBtn, setShowFrontend
     } = useContext(context);
 
     let contentLoaded = articleDataLoaded === true && (articleImgLoaded === true || imgURL === 'generic');
@@ -307,10 +306,10 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     })
 
     useEffect(() => {
-        setShowHomepageBtn('inline-block');
-        setAllArticlesBtn('inline-block');
+
+
         setNewArticleBtn('inline-block');
-        setShowOrderBtn('inline-block');
+
         setShowMenu('block');
         setShowFrontend('none');
     })

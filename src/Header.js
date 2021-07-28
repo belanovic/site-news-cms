@@ -1,22 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { context } from './newsContext.js';
-import './style/header.css';
+import './style/header.css'; 
 
 export default function Header() {
-       const [showLinks, setShowLinks] = useState(false)
-       const { showHomepageBtn, setAllArticlesBtn, allArticlesBtn, showOrderBtn,
-            newArticleBtn, showFrontend, setFormVisible, 
-            activeLink,showMenu,
-            loggedIn, loggedUser, loggedUsername } = useContext(context);
-       let displayLinks = showLinks === true? 'block' : 'none';
+       const [showLinks, setShowLinks] = useState(true);
+       const { newArticleBtn, showFrontend, setFormVisible,
+            activeLink,showMenu, loggedIn, loggedUser, 
+            loggedUsername } = useContext(context);
+
     return (
         <header className="header">
             <div className="header-links">
-                <i  className= {showLinks === true? "fas fa-times" : "fas fa-bars"}
-                    onClick = {() => {setShowLinks(prev => !prev)}}
-                    style = {{display: showMenu}}     
-                ></i> 
                 <div className="header-links-frontend" style = {{display: showFrontend}} >
                     <a href = 'https://site-news-frontend.netlify.app/' target = "_blanc">
                         <div className="header-links-frontend-title">
@@ -25,37 +20,50 @@ export default function Header() {
                         </div>
                     </a> 
                 </div>
-                <div
-                    className="header-homepageBtn"
-                    style={{ display: showHomepageBtn && displayLinks }}
+                <div 
+                    className = "header-links-navigation"
+                    style = {{display: showMenu}}
                 >
-                    <Link to="/">
+                    <i  className= {showLinks === true? "fas fa-times" : "fas fa-bars"}
+                        onClick = {() => {setShowLinks(prev => !prev)}}
+                        
+                    ></i> 
+                    <div 
+                        className = {`header-links-navigation-buttons ${showLinks? 'visible' : 'hidden'}`}
+                    >
                         <div
-                            className="header-homepageBtn-text"
-                        ><i className="fas fa-home"></i><span>Homepage</span></div>
-                    </Link>
-                </div>
- 
-                <div
-                    className={`header-allArticlesBtn ${activeLink === 'allArticles' && 'activeLink'}`}
-                    style={{ display: allArticlesBtn && displayLinks }}
-                >
-                    <Link to={`/allArticles`}>
+                            className="header-homepageBtn"
+                        >
+                            <Link to="/">
+                                <div
+                                    className="header-homepageBtn-text"
+                                ><i className="fas fa-home"></i><span>Homepage</span></div>
+                            </Link>
+                        </div>
+        
                         <div
-                            className="header-allArticlesBtn-text"
-                        ><i className="fas fa-list-ul"></i><span>All articles</span></div>
-                    </Link>
-                </div>
-                <div
-                    className={`header-orderBtn ${activeLink === 'order' && 'activeLink'}`}
-                    style={{ display: showOrderBtn && displayLinks }}
-                >
-                    <Link to={`/order`}>
+                            className={`header-allArticlesBtn ${activeLink === 'allArticles' && 'activeLink'}`}
+                        >
+                            <Link to={`/allArticles`}>
+                                <div
+                                    className="header-allArticlesBtn-text"
+                                ><i className="fas fa-list-ul"></i><span>All articles</span></div>
+                            </Link>
+                        </div>
                         <div
-                            className="header-orderBtn-text"
-                        ><i className="fas fa-stream"></i><span>Order articles</span></div>
-                    </Link>
+                            className={`header-orderBtn ${activeLink === 'order' && 'activeLink'}`}
+                    
+                        >
+                            <Link to={`/order`}>
+                                <div
+                                    className="header-orderBtn-text"
+                                ><i className="fas fa-stream"></i><span>Order articles</span></div>
+                            </Link>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
 
             <div className="header-title">
@@ -78,7 +86,12 @@ export default function Header() {
                     </Link>
                 </div>
                 <div className="login">
-                    <Link to = "/form"><i className="fas fa-user-edit" onClick = {() => setFormVisible(prev => !prev)}></i></Link>
+                    <Link to = "/form">
+                        <i 
+                            className="fas fa-user-edit" 
+                            onClick = {() => setFormVisible(prev => !prev)}>
+                         </i>
+                    </Link>
                     <div className = "login-info">
                         <div className = "login-info-title">User logged in:</div>
                         <div className = "login-info-username">{loggedUser.username === ''? loggedUser.username : localStorage.getItem('loggedUsername')}</div>
