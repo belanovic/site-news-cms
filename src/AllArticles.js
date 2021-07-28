@@ -79,42 +79,43 @@ export default function AllArticles() {
                                    onClick = {() => setActiveCriteria(['title', 'up', 2])}>
                                 </i>
                         </div>
-
-                        <div 
-                            className = "allArticles-columnNames-note allArticles-columnNames-text">
-                                <span>Napomena</span>
-                        </div>
-                        <div 
-                            className = "allArticles-columnNames-dateUpdated allArticles-columnNames-text" >
-                                <i className= {`fas fa-arrow-down ${activeCriteria[2] === 3? 'activeArrow' : ''}`}
-                                   onClick = {() => setActiveCriteria(['dateUpdated', 'down', 3])}></i>
-                                <span>Poslednja izmena </span>
-                                <i className= {`fas fa-arrow-up ${activeCriteria[2] === 4? 'activeArrow' : ''}`} 
-                                   onClick = {() => setActiveCriteria(['dateUpdated', 'up', 4])}></i>
-                        </div>
-                        <div 
-                            className = "allArticles-columnNames-dateCreated allArticles-columnNames-text">
-                                <i className= {`fas fa-arrow-down ${activeCriteria[2] === 5? 'activeArrow' : ''}`}
-                                   onClick = {() => setActiveCriteria(['dateCreated', 'down', 5])}></i>
-                                <span>Vreme kreiranja</span>
-                                <i className= {`fas fa-arrow-up ${activeCriteria[2] === 6? 'activeArrow' : ''}`}
-                                   onClick = {() => setActiveCriteria(['dateCreated', 'up', 6])}></i>
-                        </div>
-                        <div 
-                            className = "allArticles-columnNames-datePublished allArticles-columnNames-text">
-                                <i className= {`fas fa-arrow-down ${activeCriteria[2] === 7? 'activeArrow' : ''}`}
-                                   onClick = {() => setActiveCriteria(['datePublished', 'down', 7])}></i>
-                                <span>Vreme objave</span>
-                                <i className= {`fas fa-arrow-up ${activeCriteria[2] === 8? 'activeArrow' : ''}`}
-                                   onClick = {() => setActiveCriteria(['datePublished', 'up', 8])}></i>
-                        </div>
-                        <div 
-                            className = "allArticles-columnNames-publish allArticles-columnNames-text">
-                                <span>Objavi</span>
-                        </div>
-                        <div 
-                            className = "allArticles-columnNames-delete allArticles-columnNames-text">
-                                <span>Izbriši</span>
+                        <div className = "allArticles-columnNames-info">
+                            <div 
+                                className = "allArticles-columnNames-note allArticles-columnNames-text">
+                                    <span>Napomena</span>
+                            </div>
+                            <div 
+                                className = "allArticles-columnNames-dateUpdated allArticles-columnNames-text" >
+                                    <i className= {`fas fa-arrow-down ${activeCriteria[2] === 3? 'activeArrow' : ''}`}
+                                    onClick = {() => setActiveCriteria(['dateUpdated', 'down', 3])}></i>
+                                    <span>Poslednja izmena </span>
+                                    <i className= {`fas fa-arrow-up ${activeCriteria[2] === 4? 'activeArrow' : ''}`} 
+                                    onClick = {() => setActiveCriteria(['dateUpdated', 'up', 4])}></i>
+                            </div>
+                            <div 
+                                className = "allArticles-columnNames-dateCreated allArticles-columnNames-text">
+                                    <i className= {`fas fa-arrow-down ${activeCriteria[2] === 5? 'activeArrow' : ''}`}
+                                    onClick = {() => setActiveCriteria(['dateCreated', 'down', 5])}></i>
+                                    <span>Vreme kreiranja</span>
+                                    <i className= {`fas fa-arrow-up ${activeCriteria[2] === 6? 'activeArrow' : ''}`}
+                                    onClick = {() => setActiveCriteria(['dateCreated', 'up', 6])}></i>
+                            </div>
+                            <div 
+                                className = "allArticles-columnNames-datePublished allArticles-columnNames-text">
+                                    <i className= {`fas fa-arrow-down ${activeCriteria[2] === 7? 'activeArrow' : ''}`}
+                                    onClick = {() => setActiveCriteria(['datePublished', 'down', 7])}></i>
+                                    <span>Vreme objave</span>
+                                    <i className= {`fas fa-arrow-up ${activeCriteria[2] === 8? 'activeArrow' : ''}`}
+                                    onClick = {() => setActiveCriteria(['datePublished', 'up', 8])}></i>
+                            </div>
+                            <div 
+                                className = "allArticles-columnNames-publish allArticles-columnNames-text">
+                                    <span>Objavi</span>
+                            </div>
+                            <div 
+                                className = "allArticles-columnNames-delete allArticles-columnNames-text">
+                                    <span>Izbriši</span>
+                            </div>
                         </div>
                     </div>
                     {listAllArticles.map((oneArticle, i) => {
@@ -127,17 +128,19 @@ export default function AllArticles() {
                                             <h2 className="allArticles-item-title-text">{oneArticle.title}</h2>
                                         </Link>
                                     </div>
-                                    <div className = "allArticles-item-note allArticles-item-part">{oneArticle.note}</div>
-                                    <DateUpdated timeUpdated = {oneArticle.dateUpdated}/>
-                                    <DateCreated timeCreated = {oneArticle.dateCreated}/>
-                                    <DatePublished timePublished = {oneArticle.datePublished} published = {oneArticle.published}/>
-                
-                                    <Publish id={oneArticle._id} published = {oneArticle.published} />
+                                    <div className = "allArticles-item-info">
+                                        <div className = "allArticles-item-note allArticles-item-part">{oneArticle.note}</div>
+                                        <DateUpdated timeUpdated = {oneArticle.dateUpdated}/>
+                                        <DateCreated timeCreated = {oneArticle.dateCreated}/>
+                                        <DatePublished timePublished = {oneArticle.datePublished} published = {oneArticle.published}/>
+                    
+                                        <Publish id={oneArticle._id} published = {oneArticle.published} />
 
-                                    <div className="allArticles-item-delete allArticles-item-part"> 
-                                    {!oneArticle.published && <Link to={`/delete/${oneArticle._id}`}>
-                                        <button>Izbriši</button>
-                                    </Link>}
+                                        <div className="allArticles-item-delete allArticles-item-part"> 
+                                        {!oneArticle.published && <Link to={`/delete/${oneArticle._id}`}>
+                                            <button>Izbriši</button>
+                                        </Link>}
+                                        </div>
                                     </div>
                                 </div>
                      

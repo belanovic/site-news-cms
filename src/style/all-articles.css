@@ -6,8 +6,12 @@
 
 .allArticles-columnNames {
     display: flex;
-} 
-.allArticles-columnNames > * {
+}
+.allArticles-columnNames-info {
+    display: flex;
+    flex: 1;
+}
+.allArticles-columnNames-title, .allArticles-columnNames-info > * {
     padding: 0.7em  0.2em 0.7em  0.2em;
     border-right: 1px solid black;
     border-bottom: 3px solid black;
@@ -21,12 +25,12 @@
 .allArticles-columnNames-dateCreated,
 .allArticles-columnNames-dateUpdated,
 .allArticles-columnNames-datePublished {
-    flex: 0 0 10%;
+    flex: 0 0 20%;
     text-align: center;
 }
 .allArticles-columnNames-delete,
 .allArticles-columnNames-publish {
-    flex: 0 0 5%;
+    flex: 0 0 10%;
     text-align: center;
 }
 

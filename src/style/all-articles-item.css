@@ -9,6 +9,11 @@
     background: rgb(189, 189, 189);
 }
 
+.allArticles-item-info {
+    display: flex;
+    flex: 1;
+}
+
 .allArticles-item-part {
     padding: 0em 0 0em 0;
     border-right: 1px solid black;
@@ -44,12 +49,12 @@
 .allArticles-item-datePublished,
 .allArticles-item-dateCreated
 {
-    flex: 0 0 10%;
+    flex: 0 0 20%;
 }
 .allArticles-item-delete,
 .allArticles-item-publish
 {
-    flex: 0 0 5%;
+    flex: 0 0 10%;
 }
 .allArticles-item-note,
 .allArticles-item-dateUpdated,
@@ -64,4 +69,11 @@
 
 .allArticles-item-note {
      padding: 0.4em;
+}
+
+@media all and (max-width: 748px) {
+    .allArticles-item {
+       flex-direction: column;
+    }
+    
 }
