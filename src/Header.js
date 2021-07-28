@@ -33,6 +33,7 @@ export default function Header() {
                     >
                         <div
                             className="header-homepageBtn"
+                            onClick = {() => setShowLinks(false)}
                         >
                             <Link to="/">
                                 <div
@@ -43,6 +44,7 @@ export default function Header() {
         
                         <div
                             className={`header-allArticlesBtn ${activeLink === 'allArticles' && 'activeLink'}`}
+                            onClick = {() => setShowLinks(false)}
                         >
                             <Link to={`/allArticles`}>
                                 <div
@@ -52,7 +54,7 @@ export default function Header() {
                         </div>
                         <div
                             className={`header-orderBtn ${activeLink === 'order' && 'activeLink'}`}
-                    
+                            onClick = {() => setShowLinks(false)}
                         >
                             <Link to={`/order`}>
                                 <div
