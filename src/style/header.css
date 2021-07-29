@@ -104,10 +104,10 @@
     background: rgba(0, 98, 0, 0.7);
 }
 
-.activeLink {
+.activeLink span {
     border-bottom: 2px solid white;
 }
-.activeLink:hover {
+.activeLink:hover span {
     background-color: transparent;
 }
 
