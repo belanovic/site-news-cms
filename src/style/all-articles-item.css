@@ -19,43 +19,50 @@
     border-right: 1px solid black;
     letter-spacing: 0.5px;
 }
+
 .allArticles-item-title {
     flex: 0 0 45%;
     display: flex;
     align-items: center;
 }
+
 .allArticles-item-title-text:hover {
     color: rgb(129, 216, 0)
 }
+
 .allArticles-item-title-text:hover .allArticles-item-dateUpdated {
     background: linear-gradient(180deg, rgb(59, 75, 59), rgb(26, 110, 26), rgb(59, 75, 59));
 }
+
 .allArticles-item-title a {
     text-decoration: none;
     margin: 0;
     color: white;
 }
+
 .allArticles-item-title-text {
     margin: 1.5em 0.5em 1.5em 0.5em;
     font-size: 1.175rem;
     line-height: 1.5;
     font-weight: normal;
 }
+
 .allArticles-item-note {
     text-align: center;
 }
+
 .allArticles-item-note,
 .allArticles-item-dateUpdated,
 .allArticles-item-datePublished,
-.allArticles-item-dateCreated
-{
+.allArticles-item-dateCreated {
     flex: 0 0 20%;
 }
+
 .allArticles-item-delete,
-.allArticles-item-publish
-{
+.allArticles-item-publish {
     flex: 0 0 10%;
 }
+
 .allArticles-item-note,
 .allArticles-item-dateUpdated,
 .allArticles-item-datePublished,
@@ -68,12 +75,29 @@
 }
 
 .allArticles-item-note {
-     padding: 0.4em;
+    padding: 0.4em;
 }
 
 @media all and (max-width: 748px) {
-    .allArticles-item { 
-       flex-direction: column;
+    .allArticles-item {
+        flex-direction: column;
     }
-    
+    .allArticles-item-note {
+        display: none;
+    }
+    .allArticles-item-note,
+    .allArticles-item-dateUpdated,
+    .allArticles-item-datePublished,
+    .allArticles-item-dateCreated {
+        flex: 0 0 20%;
+        flex: 0 0 25%;
+    }
+    .allArticles-item-delete,
+    .allArticles-item-publish {
+        flex: 0 0 10%;
+        flex: 0 0 12.5%;
+    }
+    .allArticles-item-info {
+        order: -1;
+    }
 }
