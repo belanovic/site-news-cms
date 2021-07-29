@@ -85,7 +85,7 @@ export default function AllArticles() {
                                 className = "allArticles-columnNames-dateUpdated allArticles-columnNames-text" >
                                     <i className= {`fas fa-arrow-down ${activeCriteria[2] === 3? 'activeArrow' : ''}`}
                                     onClick = {() => setActiveCriteria(['dateUpdated', 'down', 3])}></i>
-                                    <span>Poslednja izmena </span>
+                                    <span>Izmena</span>
                                     <i className= {`fas fa-arrow-up ${activeCriteria[2] === 4? 'activeArrow' : ''}`} 
                                     onClick = {() => setActiveCriteria(['dateUpdated', 'up', 4])}></i>
                             </div>
@@ -93,7 +93,7 @@ export default function AllArticles() {
                                 className = "allArticles-columnNames-dateCreated allArticles-columnNames-text">
                                     <i className= {`fas fa-arrow-down ${activeCriteria[2] === 5? 'activeArrow' : ''}`}
                                     onClick = {() => setActiveCriteria(['dateCreated', 'down', 5])}></i>
-                                    <span>Vreme kreiranja</span>
+                                    <span>Kreirano</span>
                                     <i className= {`fas fa-arrow-up ${activeCriteria[2] === 6? 'activeArrow' : ''}`}
                                     onClick = {() => setActiveCriteria(['dateCreated', 'up', 6])}></i>
                             </div>
@@ -101,7 +101,7 @@ export default function AllArticles() {
                                 className = "allArticles-columnNames-datePublished allArticles-columnNames-text">
                                     <i className= {`fas fa-arrow-down ${activeCriteria[2] === 7? 'activeArrow' : ''}`}
                                     onClick = {() => setActiveCriteria(['datePublished', 'down', 7])}></i>
-                                    <span>Vreme objave</span>
+                                    <span>Objavljeno</span>
                                     <i className= {`fas fa-arrow-up ${activeCriteria[2] === 8? 'activeArrow' : ''}`}
                                     onClick = {() => setActiveCriteria(['datePublished', 'up', 8])}></i>
                             </div>

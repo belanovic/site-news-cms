@@ -201,12 +201,6 @@
         /* transform: translateX(0%); */
         left: 0%;
     }
-    .header-homepageBtn,
-    .header-orderBtn,
-    .header-allArticlesBtn,
-    .header-newArticleBtn {
-        /* margin-bottom: 0.8em; */
-    }
     .header-homepageBtn-text,
     .header-orderBtn-text,
     .header-allArticlesBtn-text,
