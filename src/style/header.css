@@ -190,6 +190,7 @@
         width: 100%;
         transition: left 250ms;
         position: absolute;
+        margin-top: 1em;
     }
     .header-links-navigation-buttons.hidden {
         /* display: none; */
