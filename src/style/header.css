@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(180deg, rgb(80, 0, 0), rgb(216, 0, 0) );
+    background: linear-gradient(180deg, rgb(80, 0, 0), rgb(216, 0, 0));
     background: linear-gradient(180deg, rgb(40, 0, 0), rgb(107, 0, 0));
     padding: 0.7em 1em 0.7em 1em;
 }
@@ -13,6 +13,7 @@
 .header-links-frontend a {
     text-decoration: none;
 }
+
 .header-links-frontend-title {
     color: white;
     margin: 0;
@@ -20,57 +21,73 @@
     font-style: italic;
     display: inline-block;
 }
+
 .fa-react {
     color: white;
     margin-right: 0.3em;
 }
+
 .header-title {
     flex: 0 0 10%;
 }
-.header-title a { 
+
+.header-title a {
     text-decoration: none;
 }
+
 .header-title-text {
     font-size: 3rem;
     color: white;
     font-family: 'Times New Roman', Times, serif;
 }
-.header-links {
-    flex: 0 0 40%; 
 
+.header-links {
+    flex: 0 0 40%;
 }
-.header-links > * {
+
+.header-links>* {
     margin-right: 1em;
     display: inline-flex;
-    
 }
+
 .right-box {
     flex: 0 0 40%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
-.fa-bars, .fa-times {
+
+.fa-bars,
+.fa-times {
     display: none;
     color: white;
     font-size: 1.5rem;
 }
-.fa-bars:hover, .fa-times:hover {
+
+.fa-bars:hover,
+.fa-times:hover {
     cursor: pointer;
 }
 
 .header-links-navigation {
     display: 'none';
 }
+
 .header-links-navigation-buttons {
     display: flex;
 }
 
-.header-homepageBtn a, .header-allArticlesBtn a, .header-newArticleBtn a, .header-orderBtn a {
+.header-homepageBtn a,
+.header-allArticlesBtn a,
+.header-newArticleBtn a,
+.header-orderBtn a {
     text-decoration: none;
 }
 
-.header-homepageBtn-text, .header-orderBtn-text, .header-allArticlesBtn-text, .header-newArticleBtn-text {
+.header-homepageBtn-text,
+.header-orderBtn-text,
+.header-allArticlesBtn-text,
+.header-newArticleBtn-text {
     font-size: 1.175rem;
     color: white;
     text-align: center;
@@ -88,7 +105,11 @@
 .header-newArticleBtn {
     margin-right: 4em;
 }
-.fa-feather-alt, .fa-home, .fa-list-ul, .fa-stream {
+
+.fa-feather-alt,
+.fa-home,
+.fa-list-ul,
+.fa-stream {
     padding-right: 0.5em;
 }
 
@@ -96,17 +117,20 @@
     background: rgba(0, 98, 0, 0.7);
 }
 
-.header-homepageBtn:active, .header-allArticlesBtn:active, .header-newArticleBtn:active {
+.header-homepageBtn:active,
+.header-allArticlesBtn:active,
+.header-newArticleBtn:active {
     transform: scale(0.95, 0.90);
 }
 
-.header-orderBtn:hover  {
+.header-orderBtn:hover {
     background: rgba(0, 98, 0, 0.7);
 }
 
 .activeLink span {
     border-bottom: 2px solid white;
 }
+
 .activeLink:hover span {
     background-color: transparent;
 }
@@ -120,11 +144,11 @@
     font-size: 1.5rem;
     color: white;
 }
+
 .login-info {
     color: white;
     position: absolute;
     width: 9em;
-
     right: 70%;
     line-height: 1.5;
     text-align: center;
@@ -138,12 +162,12 @@
 .login-info-title {
     font-size: 0.8rem;
 }
+
 .login:hover .login-info {
     display: block;
 }
 
 @media all and (max-width: 768px) {
-
     .header-links-frontend-title {
         font-size: 1rem;
     }
@@ -166,7 +190,6 @@
         width: 100%;
         transition: left 250ms;
         position: absolute;
-        padding: 1.3em;
     }
     .header-links-navigation-buttons.hidden {
         /* display: none; */
@@ -177,18 +200,28 @@
         /* transform: translateX(0%); */
         left: 0%;
     }
-    .header-homepageBtn, .header-orderBtn, .header-allArticlesBtn, .header-newArticleBtn {
+    .header-homepageBtn,
+    .header-orderBtn,
+    .header-allArticlesBtn,
+    .header-newArticleBtn {
         /* margin-bottom: 0.8em; */
     }
-    .header-homepageBtn-text, .header-orderBtn-text, .header-allArticlesBtn-text, .header-newArticleBtn-text {
+    .header-homepageBtn-text,
+    .header-orderBtn-text,
+    .header-allArticlesBtn-text,
+    .header-newArticleBtn-text {
         padding: 0.2em 0.2em 0.2em 0.2em;
         text-align: left;
         margin: 1em 0 1em 0;
     }
-    .fa-feather-alt, .fa-home, .fa-list-ul, .fa-stream {
+    .fa-feather-alt,
+    .fa-home,
+    .fa-list-ul,
+    .fa-stream {
         font-size: 1.25rem;
     }
-    .fa-bars, .fa-times {
+    .fa-bars,
+    .fa-times {
         display: block;
         margin: 0.25em 0 0.25em 0;
     }
