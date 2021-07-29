@@ -162,9 +162,7 @@
         position: absolute;
         padding: 1.3em;
     }
-    .header-links-navigation-buttons span {
-        font-size: 1.25rem;
-    }
+  
 
     .header-links-navigation-buttons.hidden {
         /* display: none; */
