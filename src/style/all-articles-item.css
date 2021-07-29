@@ -97,11 +97,13 @@
     .allArticles-item-dateCreated {
         flex: 0 0 20%;
         flex: 0 0 25%;
+        padding: 1.5em 0.5em 1.5em 0.5em;
     }
     .allArticles-item-delete,
     .allArticles-item-publish {
         flex: 0 0 10%;
         flex: 0 0 12.5%;
+        padding: 0.5em 0.5em 01.5em 0.5em;
     }
     .allArticles-item-info {
         order: -1;
