@@ -155,11 +155,25 @@
         display: none;
     }
     .header-links-navigation-buttons {
-        flex-direction: column;
+        background: linear-gradient(180deg, rgb(107, 0, 0), rgb(40, 0, 0));
+        justify-content: space-around;
+        width: 100%;
+        transition: left 250ms;
+        position: absolute;
+        padding: 1.3em;
+    }
+    .header-links-navigation-buttons span {
+        font-size: 1.25rem;
     }
 
     .header-links-navigation-buttons.hidden {
-        display: none;
+        /* display: none; */
+        /* transform: translateX(-100%); */
+        left: -100%;
+    }
+    .header-links-navigation-buttons.visible {
+        /* transform: translateX(0%); */
+        left: 0%;
     }
     .header-homepageBtn, .header-orderBtn, .header-allArticlesBtn, .header-newArticleBtn {
         margin-bottom: 0.8em;
