@@ -79,6 +79,12 @@
 }
 
 @media all and (max-width: 748px) {
+    .allArticles-item-title {
+        border-top: 1px dashed black;
+    }
+    .allArticles-columnNames-note, .allArticles-columnNames-title {
+        display: none;
+    }
     .allArticles-item {
         flex-direction: column;
     }
