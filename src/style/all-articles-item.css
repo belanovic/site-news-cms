@@ -120,7 +120,7 @@
         font-size: 0.7rem;
 /*         background: grey; */
     }
-    .allArticles-item-publish {
+    .allArticles-item-publish button {
         display: none;
         font-size: 0.7rem;
     }
