@@ -14,7 +14,7 @@
 .allArticles-columnNames-title, .allArticles-columnNames-info > * {
     padding: 0.7em  0.2em 0.7em  0.2em;
     border-right: 1px solid black;
-    border-bottom: 3px solid black;
+    border-bottom: 1px solid black;
 }
 
 .allArticles-columnNames-title {
