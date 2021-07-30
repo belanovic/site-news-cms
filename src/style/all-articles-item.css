@@ -123,8 +123,7 @@
     .allArticles-item-publish {
         display: none;
     }
-    .allArticles-item-publish button {
-        display: none;
+    .allArticles-item-delete button {
         font-size: 0.7rem;
     }
 
