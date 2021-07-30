@@ -79,8 +79,17 @@
 }
 
 @media all and (max-width: 748px) {
+    .allArticles-item {
+        margin-bottom: 1em;
+    }
     .allArticles-item-title {
         border-top: 1px dashed black;
+    }
+    .allArticles-columnNames {
+        margin-bottom: 1em;
+    }
+    .allArticles-item-info {
+        order: -1;
     }
     .allArticles-columnNames-note, .allArticles-columnNames-title {
         display: none;
@@ -97,15 +106,17 @@
     .allArticles-item-dateCreated {
         flex: 0 0 20%;
         flex: 0 0 25%;
-        padding: 1.5em 0.5em 1.5em 0.5em;
+        padding: 0.5em;
+        font-size: 0.7rem;
+/*         background: grey; */
     }
     .allArticles-item-delete,
     .allArticles-item-publish {
         flex: 0 0 10%;
         flex: 0 0 12.5%;
-        padding: 0.5em 0.5em 01.5em 0.5em;
+        padding: 0.5em;
+        font-size: 0.7rem;
+/*         background: grey; */
     }
-    .allArticles-item-info {
-        order: -1;
-    }
+
 }
