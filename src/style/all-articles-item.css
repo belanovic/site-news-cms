@@ -122,6 +122,7 @@
     }
     .allArticles-item-publish {
         display: none;
+        font-size: 0.7rem;
     }
 
 }
