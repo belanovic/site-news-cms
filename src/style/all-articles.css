@@ -15,6 +15,7 @@
     padding: 0.7em  0.2em 0.7em  0.2em;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
+    border-top: 1px solid black;
 }
 
 .allArticles-columnNames-title {
