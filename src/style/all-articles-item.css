@@ -88,6 +88,9 @@
     .allArticles-columnNames {
         margin-bottom: 1em;
     }
+    .allArticles-columnNames span {
+        font-size: 0.7rem;
+    }
     .allArticles-item-info {
         order: -1;
         background: black;
