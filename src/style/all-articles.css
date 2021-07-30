@@ -61,7 +61,9 @@
     .allArticles-columnNames-delete,
     .allArticles-columnNames-publish {
         flex: 0 0 12.5%;
-
+    }
+    .allArticles-columnNames-delete {
+        border-right: none;
     }
     .allArticles-columnNames-publish {
         display: none;
