@@ -90,6 +90,7 @@
     }
     .allArticles-item-info {
         order: -1;
+        background: black;
     }
     .allArticles-columnNames-note, .allArticles-columnNames-title {
         display: none;
@@ -106,7 +107,7 @@
     .allArticles-item-dateCreated {
         flex: 0 0 20%;
         flex: 0 0 25%;
-        padding: 0.5em 0.5em 0em 0.5em;
+        padding: 0.5em 0em 0em 0em;
         font-size: 0.7rem;
 /*         background: grey; */
     }
@@ -114,7 +115,7 @@
     .allArticles-item-publish {
         flex: 0 0 10%;
         flex: 0 0 12.5%;
-        padding: 0.5em 0.5em 0em 0.5em;
+        padding: 0.5em 0em 0em 0em;
         font-size: 0.7rem;
 /*         background: grey; */
     }
