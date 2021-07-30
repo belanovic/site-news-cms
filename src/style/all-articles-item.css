@@ -108,19 +108,20 @@
     .allArticles-item-dateUpdated,
     .allArticles-item-datePublished,
     .allArticles-item-dateCreated {
-        flex: 0 0 20%;
-        flex: 0 0 25%;
+        flex: 0 0 29.166%;
         padding: 0.5em 0em 0em 0em;
         font-size: 0.7rem;
 /*         background: grey; */
     }
     .allArticles-item-delete,
     .allArticles-item-publish {
-        flex: 0 0 10%;
         flex: 0 0 12.5%;
         padding: 0.5em 0em 0em 0em;
         font-size: 0.7rem;
 /*         background: grey; */
+    }
+    .allArticles-item-publish {
+        display: none;
     }
 
 }

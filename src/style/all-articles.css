@@ -54,12 +54,15 @@
     .allArticles-columnNames-dateCreated,
     .allArticles-columnNames-dateUpdated,
     .allArticles-columnNames-datePublished {
-        flex: 0 0 25%;
+        flex: 0 0 29.166%;
 
     }
     .allArticles-columnNames-delete,
     .allArticles-columnNames-publish {
         flex: 0 0 12.5%;
 
+    }
+    .allArticles-columnNames-publish {
+        display: none;
     }
 }
