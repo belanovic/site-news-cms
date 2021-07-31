@@ -119,8 +119,9 @@
 
 .header-homepageBtn:active,
 .header-allArticlesBtn:active,
-.header-newArticleBtn:active {
-    transform: scale(0.95, 0.90);
+.header-newArticleBtn:active,
+.header-orderBtn:active {
+    transform: scale(0.98, 0.98);
 }
 
 .header-orderBtn:hover {

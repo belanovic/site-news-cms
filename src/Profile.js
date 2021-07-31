@@ -4,6 +4,7 @@ import './style/profile.css'
 
 export default function Profile({loggedUser}) {
 
+    
     const {setLoggedIn} = useContext(context);
 
     const handleSignOut = (e) => {

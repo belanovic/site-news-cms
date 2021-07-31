@@ -88,6 +88,11 @@
     background: rgb(0, 150, 0);
 }
 
+.order-send-button.sending {
+    cursor: not-allowed;
+    background: rgb(0, 184, 0);
+}
+
 .fas.fa-chevron-down {
     transition: transform 0.25s;
     font-size: 1.25rem;

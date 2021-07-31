@@ -9,12 +9,14 @@ import './style/order-date.css';
 
 export default function Order() {
 
+    const [requestSent, setRequestSent] = useState(true);
+
     const [frontpageNews, setFrontpageNews] = useState('');
     const [reorderedArticles, setreorderedArticles] = useState('');
     const [activeArrow, setActiveArrow] = useState('');
     const [doubleSelectedArticle, setDoubleSelectedArticle] = useState('');
     const [newsByDateAllComp, setNewsByDateAllComp] = useState([]);
-    const { setActiveLink, 
+    const { setActiveLink,
         setNewArticleBtn, setShowMenu,
         setShowFrontend } = useContext(context);
 
@@ -47,6 +49,7 @@ export default function Order() {
     }
 
     const handleClickOrder = async () => {
+        setRequestSent(true);
         const idAndPositionArr = reorderedArticles.map((prom, i) => {
             const idAndPosition = {
                 id: prom._id,
@@ -56,6 +59,7 @@ export default function Order() {
 
         })
         const updatedFrontpage = await updateFrontpage(idAndPositionArr);
+        setRequestSent(false);
         /* updatedFrontpage.sort((a, b) => a.position - b.position).forEach((prom) => {
             if (prom.position > 0) console.log(prom.title)
         }) */
@@ -76,6 +80,7 @@ export default function Order() {
 
     useEffect(async () => {
         const n = await getFrontpageNews();
+        setRequestSent(false);
         setFrontpageNews(n);
         setreorderedArticles(n);
 
@@ -164,9 +169,10 @@ export default function Order() {
             </DragDropContext>
             <div className="order-send">
                 <button
-                    className="order-send-button"
+                    className= {`order-send-button ${requestSent && 'sending'}`}
                     onClick={handleClickOrder}
-                >Uredi</button>
+                    disabled = {requestSent? true : false}
+                >{requestSent? 'Ordering...' : 'Uredi'}</button>
             </div>
         </div>
 

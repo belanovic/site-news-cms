@@ -8,14 +8,18 @@ import './style/form.css';
 
 export default function Form() {
 
-    const { alphabet, isLoggedIn, setLoggedIn, 
+    const { alphabet, isLoggedIn, setLoggedIn,
             loggedUser, setLoggedUser, setLoggedUsername,
             setNewArticleBtn, setActiveLink,
             setShowFrontend, setShowMenu
         } = useContext(context);
 
+    const [requestSent, setRequestSent] = useState(false);
+
     const [signInisActive, setSignInIsActive] = useState(true);
     const [signUpisActive, setSignUpIsActive] = useState(false);
+
+
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('');
@@ -46,8 +50,12 @@ export default function Form() {
 
     const handleClickSignIn = async (e) => {
         e.preventDefault();
+        setRequestSent(true);
         const userAndToken = await loginUser(usernameSignIn, passwordSignIn);
-        if(userAndToken[0] === false) return;
+        if(userAndToken[0] === false) {
+            setRequestSent(false);
+            return;
+        };
         const token = userAndToken[3];
         localStorage.setItem('x-auth-token', token);
         
@@ -66,12 +74,15 @@ export default function Form() {
             }
             return v
         })
+        setRequestSent(false);
         console.log(userAndToken);
     }
 
     const handleClickSignUp = async (e) => {
         e.preventDefault();
+        setRequestSent(true);
         const newUser = await registerUser(firstName, lastName, usernameSignUp, passwordSignUp, email);
+        setRequestSent(false);
         console.log(newUser);
     }
 
@@ -260,8 +271,9 @@ export default function Form() {
                             </div>
                             <div className="form-send">
                                 <button 
-                                    className="form-send-button"
+                                    className={`form-send-button ${requestSent && 'sending'}`}
                                     onClick = {signInisActive? handleClickSignIn : handleClickSignUp}
+                                    disabled = {requestSent? true : false}
                                 >{`${signInisActive? 'Prijavi se' : 'Registruj se'}`}</button>
                             </div>
                         </form>}

@@ -94,6 +94,11 @@
     background: rgb(0, 150, 0);
 }
 
+.form-send-button.sending {
+    cursor: not-allowed;
+    background: rgb(0, 184, 0);
+}
+
 .form-element-condition span {
     color: red;
     font-size: 0.8rem;
