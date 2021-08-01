@@ -1,30 +1,3 @@
-.search {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0.5em;
-}
-.search-cathegories label {
-    font-size: .8rem;
-    letter-spacing: 1px;
-    margin-right: 1.25em;
-}
-.search-cathegories select {
-    letter-spacing: 1.25px;
-    margin-right: 1.25em;
-}
-.search-cathegories option {
-    letter-spacing: 1px;
-    font-size: 1rem;
-}
-.search-button .btn {
-    background: green;
-    color: white;
-    text-align: center;
-    padding: 0.2em 2em 0.2em 2em;
-}
-
-.search-button .btn:hover {
-    background:rgb(0, 150, 0);
-    cursor: pointer;
-}
+/* .search {
+    margin-left: 5em;
+} */

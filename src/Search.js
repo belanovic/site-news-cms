@@ -3,77 +3,41 @@ import { context } from './newsContext.js';
 import { getAllArticles, getByCategory } from './getDatabase';
 import './style/search.css';
 
-export default function Search({ setPageNum, sortArticles }) {
+export default function Search() {
 
+    const [query, setQuery] = useState('');
     
-    const { listAllArticles, setListAllArticles, defaultCathegory, setDefaultCathegory,
-        listLoaded, setListLoaded, shouldLoadArticles } = useContext(context);
+    const { listAllArticles, setListAllArticles,
+        listLoaded, setListLoaded } = useContext(context);
 
-    const [cathegory, setCathegory] = useState(defaultCathegory);
-
-    const handleSelect = (e) => {
-        const option = e.target.value;
-        console.log(option);
-        setCathegory(option);
-        setDefaultCathegory(option);
+    const handleChange = (e) => {
+        const v = e.target.value;
+        setQuery(v);
     }
-
-    const handleClick = async (e) => {
+    const handleClick = (e) => {
         e.preventDefault();
-
-        if (cathegory === 'allArticles') {
-            const allNews = await getAllArticles();
-            console.log(allNews);
-            const promiseResolveA = await setListAllArticles(allNews);
-            sortArticles();
-            const promiseResolveB = await setListLoaded(true);
-            setPageNum(1)
-        } else {
-            const allNews = await getByCategory(cathegory);
-            console.log(allNews);
-            const promiseResolveA = await setListAllArticles(allNews);
-            sortArticles();
-            const promiseResolveB = await setListLoaded(true);
-            setPageNum(1);
-        }
+        const newsFound = listAllArticles.filter((article) => {
+            const i = article.title.search(query);
+            console.log(i);
+            return i === -1? false : true
+        })
+        setListAllArticles(newsFound)
     }
-
-    useEffect(async () => {
-        if (cathegory === 'allArticles') {
-            const allNews = await getAllArticles();
-            const promiseResolveA = await setListAllArticles(allNews);
-            sortArticles();
-            const promiseResolveB = await setListLoaded(true);
-            setPageNum(1)
-        } else {
-            const allNews = await getByCategory(cathegory);
-            const promiseResolveA = await setListAllArticles(allNews);
-            sortArticles();
-            const promiseResolveB = await setListLoaded(true);
-            setPageNum(1);
-        }
-    }, [])
 
     return (
         <div className="search">
-            <div className="search-cathegories">
-                <label htmlFor="search-cathegories">Rubrike</label>
-                <select id="search-cathegories" value={cathegory} onChange={handleSelect}>
-                    <option value="allArticles">Sve vesti</option>
-                    <option value="politics">Politics</option>
-                    <option value="business">Business</option>
-                    <option value="technology">Technology</option>
-                    <option value="entertainment">Entertainment</option>
-                    <option value="sports">Sports</option>
-                </select>
-            </div>
-            <div className="search-button">
-                <button
-                    className="search-button btn"
-                    onClick={handleClick}
-                >Traži
-                </button>
-            </div>
+            <input 
+                className = "search-input"
+                type = "text"
+                value = {query}
+                onChange = {handleChange}
+                >    
+            </input>
+            <button
+                className = "search-button"
+                onClick = {handleClick}
+            >Traži
+            </button>
         </div>
     )
 }

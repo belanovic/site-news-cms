@@ -5,6 +5,7 @@ import { context } from './newsContext.js';
 import Pagination from './Pagination.js';
 import {DatePublished, DateCreated, DateUpdated} from './Time.js';
 import Publish from './Publish.js';
+import Cathegory from './Cathegory.js';
 import Search from './Search.js';
 import './style/all-articles.css'; 
 import './style/all-articles-item.css';
@@ -64,7 +65,10 @@ export default function AllArticles() {
         <>
             {listLoaded === true ?
                 <div className="allArticles">
-                    <Search setPageNum = {setPageNum} sortArticles = {sortArticles} />
+                    <div className = "find">
+                        <Cathegory setPageNum = {setPageNum} sortArticles = {sortArticles} />
+                        <Search />
+                    </div>
                     <div className = "allArticles-columnNames">
                         <div 
                             className = "allArticles-columnNames-title allArticles-columnNames-text">
