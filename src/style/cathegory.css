@@ -33,3 +33,9 @@
     background:rgb(0, 150, 0);
     cursor: pointer;
 }
+
+@media all and (max-width: 748px) {
+    .find {
+        flex-direction: column;
+    }
+}
