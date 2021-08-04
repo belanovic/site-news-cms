@@ -4,6 +4,7 @@
 
 
 .calendar-container {
+    display: inline-block;
     margin-right: 2em;
     color: rgb(199, 199, 199);
     cursor: not-allowed;
@@ -19,6 +20,7 @@
 /* .calendar-select:hover {
     cursor: pointer;
 } */
+
 
 .calendar-select span {
     margin-right: 0.5em;
