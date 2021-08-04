@@ -21,6 +21,7 @@ function Provider(props) {
     const [defaultCathegory, setDefaultCathegory] = useState('allArticles');
     const [activeCriteria, setActiveCriteria] = useState(['dateUpdated', 'down', 3]);
 
+
     useEffect(() => {
         setLoggedIn((prev) => {
             const storageToken = localStorage.getItem('x-auth-token');
@@ -71,7 +72,6 @@ function Provider(props) {
             setActiveCriteria,
             showMenu, 
             setShowMenu
-
         }}>
             {props.children}
         </context.Provider>

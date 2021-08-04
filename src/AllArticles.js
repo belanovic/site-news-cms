@@ -68,6 +68,7 @@ export default function AllArticles() {
                     <div className = "find">
                         <Cathegory setPageNum = {setPageNum} sortArticles = {sortArticles} />
                         <Search />
+                        
                     </div>
                     <div className = "allArticles-columnNames">
                         <div 
