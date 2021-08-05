@@ -29,10 +29,11 @@ export default function Calendar({setIsDated, setSelectedDate}) {
             ></input>
             <div
                 className= {`calendar-container ${checkValue && 'active'}`}
-                onClick={() => setShowCalendar(prev => !prev)}
+                /* onClick={() => setShowCalendar(prev => !prev)} */
             >
                 <div
                     className="calendar-select"
+                    onClick={() => setShowCalendar(prev => !prev)}
                 >
                     <span>{dateFormat(value, 'month', 'dayMonth', 'year')}</span>
                     <i
@@ -43,6 +44,7 @@ export default function Calendar({setIsDated, setSelectedDate}) {
                     onChange={handleChange}
                     value={value}
                     className={showCalendar && 'show'}
+                    onClickDay = {() => setShowCalendar(prev => !prev)}
                 />
 
             </div>

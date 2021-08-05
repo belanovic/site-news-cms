@@ -93,7 +93,7 @@ export default function Cathegory({ setPageNum, sortArticles }) {
         <div className="cathegory">
             <Calendar setIsDated = {setIsDated} setSelectedDate = {setSelectedDate} />
             <div className="cathegory-cathegories">
-                <label htmlFor="cathegory-cathegories">Rubrike</label>
+                {/* <label htmlFor="cathegory-cathegories">Rubrike</label> */}
                 <select id="cathegory-cathegories" value={cathegory} onChange={handleSelect}>
                     <option value="allArticles">Sve vesti</option>
                     <option value="politics">Politics</option>

@@ -53,7 +53,7 @@ export default function Search() {
                 onKeyDown = {handleKeyDown}
                 >    
             </input>
-            <i class="fas fa-search"></i>
+            {/* <i class="fas fa-search"></i> */}
             <button
                 className = {`search-button ${requestSent && 'sending'}`}
                 onClick = {handleClick}

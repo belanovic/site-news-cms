@@ -90,5 +90,8 @@
 @media all and (max-width: 748px) {
     .find {
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }
+
