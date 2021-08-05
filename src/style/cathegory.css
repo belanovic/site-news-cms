@@ -93,5 +93,20 @@
         justify-content: center;
         align-items: center;
     }
+    .cathegory {
+        flex-direction: column;
+        margin-bottom: 1em;
+        align-items: center;
+        justify-content: center;
+    }
+    .cathegory > * {
+        margin-bottom: 1em;
+    }
+    #cathegory-cathegories {
+        margin-right: 0;
+    }
+    .calendar-container {
+        margin-right: 0;
+    }
 }
 

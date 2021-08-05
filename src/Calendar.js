@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ReactCalendar from 'react-calendar';
 import dateFormat from './dateFormat';
+import {context} from './newsContext'
 import 'react-calendar/dist/Calendar.css';
 
 export default function Calendar({setIsDated, setSelectedDate}) {
 
-    const [value, handleChange] = useState(new Date());
+    const {showCalendar, setShowCalendar} = useContext(context);
 
-    const [showCalendar, setShowCalendar] = useState(false);
+    const [value, handleChange] = useState(new Date());
     const [checkValue, setCheckValue] = useState(false);
 
     const handleCheck = (e)  => {

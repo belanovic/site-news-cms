@@ -20,6 +20,7 @@ function Provider(props) {
     const [loggedUser, setLoggedUser] = useState('');
     const [defaultCathegory, setDefaultCathegory] = useState('allArticles');
     const [activeCriteria, setActiveCriteria] = useState(['dateUpdated', 'down', 3]);
+    const [showCalendar, setShowCalendar] = useState(false);
 
 
     useEffect(() => {
@@ -71,7 +72,9 @@ function Provider(props) {
             activeCriteria, 
             setActiveCriteria,
             showMenu, 
-            setShowMenu
+            setShowMenu,
+            showCalendar, 
+            setShowCalendar
         }}>
             {props.children}
         </context.Provider>

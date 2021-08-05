@@ -17,7 +17,7 @@ export default function AllArticles() {
 
     const { listAllArticles, setListAllArticles, listLoaded, setListLoaded, 
         setActiveLink, activeCriteria, setActiveCriteria,setNewArticleBtn ,
-        setShowFrontend, setShowMenu} = useContext(context);
+        setShowFrontend, setShowMenu, setShowCalendar} = useContext(context);
     const [pageNum, setPageNum] = useState(1);
 
     const sortArticles = () => {
@@ -70,7 +70,7 @@ export default function AllArticles() {
                         <Search />
                         
                     </div>
-                    <div className = "allArticles-columnNames">
+                    <div className = "allArticles-columnNames" onClick = {() => setShowCalendar(false)}>
                         <div 
                             className = "allArticles-columnNames-title allArticles-columnNames-text">
                                 <i className= {`fas fa-arrow-down ${activeCriteria[2] === 1? 'activeArrow' : ''}`} 
@@ -124,7 +124,7 @@ export default function AllArticles() {
                         const isOnLastPage = (i + 1 > listAllArticles.length - (listAllArticles.length % 10));
                         return ((i + 1) <= pageNum * NEWS_PER_PAGE && (i + 1) > pageNum * NEWS_PER_PAGE - NEWS_PER_PAGE) &&
 
-                                <div key={i} className={`allArticles-item ${isOnLastPage? 'allArticles-item-lastPage' : ''}`}>
+                                <div key={i} className={`allArticles-item ${isOnLastPage? 'allArticles-item-lastPage' : ''}`} onClick = {() => setShowCalendar(false)}>
                                     <div className="allArticles-item-title allArticles-item-part">
                                         <Link to={`/oneArticle/${oneArticle._id}`}>
                                             <h2 className="allArticles-item-title-text">{oneArticle.title}</h2>

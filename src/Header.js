@@ -7,10 +7,10 @@ export default function Header() {
        const [showLinks, setShowLinks] = useState(false);
        const { newArticleBtn, showFrontend, setFormVisible,
             activeLink,showMenu, loggedIn, loggedUser, 
-            loggedUsername } = useContext(context);
+            loggedUsername, setShowCalendar } = useContext(context);
 
     return (
-        <header className="header">
+        <header className="header" onClick = {() => setShowCalendar(false)}>
             <div className="header-links">
                 <div className="header-links-frontend" style = {{display: showFrontend}} >
                     <a href = 'https://site-news-frontend.netlify.app/' target = "_blanc">
