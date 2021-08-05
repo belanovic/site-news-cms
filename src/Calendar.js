@@ -43,7 +43,7 @@ export default function Calendar({setIsDated, setSelectedDate}) {
                 <ReactCalendar
                     onChange={handleChange}
                     value={value}
-                    className={showCalendar && 'show'}
+                    className={showCalendar && checkValue? 'show' : ''}
                     onClickDay = {() => setShowCalendar(prev => !prev)}
                 />
 
