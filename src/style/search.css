@@ -3,5 +3,24 @@
 } */
 
 .search {
-    margin-bottom: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:rgb(148, 148, 148);
+    padding: 0.7em;
+    transition: transform 250ms;
+}
+.search input {
+    margin-right: 1.25em;
+    outline: none;
+}
+
+.search:focus-within {
+    outline: 3px solid green;
+    transform: scale(1.1);
+}
+.search-button {
+    width: 100px;
+    color: white;
+    background: green;
 }

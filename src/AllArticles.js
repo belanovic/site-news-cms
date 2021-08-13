@@ -35,8 +35,6 @@ export default function AllArticles() {
                 return activeCriteria[1] === 'down'? new Date(b[activeCriteria[0]]).getTime() - new Date(a[activeCriteria[0]]).getTime() :
                                                      new Date(a[activeCriteria[0]]).getTime() - new Date(b[activeCriteria[0]]).getTime()
             })
-            console.log('posle');
-            console.log(prev);
             return [...prev]
         })
     }
@@ -66,8 +64,9 @@ export default function AllArticles() {
             {listLoaded === true ?
                 <div className="allArticles">
                     <div className = "find">
+                        <Search option = 'title' />
                         <Cathegory setPageNum = {setPageNum} sortArticles = {sortArticles} />
-                        <Search />
+                        <Search option = "tag" />
                         
                     </div>
                     <div className = "allArticles-columnNames" onClick = {() => setShowCalendar(false)}>

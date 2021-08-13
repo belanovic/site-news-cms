@@ -1,14 +1,31 @@
 .find {
     display: flex;
-    justify-content: center;
-    padding: 0.3em;
+    padding: 1em 3em 1em 3em;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.find > * {
+    
+    /* margin-right: 5.5em; */
+}
+.find > div:last-child {
+    margin-right: 0px;
 }
 .cathegory {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 0.5em;
+    flex: 0 0 40%;
+    padding: 0.5em;
+    background:rgb(148, 148, 148);
+    color: white;
+    transition: transform 250ms;
+}
 
+.cathegory:focus-within  {
+    outline: 3px solid green;
+    transform: scale(1.1);
 }
 .cathegory-cathegories label {
     font-size: .8rem;
@@ -28,6 +45,7 @@
     color: white;
     text-align: center;
     padding: 0.2em 2em 0.2em 2em;
+    width: 100px;
 }
 
 .cathegory-button .btn:hover {
@@ -37,22 +55,22 @@
 
 /*calendar*/
 
-.calendar-wrapper input {
-    border: black
-}
+/* .calendar-wrapper input {
+    border: 2px solid blue;
+} */
 
 .calendar-container {
     display: inline-block;
     margin-right: 2em;
-    color: rgb(148, 148, 148);
     cursor: not-allowed;
     pointer-events: none;
+    color: black;
 }
 
 .calendar-container.active {
-    color: black;
     cursor: pointer;
     pointer-events: all;
+    color: white;
 }
 
 /* .calendar-select:hover {

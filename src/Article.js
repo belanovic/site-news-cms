@@ -17,6 +17,7 @@ import TextEditor from './TextEditor.js';
 import Line from './Line';
 import Note from './Note';
 import Scraper from './Scraper';
+import Social from './Social';
 import './style/article.css';
 import './style/article-navigation.css';
 
@@ -29,6 +30,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     const [tabTextVisibility, setTabTextVisibility] = useState('block')
     const [tabPhotoVisibility, setTabPhotoVisibility] = useState('none')
     const [tabVideoVisibility, setTabVideoVisibility] = useState('none')
+    const [tabSocialVisibility, setTabSocialVisibility] = useState('none')
     const [activeTab, setActiveTab] = useState(1);
 
     const [frontpageNews, setFrontpageNews] = useState('');
@@ -264,7 +266,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     const handleClickTab = (tab) => {
         setActiveTab(tab);
         const arr = [setTabPublishVisibility, setTabTextVisibility,
-            setTabPhotoVisibility, setTabVideoVisibility];
+            setTabPhotoVisibility, setTabVideoVisibility, setTabSocialVisibility];
 
         arr.forEach((prom, i) => {
             if (tab === i) {
@@ -341,6 +343,10 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                         className={`article-navigation-tab ${activeTab === 3 ? 'active-tab' : ''}`}
                         onClick={() => { handleClickTab(3) }}
                     >Video</div>
+                    <div
+                        className={`article-navigation-tab ${activeTab === 4 ? 'active-tab' : ''}`}
+                        onClick={() => { handleClickTab(4) }}
+                    >Mreže</div>
                 </div>
                 <div className="fake-article-navigation-element"></div>
 
@@ -447,7 +453,10 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                 onChange={inputHandler}
                 tabVideoVisibility = {tabVideoVisibility}
             />
-       
+
+            <Social
+                tabSocialVisibility = {tabSocialVisibility}
+            />
 
             <div className="loadingArticle" style={{
                 display: contentLoaded === true || isNewArticle === true ? 'none' : 'block',

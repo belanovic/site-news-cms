@@ -3,10 +3,12 @@ import { context } from './newsContext.js';
 import { getAllArticles } from './getDatabase';
 import './style/search.css';
 
-export default function Search() {
+export default function Search({option}) {
 
     const [query, setQuery] = useState('');
     const [requestSent, setRequestSent] = useState(false);
+
+    const caption = option === 'title'? "Pretraži naslove" : "Pretraži tagove";
     
     const { listAllArticles, setListAllArticles,
         listLoaded, setListLoaded } = useContext(context);
@@ -15,7 +17,7 @@ export default function Search() {
         const v = e.target.value;
         setQuery(v);
     }
-    const find = async () => {
+    const findTitle = async () => {
         setRequestSent(true);
         const all = await getAllArticles();
         const newsFound = all.filter((article) => {
@@ -27,16 +29,47 @@ export default function Search() {
         setRequestSent(false);
         return newsFound
     }
+    const findTag = async () => {
+        setRequestSent(true);
+        const all = await getAllArticles();
+        const newsFound = all.filter((article) => {
+            const reg = new RegExp(`${query}`, 'i'); 
+            const some = article.tagsArr.some(tag => {
+                const i = tag.search(reg);
+                console.log(i)
+                return i === -1? false : true
+            });
+            console.log(some);
+            return some
+        })
+        console.log(newsFound);
+        setRequestSent(false);
+        return newsFound
+    }
     const handleClick = async (e) => {
         e.preventDefault();
-        const newsFound = await find();
+        if(query.trim() === '') {
+            setQuery('');
+            return '';
+        }
+        let newsFound;
+        if(option === 'title') {
+            newsFound = await findTitle();
+        } else if(option === 'tag') {
+            newsFound = await findTag();
+        }
         setListAllArticles(newsFound);
     }
 
     const handleKeyDown = async (e) => {
     
         if(e.keyCode === 13) {
-            const newsFound = await find();
+            let newsFound;
+            if(option === 'title') {
+                newsFound = await findTitle();
+            } else if(option === 'tag') {
+                newsFound = await findTag()
+            }
             setListAllArticles(newsFound);
         }
     }
@@ -51,13 +84,15 @@ export default function Search() {
                 value = {query}
                 onChange = {handleChange}
                 onKeyDown = {handleKeyDown}
+                placeholder = {`${caption}`}
                 >    
             </input>
             {/* <i class="fas fa-search"></i> */}
+            
             <button
                 className = {`search-button ${requestSent && 'sending'}`}
                 onClick = {handleClick}
-            >{requestSent? 'Traženje...' : 'Traži'}
+            >{requestSent? 'Pretraživanje...' : 'Traži'}
             </button>
         </div>
     )
