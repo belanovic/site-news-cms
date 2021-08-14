@@ -42,7 +42,7 @@ export default function Facebook() {
 
     function callFace () {
         window.FB.api(
-        '/105289518528554/feed?&access_token={EAAI3gkInUwMBAK3KXdU7Oa96bhGOqhpnXQojoZAZAZCCCZBUnHzMUNKR1bL64jRfjdd943GPBiLdW5BZBgQDOZAnKzsSmsyoVOiFTxabCCcUY16GvjS8psdGEtne8iPFBVIvQ6GyrVl62AlC76BtP9XZBJiBBtQNmzQ9sE2QfBWZAFZB5KUsaw3I0Ea5zpvGrVPJuYZBqv20Ab9BtdRgFH60ce}',
+        '/105289518528554/feed',
         'POST',
         {"message":"hello, ovo je post iz cms-a"},  
         function(response) {
