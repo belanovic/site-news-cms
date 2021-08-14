@@ -46,7 +46,7 @@ export default function Facebook() {
         'POST',
         {"message":"hello, ovo je drugi post"},  
         function(response) {
-            console.log('odgovor u slucaju greske')
+            console.log(response)
         }
       );
     }
