@@ -38,7 +38,7 @@ export default function Facebook() {
             console.log(response)
         }
       ); */
-let r = await fetch("https://graph.facebook.com/v11.0/105289518528554/feed?message=zzzzzzzzyyyyyyyydsdsd&access_token=EAAI3gkInUwMBAJPpcJal1CYvmRePMIE3s26ciCT5tMZCygAB1NrCJwhU6taIe8wytIvZAem2KJIwpyeDZBuXMzEse4jh92rxjat4iO4eeGZCW1THVyAeP1gfoEwe8nt2cRElYwNQKhZAY4NtGZCTweMOJpDwvrZClaAI9Qxdq8jw9AMZAZA8sWHm5tWZBWwHsu61ZCWf902IKbbaU3sQm1jAebZC", {
+let r = await fetch("https://graph.facebook.com/v11.0/105289518528554/feed?message=1111111111zzzzzzzzyyyyyyyydsdsd&access_token=EAAI3gkInUwMBAJPpcJal1CYvmRePMIE3s26ciCT5tMZCygAB1NrCJwhU6taIe8wytIvZAem2KJIwpyeDZBuXMzEse4jh92rxjat4iO4eeGZCW1THVyAeP1gfoEwe8nt2cRElYwNQKhZAY4NtGZCTweMOJpDwvrZClaAI9Qxdq8jw9AMZAZA8sWHm5tWZBWwHsu61ZCWf902IKbbaU3sQm1jAebZC", {
 mode: 'no-cors',
     method: 'POST',
     headers: {
