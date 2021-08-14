@@ -38,8 +38,8 @@ export default function Facebook() {
             console.log(response)
         }
       ); */
-let r = await fetch("https://graph.facebook.com/v11.0/105289518528554/feed?message=9999999999&access_token=EAAI3gkInUwMBAMuwLDFSDPdSAwiYGTHBFmzGZCUq3Ytq5FOkg3xZA4IpZCke9p5340E58fdPhgDqiAgvtXCflt8P7mNpjmcd9hdcin1DH07HaZC9OSOVZCGUZCJeb7ZCLLPnRfbDDvbY0BlC17HymLNUx4erbgMSF3NblDLoULFB8y4vBlAfNddZBoJSC04HUZC9osIx6fwGddK7ZA1CYA24cE", {
-
+let r = await fetch("https://graph.facebook.com/v11.0/105289518528554/feed?message=zzzzzzzzyyyyyyyydsdsd&access_token=EAAI3gkInUwMBAJPpcJal1CYvmRePMIE3s26ciCT5tMZCygAB1NrCJwhU6taIe8wytIvZAem2KJIwpyeDZBuXMzEse4jh92rxjat4iO4eeGZCW1THVyAeP1gfoEwe8nt2cRElYwNQKhZAY4NtGZCTweMOJpDwvrZClaAI9Qxdq8jw9AMZAZA8sWHm5tWZBWwHsu61ZCWf902IKbbaU3sQm1jAebZC", {
+mode: 'no-cors',
     method: 'POST',
     headers: {
         'Content-Type': 'text/plain'
