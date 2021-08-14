@@ -4,7 +4,6 @@ import react from 'react';
 export default function Facebook() {
 
     function callFace () {
-        console.log(FB)
         window.FB.api(
         '/105289518528554/feed',
         'POST',
