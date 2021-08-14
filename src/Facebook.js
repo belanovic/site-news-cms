@@ -42,7 +42,7 @@ export default function Facebook() {
 
     function callFace () {
         window.FB.api(
-        '/105289518528554/feed?&access_token={EAAI3gkInUwMBAMb9Pa7XekahGV8QBx5neeQclJ2uA2FjqpwnLyiBuIVBx14KwbpLdV4uzkOg0lkxlJAwQ0qu92tukKHFBZBSFeBys3BDfSPPLaCs2gkaoMatAomktzFBhcY6ny4w4kFiIqRuvSVawCm3di2q33QtB1ucWhIPClo24LSFWJoUrqx9foQsa5PZBXxpI7BeS0jjcbv69ZB}',
+        '/105289518528554/feed?&access_token={EAAI3gkInUwMBADIweRRlOf3J5ZBZB5JsaPwo7a1zZB7OsyLo2LRFvgssv4eCkIwNIB8UuXz5qIZATuGRO6F92hobTAmuQZAZAOc6mx4DyifZCLvwQnqpDOQ4oRlKOJA4rif6zMU3GibRF1RtZA7W4ixnHXQUpqZAcA5TkEZC6nvePT3huYrwkn3FhmjWZCRRP2cv6YL0WAho6Aa90I4QlT0zPChCsIRIrNVOJUmGjKCVJ7ZC7toRn3KbDVTTMvqcR37TBzEZD}',
         'POST',
         {"message":"hello, ovo je post iz cms-a"},  
         function(response) {
