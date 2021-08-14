@@ -8,7 +8,7 @@ export default function Facebook() {
         window.FB.api(
         '/105289518528554/feed',
         'POST',
-        {"message":"hello, ovo je drugi post"},
+        {"message":"hello, ovo je drugi post"},  
         function(response) {
             console.log('odgovor u slucaju greske')
         }
