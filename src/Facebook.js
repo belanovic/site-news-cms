@@ -3,6 +3,7 @@ import react from 'react';
 export default function Facebook() {
 
     function callFace () {
+        console.log('iz poziva' + ' ' + FB)
            FB.api(
         '/105289518528554/feed',
         'POST',

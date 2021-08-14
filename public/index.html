@@ -42,6 +42,7 @@
     <script>
       window.fbAsyncInit = function() {
         console.log('Ovo je poruka iz script taga za fejs')
+        console.log(FB)
         FB.init({
           appId            : '623982548570883',
           autoLogAppEvents : true,
@@ -50,6 +51,6 @@
         });
       };
     </script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script async defer crossorigin="anonymous" src="http://connect.facebook.net/en_US/sdk.js"></script>
   </body>
 </html>
