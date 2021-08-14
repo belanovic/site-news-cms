@@ -13,7 +13,7 @@ export default function Facebook() {
       );
     }
     return (
-        <div className = "facebook">
+        <div className = "facebook"> 
             <button onClick = {() => callFace()}>Facebook call</button>
         </div>
     )
