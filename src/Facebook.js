@@ -1,12 +1,11 @@
 import react from 'react';
-import FB from 'fb';
 
 
 export default function Facebook() {
 
     function callFace () {
         console.log(FB)
-           FB.api(
+        window.FB.api(
         '/105289518528554/feed',
         'POST',
         {"message":"hello, ovo je drugi post"},
