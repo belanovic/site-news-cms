@@ -1,9 +1,9 @@
-import react from 'react';
+import react, {useEffect} from 'react';
 
 
 export default function Facebook() {
 
-    useEFfect(function() {
+    useEffect(function() {
         window.fbAsyncInit = function() {
           window.FB.init({
             appId            : '623982548570883',
@@ -23,9 +23,9 @@ export default function Facebook() {
           //    your app or not.
           //
           // These three cases are handled in the callback function.
-          window.FB.getLoginStatus(function(response) {
+        /*   window.FB.getLoginStatus(function(response) {
             this.statusChangeCallback(response);
-          }.bind(this));
+          }.bind(this)); */
         }.bind(this);
       
         // Load the SDK asynchronously
