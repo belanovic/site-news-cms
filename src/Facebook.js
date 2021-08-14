@@ -1,4 +1,6 @@
 import react from 'react';
+import FB from 'fb';
+
 
 export default function Facebook() {
 
