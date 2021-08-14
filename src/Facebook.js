@@ -23,9 +23,9 @@ export default function Facebook() {
           //    your app or not.
           //
           // These three cases are handled in the callback function.
-        /*   window.FB.getLoginStatus(function(response) {
+          window.FB.getLoginStatus(function(response) {
             this.statusChangeCallback(response);
-          }.bind(this)); */
+          }.bind(this));
         }.bind(this);
       
         // Load the SDK asynchronously
