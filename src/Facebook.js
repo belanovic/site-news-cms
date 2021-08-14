@@ -44,7 +44,7 @@ export default function Facebook() {
         window.FB.api(
         '/105289518528554/feed',
         'POST',
-        {"message":"hello, ovo je drugi post"},  
+        {"message":"hello, ovo je post iz cms-a"},  
         function(response) {
             console.log(response)
         }
