@@ -456,6 +456,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
 
             <Social
                 tabSocialVisibility = {tabSocialVisibility}
+                subtitle = {subtitle}
             />
 
             <div className="loadingArticle" style={{

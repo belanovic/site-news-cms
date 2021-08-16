@@ -1,5 +1,29 @@
 .article-social {
-    height: 100px;
-    width: 100px;
+    width: 100%;
+    padding: 1em;
     background: red;
+}
+.twitter .twit {
+    display: block;
+    width: 50%;
+    height: 7em;
+    margin: auto;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0.5em;
+    resize: none;
+    line-height: 1.4;
+}
+
+.fa-twitter {
+    display: block;
+    margin: auto;
+    background-color: white;
+    color: #1da1f2;
+    width: 3em;
+    padding: 0.3em;
+    font-size: 2rem;
+    text-align: center;
+    border-radius: 10px;
 }

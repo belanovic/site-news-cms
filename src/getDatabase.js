@@ -243,3 +243,17 @@ export async function scrape(url) {
         console.log(err)
     }
 }
+
+export async function publishTwit(twit) {
+    const r = await fetch(`${HOST_BACKEND}/publishTwit`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify({
+            twit: twit
+        })
+    }
+    )
+    return r
+}
