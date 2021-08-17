@@ -2,14 +2,28 @@
     display: none;
     justify-content: space-between;
     align-items: center;
+    font-size: 1.75rem;
+    padding: 0.2em 0.3em 0.2em 0.2em;
+    background: black;
+    color: white;
+    margin-bottom: 0.7em;
+}
+
+.find-label:hover {
+    cursor: pointer;
+}
+
+.find-label-fake {
+    visibility: hidden;
+}
+
+.find-label-text {
+    font-family: 'Times New Roman', Times, serif
 }
 
 .find-label .fa-chevron-down {
     transition: transform 0.25s;
-    font-size: 1.75rem;
-}
-.find-label .fa-chevron-down {
-    transform: rotateZ(0deg)
+    transform: rotateZ(0deg);
 }
 .find-label .fa-chevron-down.up {
     transform: rotateZ(180deg)

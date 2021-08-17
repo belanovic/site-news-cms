@@ -5,6 +5,7 @@
     flex-wrap: wrap;
     align-items: center;
 }
+
 .find > * {
     
     /* margin-right: 5.5em; */
@@ -21,6 +22,7 @@
     background:rgb(148, 148, 148);
     color: white;
     transition: transform 250ms;
+    
 }
 
 .cathegory:focus-within  {
@@ -114,9 +116,11 @@
         display: none;
         flex-direction: column;
         justify-content: center;
-        align-items: stretch;
-        padding: 1em 0em 1em 0em;
-
+        padding: 0em 0em 1em 0em;
+    }
+   
+    .find > * {
+        flex: 0 0 90%;
     }
     .find.show {
         display: block;
@@ -126,8 +130,6 @@
         padding: 1em 0.5em 1em 0.5em;
       /*   flex-direction: column; */
         margin-bottom: 1em;
-
-
     }
     .fa-search {
         display: block;

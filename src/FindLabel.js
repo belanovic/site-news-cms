@@ -1,7 +1,7 @@
-import react, {useState} from 'react';
+import react, { useState } from 'react';
 import './style/FindLabel.css'
 
-export default function FindLabel({setFindVisible}) {
+export default function FindLabel({ setFindVisible }) {
 
     const [activeArrow, setActiveArrow] = useState(false);
 
@@ -11,14 +11,18 @@ export default function FindLabel({setFindVisible}) {
     }
 
     return (
-        <div className="find-label">
-            <div className="find-label-fake"></div>
-            <div className="find-label-text">Pretraga</div>
-            <div>
-            <i  
-                onClick = {() => handleClick()}
+        <div className="find-label" onClick={() => handleClick()}>
+            {/* <div className="find-label-fake">iiiii</div> */}
+            <i
+
                 className={`find-label fas fa-chevron-down ${activeArrow && 'up'}`}>
             </i>
+            <div className="find-label-text">Pretraga</div>
+            <div>
+                <i
+
+                    className={`find-label fas fa-chevron-down ${activeArrow && 'up'}`}>
+                </i>
             </div>
         </div>
     )
