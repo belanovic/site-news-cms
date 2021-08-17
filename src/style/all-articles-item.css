@@ -83,7 +83,7 @@
         margin-bottom: 1em;
     }
     .allArticles-item-title {
-        border-top: 1px dashed black;
+        /* border-top: 1px dashed black; */
     }
     .allArticles-columnNames {
         margin-bottom: 1em;
@@ -93,7 +93,7 @@
     }
     .allArticles-item-info {
         order: -1;
-        background: black;
+        background: rgb(156, 155, 155);
     }
     .allArticles-columnNames-note, .allArticles-columnNames-title {
         display: none;
