@@ -8,6 +8,7 @@
     align-items: center;
     background:rgb(148, 148, 148);
     padding: 0.7em;
+    margin-bottom: 1em;
     transition: transform 250ms;
 }
 .search input {
