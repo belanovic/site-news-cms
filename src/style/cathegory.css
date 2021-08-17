@@ -87,6 +87,10 @@
     display: none;
 }
 
+.fa-search {
+    display: none;
+}
+
 .react-calendar.show {
     display: block;
 }
@@ -119,6 +123,15 @@
         margin-bottom: 1em;
 
 
+    }
+    .fa-search {
+        display: block;
+    }
+    .fa-search:hover {
+        cursor: pointer;
+    }
+    .cathegory-button .btn {
+        display: none;
     }
     .cathegory > * {
         /* margin-bottom: 1em; */

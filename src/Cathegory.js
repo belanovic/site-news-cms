@@ -109,6 +109,7 @@ export default function Cathegory({ setPageNum, sortArticles }) {
                     onClick={handleClick}
                 >Prikaži
                 </button>
+                <i className="fas fa-search"></i>
             </div>
         </div>
     )
