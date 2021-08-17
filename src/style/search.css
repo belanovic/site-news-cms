@@ -25,3 +25,23 @@
     color: white;
     background: green;
 }
+.fa-search {
+    display: none;
+}
+.fa-search:hover {
+    cursor: pointer;
+}
+
+@media all and (max-width: 768px) {
+    .search-button {
+        display: none;
+    }
+    .fa-search {
+        display: block;
+        font-size: 1.5rem;
+        color: white;
+    }
+    .fa-search:hover {
+        cursor: pointer;
+    }
+}
