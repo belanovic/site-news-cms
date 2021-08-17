@@ -10,6 +10,7 @@ import Search from './Search.js';
 import './style/all-articles.css'; 
 import './style/all-articles-item.css';
 import {alphabet} from './cirilizatorDecirilizator.js';
+import FindLabel from './FindLabel.js'
 
 const NEWS_PER_PAGE = 10; 
 
@@ -19,6 +20,7 @@ export default function AllArticles() {
         setActiveLink, activeCriteria, setActiveCriteria,setNewArticleBtn ,
         setShowFrontend, setShowMenu, setShowCalendar} = useContext(context);
     const [pageNum, setPageNum] = useState(1);
+    const [findVisible, setFindVisible] = useState(false);
 
     const sortArticles = () => {
         setListAllArticles((prev) => {
@@ -63,7 +65,8 @@ export default function AllArticles() {
         <>
             {listLoaded === true ?
                 <div className="allArticles">
-                    <div className = "find">
+                    <FindLabel setFindVisible = {setFindVisible} />
+                    <div className = {`find ${findVisible && 'show'}`}>
                         <Search option = 'title' />
                         <Cathegory setPageNum = {setPageNum} sortArticles = {sortArticles} />
                         <Search option = "tag" />

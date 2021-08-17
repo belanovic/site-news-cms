@@ -1,0 +1,27 @@
+.find-label {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.find-label .fa-chevron-down {
+    transition: transform 0.25s;
+    font-size: 1.75rem;
+}
+.find-label .fa-chevron-down {
+    transform: rotateZ(0deg)
+}
+.find-label .fa-chevron-down.up {
+    transform: rotateZ(180deg)
+}
+
+.find-label .fa-chevron-down:hover {
+    cursor: pointer;
+    color: red;
+}
+
+@media all and (max-width: 768px) {
+    .find-label {
+        display: flex;
+    }
+}

@@ -111,10 +111,15 @@
 
 @media all and (max-width: 748px) {
     .find {
+        display: none;
         flex-direction: column;
         justify-content: center;
         align-items: stretch;
         padding: 1em 0em 1em 0em;
+
+    }
+    .find.show {
+        display: block;
     }
     .cathegory {
         order: -1;
