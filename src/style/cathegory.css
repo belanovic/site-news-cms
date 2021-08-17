@@ -112,7 +112,8 @@
         align-items: center;
     }
     .cathegory {
-        flex-direction: column;
+        order: -1;
+      /*   flex-direction: column; */
         margin-bottom: 1em;
         align-items: center;
         justify-content: center;
