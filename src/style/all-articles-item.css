@@ -93,7 +93,7 @@
     }
     .allArticles-item-info {
         order: -1;
-        background: rgb(156, 155, 155);
+       /*  background: rgb(156, 155, 155); */
     }
     .allArticles-columnNames-note, .allArticles-columnNames-title {
         display: none;
