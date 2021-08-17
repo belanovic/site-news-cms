@@ -27,9 +27,13 @@
 }
 .fa-search {
     display: none;
+    transition: transform 250ms;
 }
 .fa-search:hover {
     cursor: pointer;
+}
+.fa-search:active {
+    transform: scale(0.9);
 }
 
 @media all and (max-width: 768px) {

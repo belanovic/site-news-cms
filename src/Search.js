@@ -94,7 +94,10 @@ export default function Search({option}) {
                 onClick = {handleClick}
             >{requestSent? 'Pretraživanje...' : 'Traži'}
             </button>
-            <i className="fas fa-search"></i>
+            <i
+                onClick = {handleClick}
+                className = {`fas fa-search ${requestSent && 'sending'}`}
+            ></i>
         </div>
     )
 }
