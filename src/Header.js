@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { context } from './newsContext.js';
-import './style/header.css'; 
+import './style/header.css';
 
 export default function Header() {
        const [showLinks, setShowLinks] = useState(false);

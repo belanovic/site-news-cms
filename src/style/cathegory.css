@@ -25,10 +25,6 @@
     
 }
 
-.cathegory:focus-within  {
-    outline: 3px solid green;
-    transform: scale(1.1);
-}
 .cathegory-cathegories label {
     font-size: .8rem;
     letter-spacing: 1px;
