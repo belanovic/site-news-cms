@@ -10,8 +10,8 @@ function Provider(props) {
     const [articleImgLoaded, setArticleImgLoaded] = useState(false);
     /* const [articleVideoLoaded, setArticleVideoLoaded] = useState(false); */
     const [showCmsOverlay, setShowCmsOverlay] = useState('none');
-    
-    const [newArticleBtn, setNewArticleBtn] = useState('none');    
+
+    const [newArticleBtn, setNewArticleBtn] = useState('none');
     const [showMenu, setShowMenu] = useState('none');
     const [activeLink, setActiveLink] = useState('none');
     const [showFrontend, setShowFrontend] = useState('none');
@@ -26,22 +26,22 @@ function Provider(props) {
     useEffect(() => {
         setLoggedIn((prev) => {
             const storageToken = localStorage.getItem('x-auth-token');
-            return storageToken === 'none' || storageToken === null || storageToken === undefined?
+            return storageToken === 'none' || storageToken === null || storageToken === undefined ?
                 false : true
         })
     }, [])
 
-  /*   useEffect(() => {
+    /*   useEffect(() => {
+  
+          console.log('User is logged in? ' + isLoggedIn)
+          console.log('in local storage ' + localStorage.getItem('x-auth-token'))
+      }, [isLoggedIn]) */
 
-        console.log('User is logged in? ' + isLoggedIn)
-        console.log('in local storage ' + localStorage.getItem('x-auth-token'))
-    }, [isLoggedIn]) */
-
-   /*  useEffect(async () => {
-        const n = listAllArticles;
-        n.sort((a, b) => a.position - b.position);
-        console.log(n)
-    }, [listAllArticles]) */
+    /*  useEffect(async () => {
+         const n = listAllArticles;
+         n.sort((a, b) => a.position - b.position);
+         console.log(n)
+     }, [listAllArticles]) */
 
     return (
         <context.Provider value={{
@@ -57,7 +57,7 @@ function Provider(props) {
             setShowCmsOverlay,
             newArticleBtn,
             setNewArticleBtn,
-            activeLink, 
+            activeLink,
             setActiveLink,
             showFrontend,
             setShowFrontend,
@@ -69,11 +69,11 @@ function Provider(props) {
             setLoggedUser,
             defaultCathegory,
             setDefaultCathegory,
-            activeCriteria, 
+            activeCriteria,
             setActiveCriteria,
-            showMenu, 
+            showMenu,
             setShowMenu,
-            showCalendar, 
+            showCalendar,
             setShowCalendar
         }}>
             {props.children}

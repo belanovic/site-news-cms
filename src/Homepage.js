@@ -8,7 +8,7 @@ import './style/homepage.css';
 
 export default function Homepage() {
 
-    const {setShowMenu, setNewArticleBtn, setShowFrontend } = useContext(context);
+    const {setShowMenu, setNewArticleBtn, setShowFrontend, setShowCmsOverlay } = useContext(context);
 
     useEffect(() => {
 
@@ -21,7 +21,7 @@ export default function Homepage() {
     return (
         <div className="homepage">
             <div className="homepage-links">
-                <div className="homepage-allArticlesBtn">
+                <div className="homepage-allArticlesBtn" onClick = {() => setShowCmsOverlay('block')}>
                     <Link to={`/allArticles`}>
                         <div
                             className="homepage-allArticlesBtn-text"

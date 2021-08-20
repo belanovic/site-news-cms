@@ -18,7 +18,7 @@ export default function AllArticles() {
 
     const { listAllArticles, setListAllArticles, listLoaded, setListLoaded, 
         setActiveLink, activeCriteria, setActiveCriteria,setNewArticleBtn ,
-        setShowFrontend, setShowMenu, setShowCalendar} = useContext(context);
+        setShowFrontend, setShowMenu, setShowCalendar, setShowCmsOverlay} = useContext(context);
     const [pageNum, setPageNum] = useState(1);
     const [findVisible, setFindVisible] = useState(false);
 
@@ -42,11 +42,12 @@ export default function AllArticles() {
     }
     
     useEffect(async function () {
-       
+        setShowCmsOverlay('none');
         return () => {
             setListLoaded(false)
         };
     }, [])
+
 
     useEffect(function () {
 
