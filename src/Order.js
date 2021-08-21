@@ -16,7 +16,7 @@ export default function Order() {
     const [activeArrow, setActiveArrow] = useState('');
     const [doubleSelectedArticle, setDoubleSelectedArticle] = useState('');
     const [newsByDateAllComp, setNewsByDateAllComp] = useState([]);
-    const { setActiveLink,
+    const { setActiveLink, setShowCmsOverlay,
         setNewArticleBtn, setShowMenu,
         setShowFrontend } = useContext(context);
 
@@ -50,6 +50,7 @@ export default function Order() {
 
     const handleClickOrder = async () => {
         setRequestSent(true);
+        setShowCmsOverlay('block');
         const idAndPositionArr = reorderedArticles.map((prom, i) => {
             const idAndPosition = {
                 id: prom._id,
@@ -60,6 +61,7 @@ export default function Order() {
         })
         const updatedFrontpage = await updateFrontpage(idAndPositionArr);
         setRequestSent(false);
+        setShowCmsOverlay('none');
         /* updatedFrontpage.sort((a, b) => a.position - b.position).forEach((prom) => {
             if (prom.position > 0) console.log(prom.title)
         }) */
@@ -79,10 +81,12 @@ export default function Order() {
     })
 
     useEffect(async () => {
+        setShowCmsOverlay('block');
         const n = await getFrontpageNews();
         setRequestSent(false);
         setFrontpageNews(n);
         setreorderedArticles(n);
+        setShowCmsOverlay('none');
 
         const d = {
             day: new Date().getDate(),
@@ -95,10 +99,7 @@ export default function Order() {
     }, [])
 
     useEffect(() => {
-
-
         setNewArticleBtn('inline-block');
-
         setShowMenu('block');
         setShowFrontend('none');
     })

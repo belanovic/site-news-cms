@@ -85,6 +85,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     async function findSelectedArticle() {
 
         if (id === 'new') {
+            setShowCmsOverlay('block');
             setIsNewArticle(true);
             setArticleDataLoaded(true);
             /* setArticleVideoLoaded(true); */
@@ -278,7 +279,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     }
     useEffect(() => {
         findSelectedArticle();
-
+        setShowCmsOverlay('none');
         return () => {
             setArticleImgLoaded(false);
             /*  setArticleVideoLoaded(false); */
@@ -300,7 +301,6 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     }, [])
     useEffect(async () => {
         const n = await getFrontpageNews();
-        console.log(text);
     }, [text])
 
    useEffect(function () {
@@ -308,10 +308,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     })
 
     useEffect(() => {
-
-
         setNewArticleBtn('inline-block');
-
         setShowMenu('block');
         setShowFrontend('none');
     })

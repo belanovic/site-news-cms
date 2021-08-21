@@ -64,7 +64,6 @@ export default function AllArticles() {
 
     return (
         <>
-            {listLoaded === true ?
                 <div className="allArticles">
                     <FindLabel setFindVisible = {setFindVisible} />
                     <div className = {`find ${findVisible && 'show'}`}>
@@ -151,12 +150,6 @@ export default function AllArticles() {
                      
                     })}
                 </div>
-                :
-                <div className="listaVesti loading" style={{
-                    fontSize: '5rem',
-                    fontWeight: 'bold',
-                    textAlign: 'center'
-                }}>Loading...</div>}
             <Pagination
                 isLastPage={pageNum * NEWS_PER_PAGE >= listAllArticles.length ? true : false}
                 NEWS_PER_PAGE={NEWS_PER_PAGE}
