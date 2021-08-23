@@ -30,7 +30,7 @@ export default function Twitter({ subtitle }) {
     return (
         <div className="twitter">
             <div className="twitter-header">
-                <i class="fab fa-twitter"
+                <i className="fab fa-twitter"
                         onClick={async () => {
                             const r = await publishTwit(twit);
                             console.log(r);

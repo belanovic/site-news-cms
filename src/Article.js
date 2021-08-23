@@ -170,6 +170,13 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                 const allNews = await getAllArticles();
                 const promiseResolveA = await setListAllArticles(allNews);
                 const promiseResolveB = await setListLoaded(true);
+
+                if (IdArticleToChangePosition !== '') {
+                    let changedPositionArticle = await updateArticlePosition(IdArticleToChangePosition, currentPosition);
+                    console.log('changed position artuicle' + changedPositionArticle)
+                }
+
+
                 window.location.href = '/allArticles';
                 setShowCmsOverlay('block');
                 return deployedArticle
@@ -233,6 +240,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
         console.log(articleWithSamePosition);
         if (articleWithSamePosition === undefined) return;
         setIdArticleToChangePosition(articleWithSamePosition._id);
+        console.log(articleWithSamePosition._id, currentPosition);
     }
 
     const handleCheck = (e) => {
