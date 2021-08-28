@@ -121,7 +121,7 @@ export default function Form() {
         setShowMenu('block');
         setShowFrontend('none');
         setActiveLink('none') 
-    })
+    }) 
 
     return (
         <>
