@@ -120,7 +120,7 @@ export default function Form() {
         setNewArticleBtn('inline-block');
         setShowMenu('block');
         setShowFrontend('none');
-        setActiveLink('none')
+        setActiveLink('none') 
     })
 
     return (
