@@ -57,8 +57,8 @@
     align-items: center;
 }
 
-.fa-bars,
-.fa-times {
+.header-links-navigation .fa-bars,
+.header-links-navigation .fa-times {
     display: none;
     color: white;
     font-size: 1.5rem;

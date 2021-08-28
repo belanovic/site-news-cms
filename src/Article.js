@@ -1,7 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { context } from './newsContext.js';
-import { getArticle, getAllArticles, postArticle, updateArticle, getFrontpageNews, updateArticlePosition } from './getDatabase.js';
+import { getArticle, getAllArticles, postArticle, 
+        updateArticle, getFrontpageNews, 
+        updateArticlePosition } from './getDatabase.js';
+import PositionPublish from './PositionPublish.js';
 import Title from './Title.js';
 import Subtitle from './Subtitle.js';
 import Textarea from './Textarea.js';
@@ -13,11 +16,12 @@ import Video from './Video.js';
 import firebase from './firebase.js';
 import { uploadImageDB, removeImageDB } from './handleImageDB';
 import { uploadVideoDB, removeVideoDB } from './handleVideoDB';
+import {publishTwit} from './getDatabase';
 import TextEditor from './TextEditor.js';
 import Line from './Line';
 import Note from './Note';
 import Scraper from './Scraper';
-import Social from './Social';
+import Twitter from './Twitter';
 import './style/article.css';
 import './style/article-navigation.css';
 
@@ -44,6 +48,8 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     const [text, setText] = useState('');
     const [initialText, setInitialText] = useState('');
     const [subtitle, setSubtitle] = useState('');
+    const [twit, setTwit] = useState('');
+    const [sendTwit, setSendTwit] = useState(true);
     const [paragraphs, setParagraphs] = useState([]);
     const [author, setAuthor] = useState(localStorage.getItem('loggedFirstName') +  ' ' + localStorage.getItem('loggedLastName'));
     const [source, setSource] = useState('Vesti');
@@ -74,7 +80,6 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     } = useContext(context);
 
     let contentLoaded = articleDataLoaded === true && (articleImgLoaded === true || imgURL === 'generic');
-    let showPosition = published === true ? 'inline' : 'none';
 
     function findNewLine() {
         const pasusi = text.split('\n')
@@ -167,6 +172,9 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                 }
                 let response = await postArticle(vest);
                 let deployedArticle = await response.text(response);
+                if(sendTwit) {
+                    const r = await publishTwit(twit);
+                }
                 const allNews = await getAllArticles();
                 const promiseResolveA = await setListAllArticles(allNews);
                 const promiseResolveB = await setListLoaded(true);
@@ -175,7 +183,6 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                     let changedPositionArticle = await updateArticlePosition(IdArticleToChangePosition, currentPosition);
                     console.log('changed position artuicle' + changedPositionArticle)
                 }
-
 
                 window.location.href = '/allArticles';
                 setShowCmsOverlay('block');
@@ -209,6 +216,9 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                     console.log('changed position artuicle' + changedPositionArticle)
                 }
                 const allNews = await getAllArticles();
+                if(sendTwit) {
+                    const r = await publishTwit(twit);
+                }
                 const promiseResolveA = await setListAllArticles(allNews);
                 const promiseResolveB = await setListLoaded(true);
                 window.location.href = '/allArticles';
@@ -225,32 +235,6 @@ export default function Article({ setShowCmsOverlay, isNew }) {
         console.log(option);
         setCategory(option);
     }
-
-    const handleNumber = (e) => {
-        if (published === false) {
-            setPosition(0);
-            return
-        }
-        const numInput = parseInt(e.target.value);
-        if (numInput > 10 || numInput < 0) return;
-        setPosition(numInput);
-        const articleWithSamePosition = frontpageNews.find((prom) => {
-            return prom.position === numInput
-        })
-        console.log(articleWithSamePosition);
-        if (articleWithSamePosition === undefined) return;
-        setIdArticleToChangePosition(articleWithSamePosition._id);
-        console.log(articleWithSamePosition._id, currentPosition);
-    }
-
-    const handleCheck = (e) => {
-        const v = e.target.checked;
-        setPublished(v);
-        if (v === false) {
-            setPosition(0)
-        }
-    }
-
     const inputHandler = (e) => {
         const name = e.target.name;
         console.log(name);
@@ -348,10 +332,6 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                         className={`article-navigation-tab ${activeTab === 3 ? 'active-tab' : ''}`}
                         onClick={() => { handleClickTab(3) }}
                     >Video</div>
-                    <div
-                        className={`article-navigation-tab ${activeTab === 4 ? 'active-tab' : ''}`}
-                        onClick={() => { handleClickTab(4) }}
-                    >Mreže</div>
                 </div>
                 <div className="fake-article-navigation-element"></div>
 
@@ -375,6 +355,13 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                         <Subtitle
                             subtitle={subtitle}
                             setSubtitle={setSubtitle}
+                        />
+                        <Twitter 
+                            subtitle = {subtitle} 
+                            twit = {twit} 
+                            setTwit = {setTwit} 
+                            sendTwit = {sendTwit}
+                            setSendTwit = {setSendTwit}
                         />
                         <div className="cathegories">
                             <label htmlFor="cathegories">Rubrike</label>
@@ -413,25 +400,15 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                         <Line />
                         <Note note={note} setNote={setNote} />
                         <Line />
-                        <div className="publish">
-                            <label htmlFor="publishCheckbox">Objavljeno</label>
-                            <input
-                                id="publishCheckbox"
-                                name="publishCheckbox"
-                                type="checkbox"
-                                className="publishCheckbox"
-                                checked={published}
-                                onChange={handleCheck}
-                            ></input>
-                            <input
-                                type="number"
-                                min="0"
-                                max="10"
-                                onChange={handleNumber}
-                                value={position}
-                                style={{ display: showPosition }}
-                            ></input>
-                        </div>
+                        <PositionPublish
+                            frontpageNews = {frontpageNews} 
+                            setPosition = {setPosition} 
+                            published = {published} 
+                            setPublished = {setPublished}
+                            position = {position}
+                            setIdArticleToChangePosition = {setIdArticleToChangePosition}
+                            currentPosition = {currentPosition}
+                        />
                         <Line />
                         <Scraper setTitle={setTitle} setSubtitle={setSubtitle} setInitialText={setInitialText} />
                         <Line />
@@ -457,11 +434,6 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                 value={videoDescription}
                 onChange={inputHandler}
                 tabVideoVisibility = {tabVideoVisibility}
-            />
-
-            <Social
-                tabSocialVisibility = {tabSocialVisibility}
-                subtitle = {subtitle}
             />
 
             <div className="loadingArticle" style={{

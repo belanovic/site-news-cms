@@ -9,6 +9,14 @@ export default function Tags({tagsArr, setTagsArr}) {
         const value = e.target.value;
         setInputValue(value);
     }
+    const handleClick = () => {
+        setTagsArr((prev) => {
+            const arr = Array.from(prev);
+            const newArrElem = inputValue;
+            arr.push(newArrElem);
+            return arr
+        });
+    }
     const handleKeyDown = (e) => {
         if(e.keyCode === 13) {
             setTagsArr((prev) => {
@@ -39,7 +47,12 @@ export default function Tags({tagsArr, setTagsArr}) {
                 onChange = {handleChange}
                 onKeyDown = {handleKeyDown}
                 value = {inputValue}
-            ></input><button>Zapamti tag</button>
+            ></input>
+            <button 
+                className = "tags-button"
+                onClick = {() => handleClick()}
+            >Sačuvaj tag
+            </button>
 
             <div className = "tags-row">
                 {tagsArr && tagsArr.map((prom, i) => {
@@ -48,7 +61,7 @@ export default function Tags({tagsArr, setTagsArr}) {
                                 key = {i}
                             >
                                 {prom}
-                                {i !== 0 && <i className="fas fa-times" onClick = {() => handleClose(i)}></i>}
+                                {i !== 0 && <i className = "fas fa-times" onClick = {() => handleClose(i)}></i>}
                             </div>
                     }
                 )}

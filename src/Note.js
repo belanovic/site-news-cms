@@ -1,4 +1,5 @@
 import react from 'react';
+import './style/note.css'
 
 export default function Note({note, setNote}) {
 
@@ -11,7 +12,8 @@ export default function Note({note, setNote}) {
         <div className = "note">
             <label htmlFor = "note">Napomena</label>
             <textarea 
-                id = "note" 
+                id = "note"
+                className = "note-text"
                 name = "note"
                 value = {note}
                 onChange = {handleChange}

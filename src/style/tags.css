@@ -1,3 +1,4 @@
+
 .tags-row {
     display: inline-flex;
     flex-wrap: wrap;
@@ -9,25 +10,35 @@
     flex-wrap: wrap;
     position: relative;
     margin-right: 1em;
-    margin-bottom: 0.2em;
-    font-size: 1.25rem;
+    margin-bottom: 0.5em;
     padding: 0.2em 0.6em 0.2em 0.6em;
-    letter-spacing: 1px;
+    letter-spacing: 1.25px;
     background: rgb(93, 93, 93);
     color: white;
     border-radius: 15%;
 }
+
 .tag::before {
     content: '#';
 }
-.tag .fa-times {
+
+.tag i.fa-times {
     position: absolute;
     top: 0;
     right: 0;
     font-size: 0.75rem;
 }
 
-.tag .fa-times:hover {
+.tag i.fa-times:hover {
     cursor: pointer;
-    color: rgb(139, 0, 0);
+    border-radius: 5px;
+}
+
+.tags-button {
+    margin-right: 1.3em;
+    margin-bottom: 0.5em;
+}
+
+.tags-button:hover {
+    cursor: pointer;
 }

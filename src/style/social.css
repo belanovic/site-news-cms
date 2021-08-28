@@ -1,29 +1,49 @@
-.article-social {
-    width: 100%;
-    padding: 1em;
-    background: red;
+.twitter {
+    display: flex;
 }
-.twitter .twit {
+
+.fa-twitter {
     display: block;
-    width: 50%;
+    margin-right: 0.5em;
+    background-color: white;
+    color: grey;
+    width: 3em;
+    padding: 0.3em;
+    font-size: 2rem;
+    text-align: center;
+    border-radius: 10px;
+    border: 3px solid white;
+}
+
+.fa-twitter:hover {
+    cursor: pointer;
+    color: #1da1f2;
+    /* outline: 3px solid #1da1f2; */
+    
+}
+
+.fa-twitter.twitter-active {
+    color: #1da1f2;
+    border: 3px solid #1da1f2;
+}
+
+.fa-twitter.twitter-active:hover {
+    color: #006db1;
+}
+
+.twitter .twit {
+    flex: 1;
+    display: block;
     height: 7em;
-    margin: auto;
     font-size: 1rem;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     padding: 0.5em;
     resize: none;
     line-height: 1.4;
+    visibility: hidden;
 }
 
-.fa-twitter {
-    display: block;
-    margin: auto;
-    background-color: white;
-    color: #1da1f2;
-    width: 3em;
-    padding: 0.3em;
-    font-size: 2rem;
-    text-align: center;
-    border-radius: 10px;
+.twitter .twit.twitter-active {
+    visibility: visible;
 }

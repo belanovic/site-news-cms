@@ -8,11 +8,13 @@ import './style/form.css';
 
 export default function Form() {
 
-    const { alphabet, isLoggedIn, setLoggedIn,
+    const { alphabet, isLoggedIn, setLoggedIn, showCmsOverlay,
             loggedUser, setLoggedUser, setLoggedUsername,
-            setNewArticleBtn, setActiveLink,
-            setShowFrontend, setShowMenu
+            setNewArticleBtn, setActiveLink, setShowCmsOverlay,
+            setShowFrontend, setShowMenu, isNewArticle
         } = useContext(context);
+
+    const cmsOverlay = useRef(null);
 
     const [requestSent, setRequestSent] = useState(false);
 
@@ -30,6 +32,17 @@ export default function Form() {
     const [email, setEmail] = useState('');
 
 
+    const clearFields = () => {
+        setFirstName('')
+        setLastName('');
+        setUsernameSignIn('');
+        setUsernameSignUp('');
+        setPasswordSignUp('');
+        setPasswordSignIn('');
+        setEmail('');
+    }
+
+
     const handleChange = (e, setFunc, limit) => {
         const value = e.target.value;
         setFunc(value);
@@ -45,20 +58,23 @@ export default function Form() {
         } else if (tab === 'sign-in') {
             setSignUpIsActive(false);
             setSignInIsActive(true);
+            
         }        
     }
 
     const handleClickSignIn = async (e) => {
         e.preventDefault();
+        setShowCmsOverlay('block');
         setRequestSent(true);
         const userAndToken = await loginUser(usernameSignIn, passwordSignIn);
         if(userAndToken[0] === false) {
             setRequestSent(false);
+            setShowCmsOverlay('none');
             return;
         };
         const token = userAndToken[3];
         localStorage.setItem('x-auth-token', token);
-        
+         
         setLoggedIn((prev) => {
              console.log(localStorage.getItem('x-auth-token'))
              const v = localStorage.getItem('x-auth-token') === 'none'? false : true;
@@ -75,14 +91,26 @@ export default function Form() {
             return v
         })
         setRequestSent(false);
+        setShowCmsOverlay('none')
         console.log(userAndToken);
     }
 
     const handleClickSignUp = async (e) => {
         e.preventDefault();
         setRequestSent(true);
-        const newUser = await registerUser(firstName, lastName, usernameSignUp, passwordSignUp, email);
+        setShowCmsOverlay('block')
+        const {newUser} = await registerUser(firstName, lastName, usernameSignUp, passwordSignUp, email);
         setRequestSent(false);
+        setShowCmsOverlay('none');
+        if(newUser[0] === false) {
+            alert(newUser[2]);
+            return
+        } else if(newUser[0] === true) {
+            alert(newUser[1]);
+            setSignInIsActive(true);
+            setSignUpIsActive(false);
+            clearFields();
+        }
         console.log(newUser);
     }
 
@@ -98,6 +126,7 @@ export default function Form() {
     return (
         <>
             <div className="form-container">
+                <div className="cmsOverlay" ref={cmsOverlay} style={{ display: showCmsOverlay }}></div>
                         {isLoggedIn?
                         <Profile loggedUser = {loggedUser}/>
                         :

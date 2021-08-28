@@ -13,16 +13,17 @@ T.post('statuses/update', { status: `${twit}` }, function (err, data, response) 
 
 
 import react, { useState, useEffect } from 'react';
-import {publishTwit} from './getDatabase';
+import './style/social.css'
 
-
-export default function Twitter({ subtitle }) {
-
-    const [twit, setTwit] = useState('');
+export default function Twitter({ subtitle, twit, setTwit, sendTwit, setSendTwit }) {
 
     const handleChangeTwit = (e) => {
         const value = e.target.value;
         setTwit(value);
+    }
+
+    const handleClick = () => {
+        setSendTwit(prev => !prev);
     }
 
     useEffect((prom) => setTwit(subtitle), [subtitle])
@@ -30,17 +31,15 @@ export default function Twitter({ subtitle }) {
     return (
         <div className="twitter">
             <div className="twitter-header">
-                <i className="fab fa-twitter"
-                        onClick={async () => {
-                            const r = await publishTwit(twit);
-                            console.log(r);
-                        }}
+                <i className= {`fab fa-twitter ${sendTwit && 'twitter-active'}`}
+                        onClick={() => handleClick()}
                 ></i>
-                <span>Twitter</span>
+                {/* <span>Twitter</span> */}
             </div>
             <textarea
                 name="twit"
                 className="twit"
+                className= {`twit ${sendTwit && 'twitter-active'}`}
                 value={twit}
                 onChange={handleChangeTwit}
             >
