@@ -31,6 +31,19 @@ export default function Form() {
     const [passwordSignIn, setPasswordSignIn] = useState('');
     const [email, setEmail] = useState('');
 
+    const [buttonLabel, setButtonLabel] = useState('');
+
+    const changeButtonLabel = () => {
+        if(signInisActive) {
+            setButtonLabel(requestSent? 'Prijavljivanje ...' : 'Prijavi se')
+        } else if(signUpisActive) {
+            setButtonLabel(requestSent? 'Registrovanje...' : 'Registruj se')
+        }
+    }
+  
+
+
+
 
     const clearFields = () => {
         setFirstName('')
@@ -122,6 +135,8 @@ export default function Form() {
         setShowFrontend('none');
         setActiveLink('none') 
     }) 
+
+    useEffect(changeButtonLabel, [signInisActive, signUpisActive, requestSent])
 
     return (
         <>
@@ -303,7 +318,7 @@ export default function Form() {
                                     className={`form-send-button ${requestSent && 'sending'}`}
                                     onClick = {signInisActive? handleClickSignIn : handleClickSignUp}
                                     disabled = {requestSent? true : false}
-                                >{`${signInisActive? 'Prijavi se' : 'Registruj se'}`}</button>
+                                >{buttonLabel}</button>
                             </div>
                         </form>}
             </div>
