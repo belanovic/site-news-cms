@@ -219,8 +219,8 @@
     .fa-stream {
         font-size: 1.25rem;
     }
-    .fa-bars,
-    .fa-times {
+    .header-links-navigation .fa-bars,
+    .header-links-navigation .fa-times {
         display: block;
         margin: 0.25em 0 0.25em 0;
     }
