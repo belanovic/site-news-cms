@@ -50,25 +50,6 @@
     margin-bottom: 0.5em;
 }
 
-.save {
-    flex: 1;
-}
-
-.saveBtn {
-    display: inline-block;
-    font-size: 1.25rem;
-    letter-spacing: 1px;
-    padding: 0.2em 1.3em 0.2em 1.3em;
-    margin-left: 1em;
-    color: white;
-    background: green;
-}
-
-.saveBtn:hover {
-    cursor: pointer;
-    background: rgb(24, 31, 24);
-}
-
 @media all and (max-width: 780px) {
     .article-content-container {
         flex-direction: column;

@@ -1,0 +1,40 @@
+.save.desktop{
+    display: block;
+}
+.save.mobile {
+    display: none;
+}
+
+
+.save {
+    flex: 1;
+}
+
+.save-button {
+    display: block;
+    width: 10rem;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    padding: 0.2em 1.3em 0.2em 1.3em;
+    margin-left: 1em;
+    color: white;
+    background: green;
+}
+
+.save-button:hover {
+    cursor: pointer;
+    background: rgb(24, 31, 24);
+}
+
+@media all and (max-width: 768px) {
+    .save.desktop{
+        visibility: hidden;
+    }
+    .save.mobile {
+        display: block;
+        padding-top: 1em;
+    }
+    .save.mobile .save-button {
+        margin-left: auto;
+    }
+}

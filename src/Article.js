@@ -22,6 +22,7 @@ import Line from './Line';
 import Note from './Note';
 import Scraper from './Scraper';
 import Twitter from './Twitter';
+import Save from './Save';
 import './style/article.css';
 import './style/article-navigation.css';
 
@@ -311,12 +312,12 @@ export default function Article({ setShowCmsOverlay, isNew }) {
         }}>
 
             <div className="article-navigation">
-                <div className="save">
-                    {title !== '' && text !== '' ?
-                        <button className="saveBtn" onClick={handleSave}>Save</button>
-                        :
-                        ''}
-                </div>
+                <Save 
+                    handleSave = {handleSave} 
+                    title = {title} 
+                    text = {text}
+                    displaySave = {'desktop'}
+                />
                 <div className="article-navigation-tabs">
                     <div
                         className={`article-navigation-tab ${activeTab === 1 ? 'active-tab' : ''}`}
@@ -344,6 +345,12 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                             text={text}
                             setText={setText}
                             initialText={initialText}
+                        />
+                        <Save 
+                            handleSave = {handleSave} 
+                            title = {title} 
+                            text = {text}
+                            displaySave = {'mobile'}
                         />
                     </div>
 
