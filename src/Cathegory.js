@@ -96,11 +96,11 @@ export default function Cathegory({ setPageNum, sortArticles }) {
                 {/* <label htmlFor="cathegory-cathegories">Rubrike</label> */}
                 <select id="cathegory-cathegories" value={cathegory} onChange={handleSelect}>
                     <option value="allArticles">Sve vesti</option>
-                    <option value="politics">Politics</option>
+                    <option value="politics">Politics</option>  
                     <option value="business">Business</option>
                     <option value="technology">Technology</option>
                     <option value="entertainment">Entertainment</option>
-                    <option value="sports">Sports</option>   
+                    <option value="sports">Sports</option>    
                 </select>
             </div>   
             <div className="cathegory-button">
