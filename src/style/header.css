@@ -210,7 +210,7 @@
     .header-allArticlesBtn-text,
     .header-newArticleBtn-text {
         padding: 0.2em 0.2em 0.2em 0.2em;
-        text-align: left;
+        text-align: left;  
         margin: 1em 0 1em 0;
     }
     .fa-feather-alt,
