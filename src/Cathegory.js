@@ -102,7 +102,7 @@ export default function Cathegory({ setPageNum, sortArticles }) {
                     <option value="entertainment">Entertainment</option>
                     <option value="sports">Sports</option>   
                 </select>
-            </div>
+            </div>   
             <div className="cathegory-button">
                 <button
                     className="cathegory-button btn"
