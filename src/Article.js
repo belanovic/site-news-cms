@@ -64,6 +64,12 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     const [imgURL, setImgURL] = useState('generic');
     const [imgFile, setImgFile] = useState('');
 
+    const [deployedImgName2, setDeployedImgName2] = useState('');
+    const [imgName2, setImgName2] = useState('generic');
+    const [deployedImgURL2, setDeployedImgURL2] = useState('');
+    const [imgURL2, setImgURL2] = useState('generic');
+    const [imgFile2, setImgFile2] = useState('');
+
     const [videoDescription, setVideoDescription] = useState('');
     const [deployedVideoName, setDeployedVideoName] = useState('');
     const [videoName, setVideoName] = useState('none');
@@ -116,6 +122,11 @@ export default function Article({ setShowCmsOverlay, isNew }) {
         setDeployedImgName(selectedArticle.imgName);
         setImgName(selectedArticle.imgName);
 
+        setDeployedImgURL2(selectedArticle.imgURL2);
+        setImgURL2(selectedArticle.imgURL2);
+        setDeployedImgName2(selectedArticle.imgName2);
+        setImgName2(selectedArticle.imgName2);
+
         setVideoDescription(selectedArticle.videoDescription);
         setDeployedVideoURL(selectedArticle.videoURL);
         setVideoURL(selectedArticle.videoURL);
@@ -146,6 +157,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
             paragraphs: paragraphs,
             imgName: imgName,
             imgDescription: imgDescription,
+            imgName2: imgName2,
             videoName: videoName,
             videoDescription: videoDescription,
             source: source,
@@ -155,10 +167,17 @@ export default function Article({ setShowCmsOverlay, isNew }) {
         if (id === 'new') {
             try {
                 let photoURL;
+                let photoURL2;
+
                 if(imgURL === 'generic') {
                     photoURL = 'generic'
                 } else { 
                     photoURL = await uploadImageDB(imgName, imgFile);
+                }
+                if(imgURL2 === 'generic') {
+                    photoURL2 = 'generic'
+                } else { 
+                    photoURL2 = await uploadImageDB(imgName2, imgFile2);
                 }
 
                 if (videoName !== 'none') {
@@ -166,6 +185,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                     vest.videoURL = videoURL;
                 }
                 vest.imgURL = photoURL;
+                vest.imgURL2 = photoURL2;
                 vest.dateCreated = new Date();
                 vest.dateUpdated = new Date();
                 if (published) {
@@ -182,7 +202,6 @@ export default function Article({ setShowCmsOverlay, isNew }) {
 
                 if (IdArticleToChangePosition !== '') {
                     let changedPositionArticle = await updateArticlePosition(IdArticleToChangePosition, currentPosition);
-                    console.log('changed position artuicle' + changedPositionArticle)
                 }
 
                 window.location.href = '/allArticles';
@@ -199,6 +218,11 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                     const deletionMsg = await removeImageDB(deployedImgName);
                     vest.imgURL = photoURL;
                 }
+                if (deployedImgName2 !== imgName2) {
+                    const photoURL2 = await uploadImageDB(imgName2, imgFile2);
+                    const deletionMsg2 = await removeImageDB(deployedImgName2);
+                    vest.imgURL2 = photoURL2;
+                }
                 if (deployedVideoName !== videoName) {
                     const videoURL = await uploadVideoDB(videoName, videoFile);
                     const deletionMsg = await removeVideoDB(deployedVideoName);
@@ -214,7 +238,6 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                 let updatedArticle = await response.json();
                 if (IdArticleToChangePosition !== '') {
                     let changedPositionArticle = await updateArticlePosition(IdArticleToChangePosition, currentPosition);
-                    console.log('changed position artuicle' + changedPositionArticle)
                 }
                 const allNews = await getAllArticles();
                 if(sendTwit) {
@@ -238,7 +261,6 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     }
     const inputHandler = (e) => {
         const name = e.target.name;
-        console.log(name);
         const value = e.target.value;
         if (name === 'source') {
             setSource(value);
@@ -432,6 +454,11 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                 setImgName={setImgName}
                 setImgFile={setImgFile}
                 cathegory = {category}
+
+                imgURL2={imgURL2}
+                setImgURL2={setImgURL2}
+                setImgName2={setImgName2}
+                setImgFile2={setImgFile2}
             />
             <Video
                 videoURL={videoURL}

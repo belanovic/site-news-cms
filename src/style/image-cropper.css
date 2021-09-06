@@ -1,18 +1,25 @@
 .imgCropper {
     display: flex;
-    align-items: flex-start;
+    border: 1px solid black;
+    margin-left: 2em;
 }
-
+.inputImage {
+    margin-bottom: 1em;
+}
+.buttons {
+    margin-left: 1em;
+}
 .crop-btn {
     margin-right: 1em;
-    margin-left: 1em;
-    font-size: 1rem;
+    color: grey;
+    border: 1px solid black;
+    font-size: 3rem;
     padding: 0.1em 0.3em 0.1em 0.3em;
 }
 .crop-btn:hover {
     cursor: pointer;
+    color: green;
 }
-
 
 .ReactCrop div {
     width: 620px;

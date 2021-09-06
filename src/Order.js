@@ -114,51 +114,51 @@ export default function Order() {
                             {reorderedArticles && reorderedArticles.map(
                                 (article, i) => {
                                     return (
-                                    
-                                    <Draggable key={i} index={i} draggableId={`order-articles-item-drg${i}`}>
-                                        {(provided) => {
-                                            return <><div
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                                key={i}
-                                                className="order-articles-item"
 
-                                            >   <div
-                                                className={`order-articles-item-elements ${activeArrow === i ? 'arrowUp' : 'arrowDown'} 
+                                        <Draggable key={i} index={i} draggableId={`order-articles-item-drg${i}`}>
+                                            {(provided) => {
+                                                return <><div
+                                                    ref={provided.innerRef}
+                                                    {...provided.draggableProps}
+                                                    {...provided.dragHandleProps}
+                                                    key={i}
+                                                    className="order-articles-item"
+
+                                                >   <div
+                                                    className={`order-articles-item-elements ${activeArrow === i ? 'arrowUp' : 'arrowDown'} 
                                                 ${doubleSelectedArticle === i ? 'double' : ''}`}
-                                            >
-                                                    <div
-                                                        className="order-articles-item-number"
-                                                    >{i + 1}.</div>
-                                                    <div
-                                                        className="order-articles-item-title"
-                                                    >{article.title}</div>
-                                                    <div
-                                                        className={`order-articles-item-edit ${activeArrow === i ? 'up' : 'down'}`}
-                                                        onClick={(e) => handleClickArrow(e, i)}
-                                                    >
-                                                        <i
-                                                            className="fas fa-chevron-down"
-                                                        ></i>
+                                                >
+                                                        <div
+                                                            className="order-articles-item-number"
+                                                        >{i + 1}.</div>
+                                                        <div
+                                                            className="order-articles-item-title"
+                                                        >{article.title}</div>
+                                                        <div
+                                                            className={`order-articles-item-edit ${activeArrow === i ? 'up' : 'down'}`}
+                                                            onClick={(e) => handleClickArrow(e, i)}
+                                                        >
+                                                            <i
+                                                                className="fas fa-chevron-down"
+                                                            ></i>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <SearchDate
-                                                    reorderedArticles={reorderedArticles}
-                                                    setreorderedArticles={setreorderedArticles}
-                                                    i={i}
-                                                    activeArrow={activeArrow}
-                                                    setActiveArrow={setActiveArrow}
-                                                    setDoubleSelectedArticle={setDoubleSelectedArticle}
-                                                    newsByDateAllComp={newsByDateAllComp}
+                                                    <SearchDate
+                                                        reorderedArticles={reorderedArticles}
+                                                        setreorderedArticles={setreorderedArticles}
+                                                        i={i}
+                                                        activeArrow={activeArrow}
+                                                        setActiveArrow={setActiveArrow}
+                                                        setDoubleSelectedArticle={setDoubleSelectedArticle}
+                                                        newsByDateAllComp={newsByDateAllComp}
 
-                                                />
-                                            </div>
-                                                {i === 4 && <div className="order-articles-item-space"></div>}
-                                                {i === 8 && <div className="order-articles-item-space"></div>}
-                                            </>
-                                        }}
-                                    </Draggable>                                    
+                                                    />
+                                                </div>
+                                                    {i === 4 && <div className="order-articles-item-space"></div>}
+                                                    {i === 8 && <div className="order-articles-item-space"></div>}
+                                                </>
+                                            }}
+                                        </Draggable>
                                     )
                                 }
                             )}
@@ -170,10 +170,10 @@ export default function Order() {
             </DragDropContext>
             <div className="order-send">
                 <button
-                    className= {`order-send-button ${requestSent && 'sending'}`}
+                    className={`order-send-button ${requestSent && 'sending'}`}
                     onClick={handleClickOrder}
-                    disabled = {requestSent? true : false}
-                >{requestSent? 'Ordering...' : 'Uredi'}</button>
+                    disabled={requestSent ? true : false}
+                >{requestSent ? 'Ordering...' : 'Uredi'}</button>
             </div>
         </div>
 

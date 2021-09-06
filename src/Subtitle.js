@@ -3,7 +3,7 @@ import React from 'react';
 export default function Subtitle({ subtitle, setSubtitle }) {
 
     function handleChangeSubtitle(e) {
-        const value = e.target.value;
+        const value = e.target.value; 
         setSubtitle(value);
     }
 

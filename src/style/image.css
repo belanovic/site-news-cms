@@ -17,13 +17,26 @@
     padding-top: 6em;
 }
 .article-photo-container {
-    display: flex;
-    justify-content: center;
+    padding: 0 10em 0 10em;
     margin-bottom: 15em;
 }
 
-.article-photo-img {
+.article-photo-wide {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2em;
+}
+
+.article-photo-square {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.article-photo-wide .article-photo-img {
     width: 620px;
+}
+.article-photo-square .article-photo-img {
+    width: 310px;
 }
 .imgDescription {
     display: flex;

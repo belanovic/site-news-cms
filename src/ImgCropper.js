@@ -38,11 +38,11 @@ function generateDownload(canvas, crop, setImgURL, setImgFile, setImgName) {
   );
 }
 
-export default function ImgCropper({ setImgURL, setImgFile, setImgName }) {
+export default function ImgCropper({ setImgURL, setImgFile, setImgName, ratio }) {
   const [upImg, setUpImg] = useState();
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
-  const [crop, setCrop] = useState({ unit: '%', width: 30, aspect: 16 / 9 });
+  const [crop, setCrop] = useState({ unit: '%', width: 30, aspect: ratio });
   const [completedCrop, setCompletedCrop] = useState(null);
 
   const onSelectFile = (e) => {
@@ -92,20 +92,7 @@ export default function ImgCropper({ setImgURL, setImgFile, setImgName }) {
 
   return (
     <div className="imgCropper">
-      <button
-        className = "crop-btn"
-        type="button"
-        disabled={!completedCrop?.width || !completedCrop?.height}
-        onClick={() =>
-          generateDownload(previewCanvasRef.current, completedCrop, setImgURL, setImgFile, setImgName)
-        }
-      >
-        Kropuj fotografiju
-      </button>
       <div className="imgContainer">
-        <div className = "inputImage">
-          <input type="file" accept="image/*" onChange={onSelectFile} />
-        </div>
         <ReactCrop
           src={upImg}
           onImageLoaded={onLoad}
@@ -122,6 +109,20 @@ export default function ImgCropper({ setImgURL, setImgFile, setImgName }) {
             }}
           />
         </div>
+      </div>
+      <div className="buttons">
+        <div className="inputImage">
+          <input type="file" accept="image/*" onChange={onSelectFile} />
+        </div>
+
+        <i className="fas fa-cut crop-btn"
+          type="button"
+          disabled={!completedCrop?.width || !completedCrop?.height}
+          onClick={() =>
+            generateDownload(previewCanvasRef.current, completedCrop, setImgURL, setImgFile, setImgName)
+          }
+        >
+        </i>
       </div>
     </div>
   );

@@ -110,6 +110,17 @@
     color: red;
 }
 
+.order-date-display button:hover {
+    cursor: pointer;
+    background-color: green;
+    color: white;
+}
+.order-date-save button:hover {
+    cursor: pointer;
+    background-color: green;
+    color: white;
+}
+
 @media all and (max-width: 768px) {
      
     .order-articles {
