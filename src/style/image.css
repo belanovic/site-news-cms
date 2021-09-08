@@ -14,17 +14,19 @@
 }
 
 .article-photo {
-    padding-top: 6em;
+    padding-top: 2em;
 }
 .article-photo-container {
     padding: 0 10em 0 10em;
     margin-bottom: 15em;
 }
-
+.article-photo-container .line {
+    margin: 2em 0 2em 0;
+    height: 2px;
+}
 .article-photo-wide {
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: 2em;
+    justify-content: flex-start;
 }
 
 .article-photo-square {
@@ -42,7 +44,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 4em;
     padding: 1em;
 }
 .imgDescription label {
@@ -51,6 +52,10 @@
 .imgDescription input {
     padding: 0.2em 0.5em 0.2em 0.5em;
     width: 40em;
+}
+
+.previewCanvas {
+    background-color: red;
 }
 
 @media all and (max-width: 748px) {

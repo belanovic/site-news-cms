@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef, useEffect } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import './style/image-cropper.css';
+import Filter from './Filter';
 
 function generateDownload(canvas, crop, setImgURL, setImgFile, setImgName) {
   if (!crop || !canvas) {
@@ -38,7 +39,7 @@ function generateDownload(canvas, crop, setImgURL, setImgFile, setImgName) {
   );
 }
 
-export default function ImgCropper({ setImgURL, setImgFile, setImgName, ratio }) {
+export default function ImgCropper({ setImgURL, setImgFile, setImgName, ratio, setFilter }) {
   const [upImg, setUpImg] = useState();
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
@@ -123,6 +124,7 @@ export default function ImgCropper({ setImgURL, setImgFile, setImgName, ratio })
           }
         >
         </i>
+        <Filter setImgURL = {setImgURL} setFilter = {setFilter} />
       </div>
     </div>
   );

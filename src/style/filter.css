@@ -1,0 +1,31 @@
+.filter-item {
+    margin-bottom: 0.3em;
+}
+.filter-item label {
+    display: inline-block;
+    margin-right: 0.3em;
+    width: 5em;
+}
+.filter-item:hover label {
+    color: white;
+}
+.filter-item input {
+    display: inline-block;
+    margin-right: 0.5em;
+}
+.filter-item input:hover {
+    cursor: pointer;
+}
+.filter-num {
+    display: inline-block;
+    width: 60px;
+}
+.filter-reset button {
+    display: block;
+    width: 50px;
+    margin-left: auto;
+    margin-right: 1em;
+}
+.filter-reset button:hover {
+    cursor: pointer;
+}
