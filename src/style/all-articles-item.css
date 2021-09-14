@@ -25,7 +25,7 @@
     display: flex;
     align-items: center;
 }
-
+ 
 .allArticles-item-title-text:hover {
     color: rgb(129, 216, 0)
 }
