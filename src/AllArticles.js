@@ -26,7 +26,6 @@ export default function AllArticles() {
         setListAllArticles((prev) => {
 
             if(activeCriteria[0] === 'title') {
-                console.log(alphabet);
                 prev.sort((a, b) => {
                     return  activeCriteria[1] === 'down'? alphabet.indexOf(a.title.split('')[0].toLowerCase()) - alphabet.indexOf(b.title.split('')[0].toLowerCase()) :
                                                           alphabet.indexOf(b.title.split('')[0].toLowerCase()) - alphabet.indexOf(a.title.split('')[0].toLowerCase())

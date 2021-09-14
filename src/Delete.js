@@ -24,7 +24,8 @@ export default function Delete() {
     const { id } = useParams();
     const { listAllArticles, setListAllArticles,
         listLoaded, setListLoaded,
-        articleImgLoaded, setArticleImgLoaded,
+        articleImgLoaded1, setArticleImgLoaded1,
+        articleImgLoaded2, setArticleImgLoaded2,
         articleVideoLoaded, setArticleVideoLoaded,
         articleDataLoaded, setArticleDataLoaded,
         showCmsOverlay, setShowCmsOverlay
@@ -67,7 +68,8 @@ export default function Delete() {
     useEffect(() => {
         findSelectedArticle();
         return () => {
-            setArticleImgLoaded(false);
+            setArticleImgLoaded1(false);
+            setArticleImgLoaded2(false);
             setArticleVideoLoaded(false);
             setArticleDataLoaded(false);
         }

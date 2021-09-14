@@ -105,7 +105,7 @@ export default function Form() {
         })
         setRequestSent(false);
         setShowCmsOverlay('none')
-        console.log(userAndToken);
+        /* console.log(userAndToken); */
     }
 
     const handleClickSignUp = async (e) => {
@@ -124,12 +124,10 @@ export default function Form() {
             setSignUpIsActive(false);
             clearFields();
         }
-        console.log(newUser);
+        /* console.log(newUser); */
     }
 
     useEffect(() => {
-
-
         setNewArticleBtn('inline-block');
         setShowMenu('block');
         setShowFrontend('none');

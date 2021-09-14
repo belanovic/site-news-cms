@@ -17,10 +17,6 @@ function generateDownload(canvas, crop, setImgURL, setImgFile, setImgName) {
 
       const fileName = Date.now() + '_' + file.name;
       const customURL = URL.createObjectURL(file);
-      /* 
-      console.log(fileName);
-      console.log(customURL);
-      console.log(file); */
 
       setImgURL(customURL);
       setImgName(fileName);
@@ -39,7 +35,8 @@ function generateDownload(canvas, crop, setImgURL, setImgFile, setImgName) {
   );
 }
 
-export default function ImgCropper({ setImgURL, setImgFile, setImgName, ratio, setFilter }) {
+export default function ImgCropper({ setImgURL, setImgFile, setImgName, 
+                            ratio, filterObj, setFilterObj, filterStyle, setFilterStyle }) {
   const [upImg, setUpImg] = useState();
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
@@ -124,7 +121,13 @@ export default function ImgCropper({ setImgURL, setImgFile, setImgName, ratio, s
           }
         >
         </i>
-        <Filter setImgURL = {setImgURL} setFilter = {setFilter} />
+        <Filter 
+          setImgURL = {setImgURL} 
+          filterObj = {filterObj} 
+          setFilterObj = {setFilterObj}
+          filterStyle = {filterStyle}
+          setFilterStyle = {setFilterStyle}
+        />
       </div>
     </div>
   );

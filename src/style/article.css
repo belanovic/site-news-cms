@@ -13,6 +13,9 @@
     width: 40vw;
     margin-right: 2em;
 }
+.article-text-editor img {
+    width: 5px !important;
+}
 
 .article-text-title {
     width: 100%;

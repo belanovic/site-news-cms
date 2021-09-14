@@ -5,9 +5,9 @@ import './style/video.css';
 
 export default function Video({ videoURL, setVideoName, inputHandler,
     setVideoFile, setVideoURL, tabVideoVisibility, videoDescription }) {
-    useEffect(() => {
+ /*    useEffect(() => {
         console.log('iz video komponente: ' + videoURL)
-    }, [])
+    }, []) */
     return (
         <div className="article-video" style={{ display: tabVideoVisibility }}>
             <div className="videoDescription">

@@ -8,7 +8,6 @@ export default function TextDiv({paragraphs, setParagraphs}) {
         const pasusi = text.split('\n')
         const elementsP = pasusi.map((prom, i) =><p key = {i}>{prom}</p>);
         setParagraphs(elementsP);
-        console.log(paragraphs)
     }
 
     const handleInput = (e) => {

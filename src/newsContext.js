@@ -7,7 +7,8 @@ function Provider(props) {
     const [listAllArticles, setListAllArticles] = useState([]);
     const [listLoaded, setListLoaded] = useState(true);
     const [articleDataLoaded, setArticleDataLoaded] = useState(false);
-    const [articleImgLoaded, setArticleImgLoaded] = useState(false);
+    const [articleImgLoaded1, setArticleImgLoaded1] = useState(false);
+    const [articleImgLoaded2, setArticleImgLoaded2] = useState(false);
     /* const [articleVideoLoaded, setArticleVideoLoaded] = useState(false); */
     const [showCmsOverlay, setShowCmsOverlay] = useState('none');
 
@@ -21,6 +22,18 @@ function Provider(props) {
     const [defaultCathegory, setDefaultCathegory] = useState('allArticles');
     const [activeCriteria, setActiveCriteria] = useState(['dateUpdated', 'down', 3]);
     const [showCalendar, setShowCalendar] = useState(false);
+
+    const defaultFilter = [{
+        blur: 0,
+        brightness: 100,
+        contrast: 100,
+        grayscale: 0,
+        huRotate: 0,
+        invert:  0,
+        opacity: 100,
+        saturate:  100,
+        sepia: 0
+}]
 
 
     useEffect(() => {
@@ -51,8 +64,10 @@ function Provider(props) {
             setListLoaded,
             articleDataLoaded,
             setArticleDataLoaded,
-            articleImgLoaded,
-            setArticleImgLoaded,
+            articleImgLoaded1,
+            setArticleImgLoaded1,
+            articleImgLoaded2,
+            setArticleImgLoaded2,
             showCmsOverlay,
             setShowCmsOverlay,
             newArticleBtn,
@@ -74,7 +89,8 @@ function Provider(props) {
             showMenu,
             setShowMenu,
             showCalendar,
-            setShowCalendar
+            setShowCalendar,
+            defaultFilter
         }}>
             {props.children}
         </context.Provider>

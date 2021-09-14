@@ -1,7 +1,7 @@
 import HOST_BACKEND from './hostBackend.js';
 
 export async function getAllArticles() {
-    console.log(localStorage.getItem('x-auth-token'));
+    /* console.log(localStorage.getItem('x-auth-token')); */
     try {
         const response = await fetch(`${HOST_BACKEND}/allArticles`, { 
             headers: {
@@ -30,7 +30,7 @@ export async function getArticle(id) {
     }
 }
 export async function postArticle({id, title, subtitle, text, paragraphs, note, imgURL, imgName, 
-                                tagsArr, imgURL2, imgName2,
+                                tagsArr, imgURL2, imgName2, imgFilter, imgFilter2,
                                 dateUpdated, dateCreated, datePublished, videoURL, videoName,
                                 category, position, published, videoDescription, imgDescription, author, source}) {
     try {
@@ -49,6 +49,8 @@ export async function postArticle({id, title, subtitle, text, paragraphs, note, 
                 imgName: imgName,
                 imgURL2: imgURL2,
                 imgName2: imgName2,
+                imgFilter: imgFilter,
+                imgFilter2: imgFilter2,
                 videoURL: videoURL,
                 videoName: videoName,
                 dateUpdated: dateUpdated,
@@ -72,8 +74,8 @@ export async function postArticle({id, title, subtitle, text, paragraphs, note, 
     }
 }
 
-export async function updateArticle({id, title, subtitle, text,  paragraphs, note, imgURL2, imgName2,
-                                    imgURL, imgName, videoURL, videoName, position, 
+export async function updateArticle({id, title, subtitle, text, paragraphs, note, imgURL2, imgName2,
+                                    imgURL, imgName, imgFilter, imgFilter2, videoURL, videoName, position, 
                                     category, published, datePublished, tagsArr,
                                     imgDescription, videoDescription, author, source}) {
     try {
@@ -92,6 +94,8 @@ export async function updateArticle({id, title, subtitle, text,  paragraphs, not
                 imgName: imgName,
                 imgURL2: imgURL2,
                 imgName2: imgName2,
+                imgFilter: imgFilter,
+                imgFilter2: imgFilter2,
                 videoURL: videoURL,
                 videoName: videoName,
                 dateUpdated: Date(),
@@ -189,7 +193,7 @@ export async function getByCategory(category) {
 }
 
 export async function getByDate(date) {
-    console.log('poslat zahtev');
+    /* console.log('poslat zahtev'); */
     try {
         const response = await fetch(`${HOST_BACKEND}/articlesByDate`, {
             method: 'POST',

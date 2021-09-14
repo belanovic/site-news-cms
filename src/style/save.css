@@ -1,12 +1,11 @@
-.save.desktop{
+.save-article.desktop{
     display: block;
 }
-.save.mobile {
+.save-article.mobile {
     display: none;
 }
 
-
-.save {
+.save-article {
     flex: 1;
 }
 
@@ -19,22 +18,29 @@
     margin-left: 1em;
     color: white;
     background: green;
+    transition: transform 50ms;
+    border: none;
 }
 
 .save-button:hover {
     cursor: pointer;
-    background: rgb(24, 31, 24);
+    background: rgb(0, 150, 0);
+}
+.save-button:active {
+    transform: scale(0.97, 0.97);
+    background: rgb(0, 184, 0);
+    border: 1px solid black;
 }
 
 @media all and (max-width: 768px) {
-    .save.desktop{
+    .save-article.desktop{
         visibility: hidden;
     }
-    .save.mobile {
+    .save-article.mobile {
         display: block;
         padding-top: 1em;
     }
-    .save.mobile .save-button {
+    .save-article.mobile .save-button {
         margin-left: auto;
     }
 }

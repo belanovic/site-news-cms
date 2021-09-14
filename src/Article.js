@@ -31,6 +31,14 @@ const storage = firebase.storage();
 
 export default function Article({ setShowCmsOverlay, isNew }) {
 
+    const { listAllArticles, setListAllArticles,
+        listLoaded, setListLoaded,setShowMenu,
+        articleImgLoaded1, setArticleImgLoaded1,
+        articleImgLoaded2, setArticleImgLoaded2,
+        setActiveLink, articleDataLoaded, setArticleDataLoaded,
+        setNewArticleBtn, setShowFrontend, defaultFilter
+    } = useContext(context);
+
     const [tabPublishVisibility, setTabPublishVisibility] = useState('none')
     const [tabTextVisibility, setTabTextVisibility] = useState('block')
     const [tabPhotoVisibility, setTabPhotoVisibility] = useState('none')
@@ -64,11 +72,15 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     const [imgURL, setImgURL] = useState('generic');
     const [imgFile, setImgFile] = useState('');
 
+
     const [deployedImgName2, setDeployedImgName2] = useState('');
     const [imgName2, setImgName2] = useState('generic');
     const [deployedImgURL2, setDeployedImgURL2] = useState('');
     const [imgURL2, setImgURL2] = useState('generic');
     const [imgFile2, setImgFile2] = useState('');
+
+    const [imgFilter, setImgFilter] = useState(defaultFilter);
+    const [imgFilter2, setImgFilter2] = useState(defaultFilter);
 
     const [videoDescription, setVideoDescription] = useState('');
     const [deployedVideoName, setDeployedVideoName] = useState('');
@@ -79,14 +91,8 @@ export default function Article({ setShowCmsOverlay, isNew }) {
 
     const { id } = useParams();
     const [isNewArticle, setIsNewArticle] = useState(true);
-    const { listAllArticles, setListAllArticles,
-        listLoaded, setListLoaded,setShowMenu,
-        articleImgLoaded, setArticleImgLoaded,
-        setActiveLink, articleDataLoaded, setArticleDataLoaded,
-        setNewArticleBtn, setShowFrontend
-    } = useContext(context);
 
-    let contentLoaded = articleDataLoaded === true && (articleImgLoaded === true || imgURL === 'generic');
+    let contentLoaded = articleDataLoaded === true /* && ((articleImgLoaded1 === true && articleImgLoaded2 === true) || (imgURL === 'generic' || imgURL2 === 'generic') )*/;
 
     function findNewLine() {
         const pasusi = text.split('\n')
@@ -101,7 +107,8 @@ export default function Article({ setShowCmsOverlay, isNew }) {
             setIsNewArticle(true);
             setArticleDataLoaded(true);
             /* setArticleVideoLoaded(true); */
-            setArticleImgLoaded(true);
+            setArticleImgLoaded1(true);
+            setArticleImgLoaded2(true);
             return
         }
         const selectedArticle = await getArticle(id);
@@ -126,6 +133,9 @@ export default function Article({ setShowCmsOverlay, isNew }) {
         setImgURL2(selectedArticle.imgURL2);
         setDeployedImgName2(selectedArticle.imgName2);
         setImgName2(selectedArticle.imgName2);
+
+        setImgFilter(selectedArticle.imgFilter);
+        setImgFilter2(selectedArticle.imgFilter2);
 
         setVideoDescription(selectedArticle.videoDescription);
         setDeployedVideoURL(selectedArticle.videoURL);
@@ -156,8 +166,10 @@ export default function Article({ setShowCmsOverlay, isNew }) {
             text: text,
             paragraphs: paragraphs,
             imgName: imgName,
-            imgDescription: imgDescription,
             imgName2: imgName2,
+            imgFilter: imgFilter,
+            imgFilter2: imgFilter2,            
+            imgDescription: imgDescription,
             videoName: videoName,
             videoDescription: videoDescription,
             source: source,
@@ -256,7 +268,6 @@ export default function Article({ setShowCmsOverlay, isNew }) {
 
     const handleSelect = (e) => {
         const option = e.target.value;
-        console.log(option);
         setCategory(option);
     }
     const inputHandler = (e) => {
@@ -296,7 +307,8 @@ export default function Article({ setShowCmsOverlay, isNew }) {
         findSelectedArticle();
         setShowCmsOverlay('none');
         return () => {
-            setArticleImgLoaded(false);
+            setArticleImgLoaded1(false);
+            setArticleImgLoaded2(false);
             /*  setArticleVideoLoaded(false); */
             setArticleDataLoaded(false);
         }
@@ -453,12 +465,17 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                 setImgURL={setImgURL}
                 setImgName={setImgName}
                 setImgFile={setImgFile}
-                cathegory = {category}
+                cathegory = {category} 
 
                 imgURL2={imgURL2}
                 setImgURL2={setImgURL2}
                 setImgName2={setImgName2}
                 setImgFile2={setImgFile2}
+
+                imgFilter = {imgFilter}
+                setImgFilter = {setImgFilter}
+                imgFilter2 = {imgFilter2}
+                setImgFilter2 = {setImgFilter2}
             />
             <Video
                 videoURL={videoURL}

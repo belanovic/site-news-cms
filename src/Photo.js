@@ -6,25 +6,16 @@ import './style/image.css';
 import Line from './Line'
 
 export default function Photo({ imgURL, setImgURL, setImgName, setImgFile,
-    imgURL2, setImgURL2, setImgName2, setImgFile2,
-    tabPhotoVisibility, imgDescription, inputHandler, cathegory }) {
+      imgURL2, setImgURL2, setImgName2, setImgFile2, imgFilter, setImgFilter,
+      imgFilter2, setImgFilter2, tabPhotoVisibility, imgDescription, 
+      inputHandler, cathegory }) {
 
-    const { articleImgLoaded, setArticleImgLoaded } = useContext(context);
+    const { articleImgLoaded1, setArticleImgLoaded1, articleImgLoaded2, setArticleImgLoaded2 } = useContext(context);
 
-    const [filter, setFilter] = useState({
-        URL: 'imgURL',
-        filter: 'none'
+    const [filterStyle1, setFilterStyle1] = useState('none');
+    const [filterStyle2, setFilterStyle2] = useState('none');
 
-    });
-    const [filter2, setFilter2] = useState({
-        URL: 'imgURL',
-        filter: 'none'
 
-    });
-
-    useEffect(() => {
-        console.log(filter);
-    })
 
     return (
         <div className="article-photo" style={{ display: tabPhotoVisibility }}>
@@ -47,8 +38,11 @@ export default function Photo({ imgURL, setImgURL, setImgName, setImgFile,
                         setImgFile={setImgFile}
                         setImgName={setImgName}
                         ratio={16 / 9}
-                        filter = {filter}
-                        setFilter = {setFilter}
+                        filterObj = {imgFilter}
+                        setFilterObj = {setImgFilter}
+
+                        filterStyle = {filterStyle1} 
+                        setFilterStyle = {setFilterStyle1}
                     />
                     <div>
                         {imgURL === 'generic' ?
@@ -59,9 +53,9 @@ export default function Photo({ imgURL, setImgURL, setImgName, setImgFile,
                                 src={imgURL}
                                 alt="fotka"
                                 onLoad={() => {
-                                    setArticleImgLoaded(true);
+                                    setArticleImgLoaded1(true);
                                 }}
-                                style = {{filter: filter.filter}}
+                                style = {{filter: filterStyle1}}
                             >
                             </img>}
                     </div>
@@ -74,8 +68,11 @@ export default function Photo({ imgURL, setImgURL, setImgName, setImgFile,
                         setImgFile={setImgFile2}
                         setImgName={setImgName2}
                         ratio={1 / 1}
-                        filter = {filter2}
-                        setFilter = {setFilter2}
+                        filterObj = {imgFilter2}
+                        setFilterObj = {setImgFilter2}
+
+                        filterStyle = {filterStyle2}
+                        setFilterStyle = {setFilterStyle2}
                     />
                     <div>
                         {imgURL2 === 'generic' ?
@@ -85,10 +82,10 @@ export default function Photo({ imgURL, setImgURL, setImgName, setImgFile,
                                 className="article-photo-img"
                                 src={imgURL2}
                                 alt="fotka"
-                            /*              onLoad={() => {
-                                             setArticleImgLoaded(true);
-                                         }} */
-                                style = {{filter: filter2.filter}}
+                                onLoad={() => {
+                                    setArticleImgLoaded2(true);
+                                }}
+                                style = {{filter: filterStyle2 }}
                             >
                             </img>}
                     </div>
