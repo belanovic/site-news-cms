@@ -9,7 +9,8 @@ import { context } from './newsContext';
 import Footer from './Footer'; 
 import Form from './Form.js'; 
 import Order from './Order.js';
-import SearchDate from './SearchDate';   
+import SearchDate from './SearchDate';
+import Proba from './Proba.js';
 
 export default function App() {
     const cmsOverlay = useRef(null);
@@ -18,9 +19,9 @@ export default function App() {
     return (<>
         {isLoggedIn ?
             <div className="cms" /* style dfdfdf= {{height: window.innerHeight + 'px'}} */>
-
                 <div className="cmsOverlay" ref={cmsOverlay} style={{ display: showCmsOverlay }}></div>
                 <Header showHomepageBtn={false} showFrontend={false} allArticlesBtn={false} newArticleBtn={false} />
+                <Proba />
                 <Switch>
                     <Route exact path="/"> 
                         <Homepage /> 

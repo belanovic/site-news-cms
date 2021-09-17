@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import './style/text-editor.css';
 
 
 export default function TextEditor({text, setText, initialText}) {
@@ -25,7 +24,7 @@ export default function TextEditor({text, setText, initialText}) {
          
          initialValue = {initialText}
          onEditorChange= {log}
-         image_dimensions = {true}
+
          init={{
            selector: 'textarea#image-tools',
            height: '75vh',
@@ -33,7 +32,7 @@ export default function TextEditor({text, setText, initialText}) {
            paste_data_images: true,
            plugins: [
              'advlist autolink lists link image charmap print preview anchor',
-             'searchreplace visualblocks code fullscreen',
+             'searchreplace visualblocks code fullscreen','importcss',
              'insertdatetime media table paste code help wordcount imagetools'
             
            ],
@@ -42,14 +41,17 @@ export default function TextEditor({text, setText, initialText}) {
            'alignright alignjustify | bullist numlist outdent indent | ' +
            'removeformat | help' + 
            'media' + 
-           'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-           content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+           'insertfile udo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+           /* content_css: 'my-styles.css' */
+           content_style: 'img { width: 100%}' +
+                          'figure.image {width: 100%}' + 
+                          'span.mce-preview-object {width: 100%}' + 
+                          '.mce-object-iframe iframe {width: 100%}',
+           image_caption: true
+
          /*   image_class_list: [
             {title: 'fotka1', value: 'fotka-klasa'}
           ] */
-
-          
-           
          }}
        />
        {/* <button onClick={log}>Log editor content</button> */}
