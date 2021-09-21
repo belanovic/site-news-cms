@@ -2,11 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { context } from './newsContext.js';
 import './style/header.css';
-
 export default function Header() {
        const [showLinks, setShowLinks] = useState(false);
        const { newArticleBtn, showFrontend, setFormVisible,
-            activeLink,showMenu, loggedIn, loggedUser, 
+            activeLink,showMenu, loggedIn, loggedUser, checkStorageToken,
             loggedUsername, setShowCalendar } = useContext(context);
 
     return (
@@ -38,6 +37,7 @@ export default function Header() {
                             <Link to="/">
                                 <div
                                     className="header-homepageBtn-text"
+                                    onClick = {() => checkStorageToken() }
                                 ><i className="fas fa-home"></i><span>Homepage</span></div>
                             </Link>
                         </div>
@@ -49,6 +49,7 @@ export default function Header() {
                             <Link to={`/allArticles`}>
                                 <div
                                     className="header-allArticlesBtn-text"
+                                    onClick = {() => checkStorageToken() }
                                 ><i className="fas fa-list-ul"></i><span>All articles</span></div>
                             </Link>
                         </div>
@@ -58,6 +59,7 @@ export default function Header() {
                         >
                             <Link to={`/order`}>
                                 <div
+                                    onClick = {() => checkStorageToken() }
                                     className="header-orderBtn-text"
                                 ><i className="fas fa-stream"></i><span>Order articles</span></div>
                             </Link>
@@ -71,6 +73,7 @@ export default function Header() {
             <div className="header-title">
                 <Link to="/">
                         <div
+                            onClick = {() => checkStorageToken() }
                             className="header-title-text"
                         >CMS</div>
                 </Link>
@@ -84,6 +87,7 @@ export default function Header() {
                     <Link to="/oneArticleNew/new">
                         <div
                             className="header-newArticleBtn-text"
+                            onClick = {() => checkStorageToken() }
                         ><i className="fas fa-feather-alt"></i><span>New article</span></div>
                     </Link>
                 </div>
@@ -91,7 +95,11 @@ export default function Header() {
                     <Link to = "/form">
                         <i 
                             className="fas fa-user-edit" 
-                            onClick = {() => setFormVisible(prev => !prev)}>
+                            onClick={(e) => {
+                                checkStorageToken();
+                                setFormVisible(prev => !prev);
+                            }}
+                        >
                          </i>
                     </Link>
                     <div className = "login-info">

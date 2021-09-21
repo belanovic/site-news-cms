@@ -11,7 +11,7 @@ export default function Search({option}) {
     const caption = option === 'title'? "Pretraži naslove" : "Pretraži tagove";
     
     const { listAllArticles, setListAllArticles,
-        listLoaded, setListLoaded } = useContext(context);
+        listLoaded, setListLoaded, checkStorageToken } = useContext(context);
 
     const handleChange = (e) => {
         const v = e.target.value;
@@ -83,7 +83,10 @@ export default function Search({option}) {
                 type = "text"
                 value = {query}
                 onChange = {handleChange}
-                onKeyDown = {handleKeyDown}
+                onKeyDown={(e) => {
+                    checkStorageToken();
+                    handleKeyDown(e);
+                }}
                 placeholder = {`${caption}`}
                 >    
             </input>
@@ -91,11 +94,17 @@ export default function Search({option}) {
             
             <button
                 className = {`search-button ${requestSent && 'sending'}`}
-                onClick = {handleClick}
+                onClick={(e) => {
+                    checkStorageToken();
+                    handleClick(e);
+                }}
             >{requestSent? 'Pretraživanje...' : 'Traži'}
             </button>
             <i
-                onClick = {handleClick}
+                onClick={(e) => {
+                    checkStorageToken();
+                    handleClick(e);
+                }}
                 className = {`fas fa-search ${requestSent && 'sending'}`}
             ></i>
         </div>

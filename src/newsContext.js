@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const context = React.createContext();
 
+
 function Provider(props) {
 
     const [listAllArticles, setListAllArticles] = useState([]);
@@ -23,25 +24,30 @@ function Provider(props) {
     const [activeCriteria, setActiveCriteria] = useState(['dateUpdated', 'down', 3]);
     const [showCalendar, setShowCalendar] = useState(false);
 
+
+
     const defaultFilter = [{
         blur: 0,
         brightness: 100,
         contrast: 100,
         grayscale: 0,
         huRotate: 0,
-        invert:  0,
+        invert: 0,
         opacity: 100,
-        saturate:  100,
+        saturate: 100,
         sepia: 0
-}]
+    }]
 
-
-    useEffect(() => {
+    const checkStorageToken = () => {
         setLoggedIn((prev) => {
             const storageToken = localStorage.getItem('x-auth-token');
             return storageToken === 'none' || storageToken === null || storageToken === undefined ?
                 false : true
         })
+    }
+
+    useEffect(() => {
+        checkStorageToken();
     }, [])
 
     /*   useEffect(() => {
@@ -90,7 +96,8 @@ function Provider(props) {
             setShowMenu,
             showCalendar,
             setShowCalendar,
-            defaultFilter
+            defaultFilter,
+            checkStorageToken
         }}>
             {props.children}
         </context.Provider>

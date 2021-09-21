@@ -74,7 +74,6 @@ export default function Form() {
             
         }        
     }
-
     const handleClickSignIn = async (e) => {
         e.preventDefault();
         setShowCmsOverlay('block');

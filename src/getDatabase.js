@@ -21,7 +21,14 @@ export async function getAllArticles() {
 
 export async function getArticle(id) {
     try {
-        const response = await fetch(`${HOST_BACKEND}/oneArticle/${id}`);
+        const response = await fetch(`${HOST_BACKEND}/oneArticleCMS/${id}`, { 
+            headers: {
+                /* 'Content-Type': 'application/json',
+                'x-auth-token' : localStorage.getItem('x-auth-token') */
+                'Authorization' : 'Bearer ' + localStorage.getItem('x-auth-token')
+   
+            }
+        });
         const selectedArticle = await response.json();
         return selectedArticle
     }
@@ -37,7 +44,8 @@ export async function postArticle({id, title, subtitle, text, paragraphs, note, 
         const newArticle = await fetch(`${HOST_BACKEND}/oneArticle/`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'text/plain',
+                'Authorization' : 'Bearer ' + localStorage.getItem('x-auth-token')
             },
             body: JSON.stringify({
                 title: title,
@@ -82,7 +90,8 @@ export async function updateArticle({id, title, subtitle, text, paragraphs, note
         const updatedArticle = await fetch(`${HOST_BACKEND}/oneArticle/${id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'text/plain',
+                'Authorization' : 'Bearer ' + localStorage.getItem('x-auth-token')
             },
             body: JSON.stringify({
                 title: title,
@@ -122,7 +131,8 @@ export async function deleteArticle(id) {
         const response = await fetch(`${HOST_BACKEND}/oneArticle/${id}`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'text/plain',
+                'Authorization' : 'Bearer ' + localStorage.getItem('x-auth-token')
             }
         })
         const deletedArticle = response.json();
@@ -135,7 +145,14 @@ export async function deleteArticle(id) {
 
 export async function getFrontpageNews() {
     try {
-        const response = await fetch(`${HOST_BACKEND}/frontpageArticles`);
+        const response = await fetch(`${HOST_BACKEND}/frontpageArticlesCMS`, { 
+            headers: {
+                /* 'Content-Type': 'application/json',
+                'x-auth-token' : localStorage.getItem('x-auth-token') */
+                'Authorization' : 'Bearer ' + localStorage.getItem('x-auth-token')
+   
+            }
+        });
         const newsFrontpage = await response.json();
         return newsFrontpage
     }
@@ -149,7 +166,8 @@ export async function updateArticlePosition(id, position) {
         const updatedArticle = await fetch(`${HOST_BACKEND}/articlePosition/${id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'text/plain',
+                'Authorization' : 'Bearer ' + localStorage.getItem('x-auth-token')
             },
             body: JSON.stringify({
                 position: position
@@ -167,7 +185,8 @@ export async function updateFrontpage(idAndPositionArr) {
         const response = await fetch(`${HOST_BACKEND}/updateFrontpage`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'text/plain',
+                'Authorization' : 'Bearer ' + localStorage.getItem('x-auth-token')
             },
             body: JSON.stringify({
                 idAndPositionArr: idAndPositionArr
@@ -198,7 +217,8 @@ export async function getByDate(date) {
         const response = await fetch(`${HOST_BACKEND}/articlesByDate`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'text/plain',
+                'Authorization' : 'Bearer ' + localStorage.getItem('x-auth-token')
             },
             body: JSON.stringify({
                 day: date.day,
@@ -219,7 +239,8 @@ export async function publishArticle(id) {
         const response = await fetch(`${HOST_BACKEND}/publishArticle/${id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'text/plain',
+                'Authorization' : 'Bearer ' + localStorage.getItem('x-auth-token')
             },
             body: JSON.stringify({
                 published: true,
@@ -239,7 +260,8 @@ export async function scrape(url) {
         const response = await fetch(`${HOST_BACKEND}/scraper`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'text/plain',
+                'Authorization' : 'Bearer ' + localStorage.getItem('x-auth-token')
             },
             body: JSON.stringify({
                 url: url
@@ -257,7 +279,8 @@ export async function publishTwit(twit) {
     const r = await fetch(`${HOST_BACKEND}/publishTwit`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'text/plain'
+            'Content-Type': 'text/plain',
+            'Authorization' : 'Bearer ' + localStorage.getItem('x-auth-token')
         },
         body: JSON.stringify({
             twit: twit

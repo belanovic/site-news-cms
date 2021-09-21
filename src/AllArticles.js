@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { getAllArticles } from './getDatabase.js';
 import { Link, useParams } from 'react-router-dom';
 import { context } from './newsContext.js';
 import Pagination from './Pagination.js';
@@ -16,8 +15,8 @@ const NEWS_PER_PAGE = 10;
 
 export default function AllArticles() {
 
-    const { listAllArticles, setListAllArticles, listLoaded, setListLoaded, 
-        setActiveLink, activeCriteria, setActiveCriteria,setNewArticleBtn ,
+    const { listAllArticles, setListAllArticles, listLoaded, setListLoaded, setLoggedIn,
+        setActiveLink, activeCriteria, setActiveCriteria,setNewArticleBtn, checkStorageToken,
         setShowFrontend, setShowMenu, setShowCalendar, setShowCmsOverlay} = useContext(context);
     const [pageNum, setPageNum] = useState(1);
     const [findVisible, setFindVisible] = useState(false);
@@ -61,7 +60,7 @@ export default function AllArticles() {
         setShowFrontend('none');
     })
 
-    return (
+     return (
         <>
                 <div className="allArticles">
                     <FindLabel setFindVisible = {setFindVisible} />
@@ -128,7 +127,11 @@ export default function AllArticles() {
                                 <div key={i} className={`allArticles-item ${isOnLastPage? 'allArticles-item-lastPage' : ''}`} onClick = {() => setShowCalendar(false)}>
                                     <div className="allArticles-item-title allArticles-item-part">
                                         <Link to={`/oneArticle/${oneArticle._id}`}>
-                                            <h2 className="allArticles-item-title-text">{oneArticle.title}</h2>
+                                            <h2 
+                                                className="allArticles-item-title-text"
+                                                onClick = {() => checkStorageToken() }
+                                            >{oneArticle.title}
+                                            </h2>
                                         </Link>
                                     </div>
                                     <div className = "allArticles-item-info">

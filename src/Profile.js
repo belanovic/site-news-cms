@@ -11,13 +11,9 @@ export default function Profile({loggedUser}) {
         e.preventDefault();
         localStorage.setItem('x-auth-token', 'none');
         localStorage.setItem('loggedUsername', null);
-        setLoggedIn(false);
         window.location.href = '/';
+        setLoggedIn(false);
     }
-
-    useEffect((prom) => {
-        console.log(loggedUser);
-    }, [])
 
     return (
         <div className = "profile">

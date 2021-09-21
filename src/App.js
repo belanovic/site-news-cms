@@ -12,13 +12,20 @@ import Order from './Order.js';
 import SearchDate from './SearchDate';
 import Proba from './Proba.js';
 
+
+
 export default function App() {
+
     const cmsOverlay = useRef(null);
-    const { showCmsOverlay, setShowCmsOverlay, isLoggedIn, isNewArticle } = useContext(context);
+    const { showCmsOverlay, setShowCmsOverlay, 
+            isLoggedIn, isNewArticle, 
+            setLoggedIn } = useContext(context);
 
     return (<>
         {isLoggedIn ?
-            <div className="cms" /* style dfdfdf= {{height: window.innerHeight + 'px'}} */>
+            <div 
+                className="cms"
+            >
                 <div className="cmsOverlay" ref={cmsOverlay} style={{ display: showCmsOverlay }}></div>
                 <Header showHomepageBtn={false} showFrontend={false} allArticlesBtn={false} newArticleBtn={false} />
                 <Proba />

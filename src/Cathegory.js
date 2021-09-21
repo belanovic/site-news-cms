@@ -7,7 +7,7 @@ import './style/cathegory.css';
 export default function Cathegory({ setPageNum, sortArticles }) {
 
     const { listAllArticles, setListAllArticles, defaultCathegory, setDefaultCathegory,
-        listLoaded, setListLoaded, shouldLoadArticles } = useContext(context);
+        listLoaded, setListLoaded, shouldLoadArticles, checkStorageToken } = useContext(context);
 
     const [cathegory, setCathegory] = useState(defaultCathegory);
     const [isDated, setIsDated] = useState(false);
@@ -26,7 +26,6 @@ export default function Cathegory({ setPageNum, sortArticles }) {
         if (cathegory === 'allArticles') {
             let allNews = await getAllArticles();
             /* const allNewsDate =  */
-            console.log(isDated)
             if(isDated) {
                 allNews = allNews.filter((article) => {
                     const articleYear = new Date(article.dateCreated).getFullYear();
@@ -49,7 +48,6 @@ export default function Cathegory({ setPageNum, sortArticles }) {
             setPageNum(1)
         } else {
             let allNews = await getByCategory(cathegory);
-            console.log(isDated)
             if(isDated) {
                 allNews = allNews.filter((article) => {
                     const articleYear = new Date(article.dateCreated).getFullYear();
@@ -103,15 +101,23 @@ export default function Cathegory({ setPageNum, sortArticles }) {
                     <option value="sports">Sports</option>    
                 </select>
             </div>   
-            <div className="cathegory-button">
+            <div 
+                className="cathegory-button"
+            >
                 <button
                     className="cathegory-button btn"
-                    onClick={handleClick}
+                    onClick={(e) => {
+                        checkStorageToken();
+                        handleClick(e);
+                    }}
                 >Prikaži
                 </button>
                 <i 
                     className="fas fa-search"
-                    onClick={handleClick}
+                    onClick={(e) => {
+                        checkStorageToken();
+                        handleClick(e);
+                    }}
                 ></i>
             </div>
         </div>

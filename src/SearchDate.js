@@ -16,6 +16,9 @@ export default function SearchDate({ reorderedArticles, setreorderedArticles, i,
     const [selectedArticle, setSelectedArticle] = useState(0);
     const [newsByDate, setNewsByDate] = useState([]);
 
+    const {checkStorageToken} = useContext(context)
+
+
     const handleChange = (e) => {
         let value = e.target.value;
         if (value === '') {
@@ -106,7 +109,11 @@ export default function SearchDate({ reorderedArticles, setreorderedArticles, i,
             <select
                 className="order-selected-articles"
                 value={selectedArticle}
-                onChange={handleSelectArticle}
+
+                onChange={(e) => {
+                    checkStorageToken();
+                    handleSelectArticle(e);
+                }}
             >
                 {newsByDate.map((prom, i) => {
                     return <option key={i} value={i}>
@@ -116,7 +123,14 @@ export default function SearchDate({ reorderedArticles, setreorderedArticles, i,
                 )}
             </select>
             <div className="order-dateElement order-date-display">
-                <button className="order-dateBtn" onClick={handleClick}>Prikaži vesti</button>
+                <button 
+                    className="order-dateBtn"
+                    onClick={() => {
+                        handleClick();
+                        checkStorageToken();
+                    }}
+                >Prikaži vesti
+                </button>
             </div>
             <div className="order-dateElement">
                 <input
@@ -125,7 +139,10 @@ export default function SearchDate({ reorderedArticles, setreorderedArticles, i,
                     id="dateInput"
                     className="dateInput"
                     value={day}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                        checkStorageToken();
+                        handleChange(e);
+                    }}
                 ></input>
             </div>
             <div className="order-dateElement">
@@ -145,12 +162,24 @@ export default function SearchDate({ reorderedArticles, setreorderedArticles, i,
                 </select>
             </div>
             <div className="order-dateElement">
-                <select onChange={handleSelect} value={year} name="year">
+                <select 
+                    onChange={(e) => {
+                        checkStorageToken();
+                        handleSelect(e);
+                    }}
+                    value={year} 
+                    name="year">
                     {years.map((prom, i) => <option className="year-option" key={i} value={prom}>{prom}</option>)}
                 </select>
             </div>
             <div className= "order-dateElement order-date-save">
-                <button onClick={handleSave}>Zameni vest</button>
+                <button 
+                    onClick={(e) => {
+                        checkStorageToken();
+                        handleSave(e);
+                    }}
+                >Zameni vest
+                </button>
             </div>
         </div>
 

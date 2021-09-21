@@ -17,7 +17,7 @@ export default function Order() {
     const [doubleSelectedArticle, setDoubleSelectedArticle] = useState('');
     const [newsByDateAllComp, setNewsByDateAllComp] = useState([]);
     const { setActiveLink, setShowCmsOverlay,
-        setNewArticleBtn, setShowMenu,
+        setNewArticleBtn, setShowMenu, checkStorageToken,
         setShowFrontend } = useContext(context);
 
     const onDragEnd = (result) => {
@@ -171,7 +171,10 @@ export default function Order() {
             <div className="order-send">
                 <button
                     className={`order-send-button ${requestSent && 'sending'}`}
-                    onClick={handleClickOrder}
+                    onClick={() => {
+                        handleClickOrder();
+                        checkStorageToken();
+                    }}
                     disabled={requestSent ? true : false}
                 >{requestSent ? 'Ordering...' : 'Uredi'}</button>
             </div>

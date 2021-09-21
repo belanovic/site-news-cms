@@ -28,7 +28,6 @@ export default function TextEditor({text, setText, initialText}) {
          init={{
            selector: 'textarea#image-tools',
            height: '75vh',
-           auto_focus : "itinymce",
            paste_data_images: true,
            plugins: [
              'advlist autolink lists link image charmap print preview anchor',
