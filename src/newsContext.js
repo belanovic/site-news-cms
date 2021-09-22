@@ -18,13 +18,11 @@ function Provider(props) {
     const [activeLink, setActiveLink] = useState('none');
     const [showFrontend, setShowFrontend] = useState('none');
     const [formVisible, setFormVisible] = useState(false);
-    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loggedUser, setLoggedUser] = useState('');
     const [defaultCathegory, setDefaultCathegory] = useState('allArticles');
     const [activeCriteria, setActiveCriteria] = useState(['dateUpdated', 'down', 3]);
     const [showCalendar, setShowCalendar] = useState(false);
-
-
 
     const defaultFilter = [{
         blur: 0,
@@ -39,15 +37,21 @@ function Provider(props) {
     }]
 
     const checkStorageToken = () => {
-        setLoggedIn((prev) => {
+        const storageToken = localStorage.getItem('x-auth-token');
+        return storageToken === 'none' || storageToken === null || storageToken === undefined ?
+            false : true
+    }
+
+ /*    const checkStorageToken = () => {
+        setIsLoggedIn((prev) => {
             const storageToken = localStorage.getItem('x-auth-token');
             return storageToken === 'none' || storageToken === null || storageToken === undefined ?
                 false : true
         })
     }
-
+ */
     useEffect(() => {
-        checkStorageToken();
+        setIsLoggedIn(checkStorageToken());
     }, [])
 
     /*   useEffect(() => {
@@ -85,7 +89,7 @@ function Provider(props) {
             formVisible,
             setFormVisible,
             isLoggedIn,
-            setLoggedIn,
+            setIsLoggedIn,
             loggedUser,
             setLoggedUser,
             defaultCathegory,

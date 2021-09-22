@@ -7,7 +7,7 @@ import './style/cathegory.css';
 export default function Cathegory({ setPageNum, sortArticles }) {
 
     const { listAllArticles, setListAllArticles, defaultCathegory, setDefaultCathegory,
-        listLoaded, setListLoaded, shouldLoadArticles, checkStorageToken } = useContext(context);
+        listLoaded, setListLoaded, shouldLoadArticles,setIsLoggedIn, checkStorageToken } = useContext(context);
 
     const [cathegory, setCathegory] = useState(defaultCathegory);
     const [isDated, setIsDated] = useState(false);
@@ -107,7 +107,9 @@ export default function Cathegory({ setPageNum, sortArticles }) {
                 <button
                     className="cathegory-button btn"
                     onClick={(e) => {
-                        checkStorageToken();
+                        const storageHasToken = checkStorageToken();
+                        setIsLoggedIn(storageHasToken);
+                        if(!storageHasToken) return;
                         handleClick(e);
                     }}
                 >Prikaži
@@ -115,7 +117,9 @@ export default function Cathegory({ setPageNum, sortArticles }) {
                 <i 
                     className="fas fa-search"
                     onClick={(e) => {
-                        checkStorageToken();
+                        const storageHasToken = checkStorageToken();
+                        setIsLoggedIn(storageHasToken);
+                        if(!storageHasToken) return;
                         handleClick(e);
                     }}
                 ></i>

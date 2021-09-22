@@ -8,7 +8,7 @@ import './style/form.css';
 
 export default function Form() {
 
-    const { alphabet, isLoggedIn, setLoggedIn, showCmsOverlay,
+    const { alphabet, isLoggedIn, setIsLoggedIn, showCmsOverlay,
             loggedUser, setLoggedUser, setLoggedUsername,
             setNewArticleBtn, setActiveLink, setShowCmsOverlay,
             setShowFrontend, setShowMenu, isNewArticle
@@ -87,7 +87,7 @@ export default function Form() {
         const token = userAndToken[3];
         localStorage.setItem('x-auth-token', token);
          
-        setLoggedIn((prev) => {
+        setIsLoggedIn((prev) => {
              console.log(localStorage.getItem('x-auth-token'))
              const v = localStorage.getItem('x-auth-token') === 'none'? false : true;
              return v

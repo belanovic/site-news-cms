@@ -16,7 +16,7 @@ export default function Order() {
     const [activeArrow, setActiveArrow] = useState('');
     const [doubleSelectedArticle, setDoubleSelectedArticle] = useState('');
     const [newsByDateAllComp, setNewsByDateAllComp] = useState([]);
-    const { setActiveLink, setShowCmsOverlay,
+    const { setActiveLink, setShowCmsOverlay, setIsLoggedIn,
         setNewArticleBtn, setShowMenu, checkStorageToken,
         setShowFrontend } = useContext(context);
 
@@ -172,8 +172,10 @@ export default function Order() {
                 <button
                     className={`order-send-button ${requestSent && 'sending'}`}
                     onClick={() => {
+                        const storageHasToken = checkStorageToken();
+                        setIsLoggedIn(storageHasToken);
+                        if(!storageHasToken) return;
                         handleClickOrder();
-                        checkStorageToken();
                     }}
                     disabled={requestSent ? true : false}
                 >{requestSent ? 'Ordering...' : 'Uredi'}</button>

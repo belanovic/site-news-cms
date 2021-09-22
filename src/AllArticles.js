@@ -15,7 +15,7 @@ const NEWS_PER_PAGE = 10;
 
 export default function AllArticles() {
 
-    const { listAllArticles, setListAllArticles, listLoaded, setListLoaded, setLoggedIn,
+    const { listAllArticles, setListAllArticles, listLoaded, setListLoaded, setIsLoggedIn,
         setActiveLink, activeCriteria, setActiveCriteria,setNewArticleBtn, checkStorageToken,
         setShowFrontend, setShowMenu, setShowCalendar, setShowCmsOverlay} = useContext(context);
     const [pageNum, setPageNum] = useState(1);
@@ -129,7 +129,8 @@ export default function AllArticles() {
                                         <Link to={`/oneArticle/${oneArticle._id}`}>
                                             <h2 
                                                 className="allArticles-item-title-text"
-                                                onClick = {() => checkStorageToken() }
+                                                onClick = {() => setIsLoggedIn(checkStorageToken())
+                                                }
                                             >{oneArticle.title}
                                             </h2>
                                         </Link>

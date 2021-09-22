@@ -20,7 +20,7 @@
     display: inline-block;
     width: 60px;
 }
-.filter-reset button {
+.filter-reset button { 
     display: block;
     width: 50px;
     margin-left: auto;

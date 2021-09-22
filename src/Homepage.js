@@ -7,7 +7,8 @@ import './style/homepage.css';
 
 export default function Homepage() {
 
-    const {setShowMenu, setNewArticleBtn, setShowFrontend, setShowCmsOverlay, checkStorageToken } = useContext(context);
+    const {setShowMenu, setNewArticleBtn, setShowFrontend, setShowCmsOverlay, 
+           setIsLoggedIn, checkStorageToken } = useContext(context);
 
     useEffect(() => {
 
@@ -23,7 +24,7 @@ export default function Homepage() {
                 <div className="homepage-allArticlesBtn" onClick = {() => setShowCmsOverlay('block')}>
                     <Link to={`/allArticles`}>
                         <div
-                            onClick = {() => checkStorageToken() }
+                            onClick = {() => setIsLoggedIn(checkStorageToken())}
                             className="homepage-allArticlesBtn-text"
                         ><i className="fas fa-list-ul"></i>List of all articles</div>
                     </Link>
@@ -31,7 +32,7 @@ export default function Homepage() {
                 <div className="homepage-newArticleBtn">
                     <Link to="/oneArticle/new">
                         <div
-                            onClick = {() => checkStorageToken() }
+                            onClick = {() => setIsLoggedIn(checkStorageToken())}
                             className="homepage-newArticleBtn-text"
                         ><i className="fas fa-feather-alt"></i>Create new article</div>
                     </Link>
@@ -39,7 +40,7 @@ export default function Homepage() {
                 <div className="homepage-frontpage-order">
                     <Link to="/order">
                         <div
-                            onClick = {() => checkStorageToken() }
+                            onClick = {() =>setIsLoggedIn(checkStorageToken())}
                             className="homepage-frontpage-order-text"
                         ><i className="fas fa-stream"></i>Set the frontpage</div>
                     </Link>

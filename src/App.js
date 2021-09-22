@@ -19,7 +19,7 @@ export default function App() {
     const cmsOverlay = useRef(null);
     const { showCmsOverlay, setShowCmsOverlay, 
             isLoggedIn, isNewArticle, 
-            setLoggedIn } = useContext(context);
+            setIsLoggedIn } = useContext(context);
 
     return (<>
         {isLoggedIn ?
@@ -46,7 +46,7 @@ export default function App() {
                         <Article key = 'new' setShowCmsOverlay={setShowCmsOverlay} />
                     </Route>
                     <Route path='/delete/:id'>
-                        <Delete />
+                        <Delete /> 
                     </Route>
                 </Switch>
                 <Footer />

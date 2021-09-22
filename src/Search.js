@@ -10,7 +10,7 @@ export default function Search({option}) {
 
     const caption = option === 'title'? "Pretraži naslove" : "Pretraži tagove";
     
-    const { listAllArticles, setListAllArticles,
+    const { listAllArticles, setListAllArticles, setIsLoggedIn,
         listLoaded, setListLoaded, checkStorageToken } = useContext(context);
 
     const handleChange = (e) => {
@@ -84,7 +84,9 @@ export default function Search({option}) {
                 value = {query}
                 onChange = {handleChange}
                 onKeyDown={(e) => {
-                    checkStorageToken();
+                    const storageHasToken = checkStorageToken();
+                    setIsLoggedIn(storageHasToken);
+                    if(!storageHasToken) return;
                     handleKeyDown(e);
                 }}
                 placeholder = {`${caption}`}
@@ -95,14 +97,18 @@ export default function Search({option}) {
             <button
                 className = {`search-button ${requestSent && 'sending'}`}
                 onClick={(e) => {
-                    checkStorageToken();
+                    const storageHasToken = checkStorageToken();
+                    setIsLoggedIn(storageHasToken);
+                    if(!storageHasToken) return;
                     handleClick(e);
                 }}
             >{requestSent? 'Pretraživanje...' : 'Traži'}
             </button>
             <i
                 onClick={(e) => {
-                    checkStorageToken();
+                    const storageHasToken = checkStorageToken();
+                    setIsLoggedIn(storageHasToken);
+                    if(!storageHasToken) return;
                     handleClick(e);
                 }}
                 className = {`fas fa-search ${requestSent && 'sending'}`}

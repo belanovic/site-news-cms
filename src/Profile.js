@@ -5,14 +5,14 @@ import './style/profile.css'
 export default function Profile({loggedUser}) {
 
     
-    const {setLoggedIn} = useContext(context);
+    const {setIsLoggedIn} = useContext(context);
 
     const handleSignOut = (e) => {
         e.preventDefault();
         localStorage.setItem('x-auth-token', 'none');
         localStorage.setItem('loggedUsername', null);
         window.location.href = '/';
-        setLoggedIn(false);
+        setIsLoggedIn(false);
     }
 
     return (
