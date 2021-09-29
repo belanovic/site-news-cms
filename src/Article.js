@@ -224,15 +224,31 @@ export default function Article({ setShowCmsOverlay, isNew }) {
             }
 
         } else {
+
             try {
                 if (deployedImgName !== imgName) {
-                    const photoURL = await uploadImageDB(imgName, imgFile);
-                    const deletionMsg = await removeImageDB(deployedImgName);
+
+                    let photoURL;
+
+                    if(imgURL === 'generic') {
+                        photoURL = 'generic'
+                    } else { 
+                        photoURL = await uploadImageDB(imgName, imgFile);
+                        const deletionMsg = await removeImageDB(deployedImgName);
+                    }
                     vest.imgURL = photoURL;
                 }
                 if (deployedImgName2 !== imgName2) {
-                    const photoURL2 = await uploadImageDB(imgName2, imgFile2);
-                    const deletionMsg2 = await removeImageDB(deployedImgName2);
+
+                    let photoURL2;
+
+                    if(imgURL2 === 'generic') {
+                        photoURL2 = 'generic'
+                    } else { 
+                        photoURL2 = await uploadImageDB(imgName2, imgFile2);
+                        const deletionMsg2 = await removeImageDB(deployedImgName2);
+                    }
+            
                     vest.imgURL2 = photoURL2;
                 }
                 if (deployedVideoName !== videoName) {
@@ -460,17 +476,20 @@ export default function Article({ setShowCmsOverlay, isNew }) {
             <Photo
                 tabPhotoVisibility={tabPhotoVisibility}
                 imgDescription={imgDescription}
-                inputHandler={inputHandler} 
+                inputHandler={inputHandler}
+                cathegory = {category} 
+
                 imgURL={imgURL} 
                 setImgURL={setImgURL}
                 setImgName={setImgName}
                 setImgFile={setImgFile}
-                cathegory = {category} 
+                setDeployedImgName = {setDeployedImgName}
 
                 imgURL2={imgURL2}
                 setImgURL2={setImgURL2}
                 setImgName2={setImgName2}
                 setImgFile2={setImgFile2}
+                setDeployedImgName2 = {setDeployedImgName2}
 
                 imgFilter = {imgFilter}
                 setImgFilter = {setImgFilter}

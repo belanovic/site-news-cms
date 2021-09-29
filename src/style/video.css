@@ -1,9 +1,9 @@
 .article-video {
     padding-top: 6em;
+    min-height: 100vh;
 }
 
 .video-container {
-
     display: flex;
     justify-content: center;
     margin-bottom: 15em;

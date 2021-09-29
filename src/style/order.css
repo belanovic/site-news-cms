@@ -1,4 +1,5 @@
 .order {
+    min-height: 100vh;
     padding: 2em;
     background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnewspaper6.jpg?alt=media&token=cf4a9604-2519-42ca-a882-c47072a061d6');
 }

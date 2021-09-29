@@ -30,6 +30,7 @@ export default function Form() {
     const [passwordSignUp, setPasswordSignUp] = useState('');
     const [passwordSignIn, setPasswordSignIn] = useState('');
     const [email, setEmail] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
 
     const [buttonLabel, setButtonLabel] = useState('');
 
@@ -41,10 +42,6 @@ export default function Form() {
         }
     }
   
-
-
-
-
     const clearFields = () => {
         setFirstName('')
         setLastName('');
@@ -59,6 +56,7 @@ export default function Form() {
     const handleChange = (e, setFunc, limit) => {
         const value = e.target.value;
         setFunc(value);
+        setErrorMsg('');
        /*  if(value.length === limit) {
             e.target.style.visibility = "hidden"
         } */
@@ -80,6 +78,8 @@ export default function Form() {
         setRequestSent(true);
         const userAndToken = await loginUser(usernameSignIn, passwordSignIn);
         if(userAndToken[0] === false) {
+            console.log(userAndToken);
+            setErrorMsg(userAndToken[2])
             setRequestSent(false);
             setShowCmsOverlay('none');
             return;
@@ -104,7 +104,6 @@ export default function Form() {
         })
         setRequestSent(false);
         setShowCmsOverlay('none')
-        /* console.log(userAndToken); */
     }
 
     const handleClickSignUp = async (e) => {
@@ -145,7 +144,7 @@ export default function Form() {
                         <form className="form">
                             <div className="form-title">
                                 <span 
-                                    className= {`proba sign-in ${signInisActive? 'isActive' : 'notActive'}`}
+                                    className= {`sign-in ${signInisActive? 'isActive' : 'notActive'}`}
                                     onClick = {() => handleClickTab('sign-in')}
                                 >Prijava</span>
                                 <span 
@@ -212,12 +211,12 @@ export default function Form() {
                                 ></input>
     
                                 <div className = "form-element-condition usernameSignIn">
-                                    <span 
+                                {/*     <span 
                                         style = {{
                                             visibility: usernameSignIn.length >= 3 || usernameSignIn.length === 0 ? 
                                                 'hidden' : 'visible'
                                             }}
-                                    >Korisničko ime mora imati najmanje 3 karaktera</span>
+                                    >Korisničko ime mora imati najmanje 3 karaktera</span> */}
                                 </div>
                             </div>
                             <div 
@@ -257,12 +256,12 @@ export default function Form() {
                                 ></input>
                 
                                 <div className = "form-element-condition passwordSignIn">
-                                    <span 
+                                    {/* <span 
                                         style = {{
                                             visibility: passwordSignIn.length >= 6 || passwordSignIn.length === 0 ? 
                                                 'hidden' : 'visible'
                                             }}
-                                    >Šifra mora imati najmanje 6 karaktera</span>
+                                    >Šifra mora imati najmanje 6 karaktera</span> */}
                                 </div>
                             </div>
                             <div 
@@ -309,6 +308,10 @@ export default function Form() {
                                             }}
                                     >Email mora imati najmanje 10 karaktera</span>
                                 </div>
+                            </div>
+                            <div
+                               className="form-error" 
+                            >{errorMsg}
                             </div>
                             <div className="form-send">
                                 <button 

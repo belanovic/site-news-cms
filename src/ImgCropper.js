@@ -112,6 +112,16 @@ export default function ImgCropper({ setImgURL, setImgFile, setImgName,
         <div className="inputImage">
           <input type="file" accept="image/*" onChange={onSelectFile} />
         </div>
+        <div className="inputGeneric">
+          <button
+            onClick = {() =>{ 
+              setImgURL('generic');
+              setImgFile('');
+              setImgName('generic');
+            }}
+          >Generička
+          </button>
+        </div>
 
         <i className="fas fa-cut crop-btn"
           type="button"

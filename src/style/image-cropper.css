@@ -6,9 +6,13 @@
     border: 1px solid black;
 }
 .inputImage {
+    margin-bottom: 0.5em;
+}
+.inputGeneric {
     margin-bottom: 1em;
 }
 .buttons {
+    width: 350px;
     padding: 0 1.5em 0 1.5em;
 }
 .crop-btn {

@@ -16,7 +16,8 @@ export default function Filter({ setImgURL, filterObj, setFilterObj, filterStyle
     }
 
     const handleReset = () => {
-            setFilterObj(defaultFilter)
+            const newObj = Object.assign({}, defaultFilter[0]);
+            setFilterObj([newObj])
     }
 
     const handleSingleReset = (e) => {

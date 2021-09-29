@@ -72,6 +72,11 @@
     font-size: 1rem;
     text-align: center;
 }
+.form-error {
+    height: 10px;
+    margin-bottom: 1.5em;
+    color: red;
+}
 .form-send {
     flex: 1;
     width: 87%;
@@ -87,7 +92,7 @@
     margin-bottom: 1em;
 }
 .form-send-button:active {
-    transform: scale(0.99, 0.92);
+    transform: scale(0.99, 0.97);
 }
 .form-send-button:hover {
     cursor: pointer;

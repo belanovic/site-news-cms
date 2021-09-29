@@ -44,9 +44,13 @@ export default function Photo({ imgURL, setImgURL, setImgName, setImgFile,
                         filterStyle = {filterStyle1} 
                         setFilterStyle = {setFilterStyle1}
                     />
-                    <div>
+                    <div  className="article-photo-img-container">
                         {imgURL === 'generic' ?
-                            <GenericThumb className={`generic-thumb ${cathegory}`} cathegory={cathegory} />
+                            <GenericThumb 
+                                className="article-photo-img"
+                                shape = {'wide'} 
+                                cathegory={cathegory} 
+                            />
                             :
                             <img
                                 className="article-photo-img"
@@ -74,9 +78,13 @@ export default function Photo({ imgURL, setImgURL, setImgName, setImgFile,
                         filterStyle = {filterStyle2}
                         setFilterStyle = {setFilterStyle2}
                     />
-                    <div>
+                    <div className="article-photo-img-container">
                         {imgURL2 === 'generic' ?
-                            <GenericThumb className={`generic-thumb ${cathegory}`} cathegory={cathegory} />
+                            <GenericThumb 
+                                className="article-photo-img"
+                                shape = {'square'} 
+                                cathegory={cathegory} 
+                            />
                             :
                             <img
                                 className="article-photo-img"
