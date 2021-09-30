@@ -1,14 +1,13 @@
-.save-article.desktop{
-    display: block;
-}
-.save-article.mobile {
-    display: none;
-}
-
 .save-article {
     flex: 1;
+    background-color: red;
 }
-
+.save-article.desktop .save-button {
+    display: block;
+}
+.save-article.mobile .save-button {
+    display: none;
+}
 .save-button {
     display: block;
     width: 10rem;
@@ -33,11 +32,13 @@
 }
 
 @media all and (max-width: 768px) {
-    .save-article.desktop{
-        visibility: hidden;
+    .save-article.desktop .save-button{
+        display: none;
+    }
+    .save-article.mobile .save-button {
+        display: block;
     }
     .save-article.mobile {
-        display: block;
         padding-top: 1em;
     }
     .save-article.mobile .save-button {
