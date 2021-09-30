@@ -1,6 +1,5 @@
 .save-article {
     flex: 1;
-    background-color: red;
 }
 .save-article.desktop .save-button {
     display: block;
