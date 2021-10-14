@@ -50,7 +50,7 @@ export default function Delete() {
             const promiseResolveD = setShowCmsOverlay('block');
             const articleDeleted = await deleteArticle(id);
             console.log('deleted article: ' + articleDeleted);
-            const deletedImage = await removeImageDB(imgName);
+            const deletedImage = await removeImageDB(imgName, '');
             console.log('deleted image: ' + deletedImage);
             const deletedVideo = await removeVideoDB(videoName);
             console.log('deleted video: ' + deletedVideo);

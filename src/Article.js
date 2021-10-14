@@ -184,12 +184,12 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                 if(imgURL === 'generic') {
                     photoURL = 'generic'
                 } else { 
-                    photoURL = await uploadImageDB(imgName, imgFile);
+                    photoURL = await uploadImageDB(imgName, imgFile, '');
                 }
                 if(imgURL2 === 'generic') {
                     photoURL2 = 'generic'
                 } else { 
-                    photoURL2 = await uploadImageDB(imgName2, imgFile2);
+                    photoURL2 = await uploadImageDB(imgName2, imgFile2, '');
                 }
 
                 if (videoName !== 'none') {
@@ -233,8 +233,8 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                     if(imgURL === 'generic') {
                         photoURL = 'generic'
                     } else { 
-                        photoURL = await uploadImageDB(imgName, imgFile);
-                        const deletionMsg = await removeImageDB(deployedImgName);
+                        photoURL = await uploadImageDB(imgName, imgFile, '');
+                        const deletionMsg = await removeImageDB(deployedImgName, '');
                     }
                     vest.imgURL = photoURL;
                 }
@@ -245,8 +245,8 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                     if(imgURL2 === 'generic') {
                         photoURL2 = 'generic'
                     } else { 
-                        photoURL2 = await uploadImageDB(imgName2, imgFile2);
-                        const deletionMsg2 = await removeImageDB(deployedImgName2);
+                        photoURL2 = await uploadImageDB(imgName2, imgFile2, '');
+                        const deletionMsg2 = await removeImageDB(deployedImgName2, '');
                     }
             
                     vest.imgURL2 = photoURL2;

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import AllArticles from './AllArticles.js';
 import Article from './Article.js';
 import { context } from './newsContext.js';
+import Chat from './Chat';
 import './style/homepage.css';
 
 export default function Homepage() {
@@ -20,6 +21,7 @@ export default function Homepage() {
 
     return (
         <div className="homepage">
+            <Chat />
             <div className="homepage-links">
                 <div className="homepage-allArticlesBtn" onClick = {() => setShowCmsOverlay('block')}>
                     <Link to={`/allArticles`}>

@@ -19,14 +19,14 @@
 }
 
 .allArticles-columnNames-title {
-    flex: 0 0 45%; 
+    flex: 0 0 37%; 
     text-align: center;
 }
 .allArticles-columnNames-note,
 .allArticles-columnNames-dateCreated,
 .allArticles-columnNames-dateUpdated,
 .allArticles-columnNames-datePublished {
-    flex: 0 0 20%;
+    flex: 0 0 22%;
     text-align: center;
 }
 .allArticles-columnNames-delete,

@@ -32,6 +32,12 @@ export default function Form() {
     const [email, setEmail] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
+    const [profileImgNameLarge, setProfileImgNameLarge] = useState('generic');
+    const [profileImgURLLarge, setProfileImgURLLarge] = useState('generic');
+
+    const [profileImgNameSmall, setProfileImgNameSmall] = useState('generic');
+    const [profileImgURLSmall, setProfileImgURLSmall] = useState('generic');
+
     const [buttonLabel, setButtonLabel] = useState('');
 
     const changeButtonLabel = () => {
@@ -77,6 +83,7 @@ export default function Form() {
         setShowCmsOverlay('block');
         setRequestSent(true);
         const userAndToken = await loginUser(usernameSignIn, passwordSignIn);
+        console.log(userAndToken[2]);
         if(userAndToken[0] === false) {
             console.log(userAndToken);
             setErrorMsg(userAndToken[2])
@@ -99,6 +106,13 @@ export default function Form() {
                 localStorage.setItem('loggedFirstName', userAndToken[2].firstName); 
                 localStorage.setItem('loggedLastName', userAndToken[2].lastName);
                 localStorage.setItem('loggedEmail', userAndToken[2].email);
+
+
+                localStorage.setItem('profileImgURLLarge', userAndToken[2].profileImgURLLarge);
+                localStorage.setItem('profileImgNameLarge', userAndToken[2].profileImgNameLarge);
+
+                localStorage.setItem('profileImgURLSmall', userAndToken[2].profileImgURLSmall);
+                localStorage.setItem('profileImgNameSmall', userAndToken[2].profileImgNameSmall);
             }
             return v
         })
@@ -110,11 +124,12 @@ export default function Form() {
         e.preventDefault();
         setRequestSent(true);
         setShowCmsOverlay('block')
-        const {newUser} = await registerUser(firstName, lastName, usernameSignUp, passwordSignUp, email);
-        setRequestSent(false);
+        const {newUser} = await registerUser(firstName, lastName, usernameSignUp, passwordSignUp, email, profileImgNameLarge, profileImgURLLarge, profileImgURLSmall, profileImgNameSmall);
+        setRequestSent(false); 
         setShowCmsOverlay('none');
         if(newUser[0] === false) {
-            alert(newUser[2]);
+            console.log(newUser);
+            /* alert(newUser[2]); */
             return
         } else if(newUser[0] === true) {
             alert(newUser[1]);
@@ -139,7 +154,7 @@ export default function Form() {
             <div className="form-container">
                 <div className="cmsOverlay" ref={cmsOverlay} style={{ display: showCmsOverlay }}></div>
                         {isLoggedIn?
-                        <Profile loggedUser = {loggedUser}/>
+                        <Profile />
                         :
                         <form className="form">
                             <div className="form-title">

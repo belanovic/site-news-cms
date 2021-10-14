@@ -21,7 +21,7 @@
 }
 
 .allArticles-item-title {
-    flex: 0 0 45%;
+    flex: 0 0 37%;
     display: flex;
     align-items: center;
 }
@@ -55,7 +55,7 @@
 .allArticles-item-dateUpdated,
 .allArticles-item-datePublished,
 .allArticles-item-dateCreated {
-    flex: 0 0 20%;
+    flex: 0 0 22%;
 }
 
 .allArticles-item-delete,
@@ -82,9 +82,9 @@
     .allArticles-item {
         margin-bottom: 1em;
     }
-    .allArticles-item-title {
-        /* border-top: 1px dashed black; */
-    }
+  /*   .allArticles-item-title {
+        border-top: 1px dashed black;
+    } */
     .allArticles-columnNames {
         margin-bottom: 1em;
     }

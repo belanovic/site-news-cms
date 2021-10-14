@@ -1,37 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import imageCompression from 'browser-image-compression';
 
-const options = {
-    maxSizeMB: 1,
-    maxWidthOrHeight: 620,
-    useWebWorker: true
-}
 
-export default function ChooseImage({ setImgName, setImgFile, setImgURL }) {
+export default function ChooseImage({ 
+    setProfileImgNameLarge, setprofileImgFileLarge, setProfileImgURLLarge, widthLarge, 
+    setProfileImgNameSmall, setprofileImgFileSmall, setProfileImgURLSmall, widthSmall
+        }) {
+
+    const optionsLarge = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: widthLarge,
+        useWebWorker: true
+    }
+    const optionsSmall = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: widthSmall,
+        useWebWorker: true
+    }
 
     async function uploadHandler(e) {
 
         let file = e.target.files[0];
         if (file === undefined) return;
-        const fileName = Date.now() + '_' + file.name;
-        const compressedFile = await imageCompression(file, options);
+        const fileNameLarge = Date.now() + '_' + file.name + '_large';
+        const fileNameSmall = Date.now() + '_' + file.name + '_small';
+        const compressedFileLarge = await imageCompression(file, optionsLarge);
+        const compressedFileSmall = await imageCompression(file, optionsSmall);
 
         /*   console.log(file.size/1024 + ' KB');
           console.log(compressedFile.size/1024 + ' KB'); */
 
-        file = compressedFile;
+        const fileLarge = compressedFileLarge;
+        const fileSmall= compressedFileSmall;
 
-        const customURL = URL.createObjectURL(file);
-        setImgURL(customURL);
-        console.log(customURL)
+        const customURLLarge = URL.createObjectURL(fileLarge);
+        setProfileImgURLLarge(customURLLarge);
 
-        /* if (!isNewArticle && changeImgCounter > 0) {
-            const currentImgRef = storage.ref('site-news-images/' + currentImgName);
-            const deletedImage = await currentImgRef.delete();
-        }  */
+        setProfileImgNameLarge(fileNameLarge);
+        setprofileImgFileLarge(fileLarge);
+        
+        
+        const customURLSmall = URL.createObjectURL(fileSmall);
+        setProfileImgURLSmall(customURLSmall);
 
-        setImgName(fileName);
-        setImgFile(file);
+
+        setProfileImgNameSmall(fileNameSmall);
+        setprofileImgFileSmall(fileSmall);
     }
 
     return (
