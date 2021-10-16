@@ -4,7 +4,7 @@
     border: 4px solid black;
     padding: 15px;
     background: white;
-    width: 400px;
+    width: 450px;
     height: 500px;  
 }
 .chat-messages  {
@@ -25,7 +25,7 @@
 
 .one-message-content {
     margin: 0px 5px 5px 5px;
-    padding: 10px 20px 10px 20px; 
+    /* padding: 10px 20px 10px 20px; */ 
     border-radius: 0 15px 15px 25px;
     max-width: 60%;
 }
@@ -43,17 +43,18 @@
 .chat-username {
     color: rgb(143, 1, 1);
     margin-bottom: 0.25em;
+    padding: 10px 20px 0px 20px;
     font-size: 1.25rem;
     font-family: 'Mulish', sans-serif;
     font-weight: 800;
     letter-spacing: 0.5px;
-    
 }
 .one-message-text {
     display: inline-block;
     /* color: white; */
     margin-bottom: 0.5em;
     line-height: 1.30;
+    padding: 0px 20px 0px 20px;
    /*  letter-spacing: 0.5px; */
     font-size: 1.125rem;
     font-family: 'Mulish', sans-serif;
@@ -67,7 +68,6 @@
 .chat-image img {
     width: 100%;
     height: 100%;
-
 }
 
 .chat-image .fa-user {
@@ -81,11 +81,12 @@
 .date-reply {
     display: flex;
     justify-content: space-between;
+    padding: 0px 20px 10px 20px;
 }
 .date {
     font-size: 0.9rem;
     margin-right: 2em;
-    color: rgb(119, 119, 119);
+    color: rgb(119, 119, 119);    
 }
 
 .reply .fa-reply {
@@ -98,6 +99,10 @@
 .reply .fa-reply:hover {
     cursor: pointer;
     color: rgb(101, 168, 0)
+}
+
+.reply .fa-reply.active {
+    color: green;
 }
 
 .check {
@@ -119,4 +124,33 @@
 }
 .fa-check-double.checked {
     color:rgb(143, 1, 1);
+}
+
+.message-replied {
+    padding: 0px 20px 0px 20px;
+    font-style: italic;
+}
+
+.their-message .message-replied {
+    background-color: #9eb8ff;
+}
+.my-message .message-replied {
+    background-color: #c2c2c2;
+}
+
+.message-replied-username {
+    font-weight: bold;
+    padding: 10px 0px 5px 0px;
+    position: relative;
+}
+
+.message-replied-text {
+    padding: 0px 0px 10px 0px;
+    font-size: 0.9rem;
+}
+.message-replied .fas.fa-reply {
+    transform: rotate(180deg);
+    font-size: 0.6rem;
+    position: absolute;
+    left: -12px;
 }

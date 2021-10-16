@@ -5,6 +5,7 @@ import {nanoid} from 'nanoid';
 import {context} from './newsContext';
 import dateFormat from './dateFormat';
 import imageCompression from 'browser-image-compression';
+import shortenSentence from './shortenSentence';
 
 const soundCheck = new Audio('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-sounds%2F590274__mrfossy__sfx-stickerripper-cluckbuttons-06.wav?alt=media&token=7e31eb83-1283-46ea-bfa3-302cba453d70')
 const soundUncheck = new Audio('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-sounds%2F589940__mrfossy__sfx-squelch-slayer-impulse-72.wav?alt=media&token=95b7f193-a27b-4467-9b41-5b65a92a52d1')
@@ -26,14 +27,20 @@ export default function Chat() {
 
     const {loggedUser} = useContext(context);
     const chatMessages = useRef(null);
+    const inputText = useRef(null);
 
     const [text, setText] = useState('')
     const [messages, setMessages] = useState([]);
+
+    const [messageToReply, setMessageToReply] = useState('');
+    const [messageToReplyIndex, setMessageToReplyIndex] = useState('');
+    const [displayMessageToReply, setDisplayMessageToReply] = useState(false);
 
     const sendMessageClick = () => {
         if(text === '') return;
         const payload = {
             text: text,
+            messageToReply: messageToReply,
             username: usernameLoggedIn,
             checked: [],
             milliseconds: new Date().getTime(),
@@ -43,12 +50,14 @@ export default function Chat() {
         soundPlay(soundSendMessage);
         socket.emit('message', payload);
         setText('');
+        setMessageToReplyIndex('');
         
     }
     const sendMessagePress = (e) => {
         if(e.code !== 'NumpadEnter' && e.code !== 'Enter' ) return; 
         const payload = {
             text: text,
+            messageToReply: messageToReply,
             username: usernameLoggedIn,
             checked: [],
             milliseconds: new Date().getTime(),
@@ -58,6 +67,7 @@ export default function Chat() {
         soundPlay(soundSendMessage);
         socket.emit('message', payload);
         setText('');
+        setMessageToReplyIndex('');
     }
 
     const handleChange = (e) => {
@@ -65,9 +75,31 @@ export default function Chat() {
           setText(value);
     }
 
-    const handleReply = (i) => {
-        console.log(messages[i].text)
+    const handleClickReply = (i) => {
+        setMessageToReplyIndex((prev) => {
+            if(prev === i) {
+                setDisplayMessageToReply(false);
+                setMessageToReply('');
+                return '';
+            }
+            setText('');
+            return i;
+        })
     }
+
+    const handleReply = (i) => {
+        console.log(messages[i]);
+        if(messageToReplyIndex === '') {
+            setDisplayMessageToReply(false);
+            setMessageToReply('');
+            setText('');
+            return;
+        }
+        setDisplayMessageToReply(true);
+        setMessageToReply(messages[messageToReplyIndex]);
+        inputText.current.focus()
+    }
+
     const handleCheck = (i) => {
         setMessages((prev) => {
 
@@ -96,6 +128,8 @@ export default function Chat() {
             return [...prev];
         })
     }
+
+    useEffect(prom => handleReply(), [messageToReplyIndex]);
 
     useEffect(() => {
 
@@ -154,7 +188,15 @@ export default function Chat() {
                             <div
                                 key = {i}
                                 className = "one-message-content"
-                            >   
+                            >       <div className = "message-replied">
+                                        <div className = "message-replied-username">
+                                            <i className="fas fa-reply"></i>
+                                            {msg.messageToReply && msg.messageToReply.username}
+                                        </div>
+                                        <div className = "message-replied-text">
+                                            {msg.messageToReply && shortenSentence( msg.messageToReply.text, 30)}
+                                        </div>
+                                    </div>
                                     <div className = "chat-username">
                                         {msg.username}
                                     </div>
@@ -170,8 +212,8 @@ export default function Chat() {
                                         </div>
                                         <div className = "reply">
                                             <i 
-                                                className="fas fa-reply"
-                                                onClick = {() => handleReply(i)}
+                                                className= {`fas fa-reply ${displayMessageToReply && i === messageToReplyIndex? 'active' : ''}`}
+                                                onClick = {() => handleClickReply(i)}
                                             ></i>
                                         </div>
                                     </div>
@@ -196,9 +238,16 @@ export default function Chat() {
                 })}
             </div>
             <div className = "chat-write">
+                <div 
+                    className = "messageToReply"
+                    style = {{display: displayMessageToReply? 'block' : 'none'}}
+                >
+                    <span>Reply to: {messageToReply && messageToReply.username} </span> <span>{shortenSentence(messageToReply && messageToReply.text, 25)}</span>
+                </div>
                 <input
                     type = "text"
                     className = "chat-input"
+                    ref = {inputText}
                     value = {text}
                     onChange = {handleChange}
                     onKeyPress = {(e) => sendMessagePress(e)}
