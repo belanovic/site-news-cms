@@ -13,5 +13,7 @@ export default function shortenSentence(sentence, numChars) {
         const rejoinedSentence = arrSentence.join(' ');
         lengthSentence = rejoinedSentence.length;
     }
-    return arrSentence.join(' ') + '...'
+    const joinedArrSentence = arrSentence.join(' ');
+    const dots = sentence.length > numChars? '...' : '';
+    return joinedArrSentence + dots
 }

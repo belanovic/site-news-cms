@@ -6,6 +6,7 @@ import {context} from './newsContext';
 import dateFormat from './dateFormat';
 import imageCompression from 'browser-image-compression';
 import shortenSentence from './shortenSentence';
+import HOST_CHAT from './hostChat.js';
 
 const soundCheck = new Audio('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-sounds%2F590274__mrfossy__sfx-stickerripper-cluckbuttons-06.wav?alt=media&token=7e31eb83-1283-46ea-bfa3-302cba453d70')
 const soundUncheck = new Audio('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-sounds%2F589940__mrfossy__sfx-squelch-slayer-impulse-72.wav?alt=media&token=95b7f193-a27b-4467-9b41-5b65a92a52d1')
@@ -17,7 +18,7 @@ const soundPlay = (sound) => {
       sound.currentTime = 0;
 }
 
-const socket = io('http://localhost:4001');
+const socket = io(HOST_CHAT);
 const usernameLoggedIn = localStorage.getItem('loggedUsername');
 
 const profileImgURLLarge = localStorage.getItem('profileImgURLLarge')
