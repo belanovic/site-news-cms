@@ -19,17 +19,16 @@ const soundPlay = (sound) => {
 }
 
 const socket = io(HOST_CHAT);
-const usernameLoggedIn = localStorage.getItem('loggedUsername');
 
 const profileImgURLLarge = localStorage.getItem('profileImgURLLarge')
 const profileImgURLSmall = localStorage.getItem('profileImgURLSmall')
 
 export default function Chat() {
-
-    const {loggedUser} = useContext(context);
+    
     const chatMessages = useRef(null);
     const inputText = useRef(null);
 
+    const [usernameLoggedIn, setUsernameLoggedIn] = useState('')
     const [text, setText] = useState('')
     const [messages, setMessages] = useState([]);
 
@@ -131,6 +130,7 @@ export default function Chat() {
     }
 
     useEffect(prom => handleReply(), [messageToReplyIndex]);
+    useEffect(prom => setUsernameLoggedIn(localStorage.getItem('loggedUsername')), [])
 
     useEffect(() => {
 
@@ -160,9 +160,9 @@ export default function Chat() {
         }
     }, [])
 
-    useEffect(() => {
+ /*    useEffect(() => {
         chatMessages.current.scrollTop = 1000000;
-    }, [messages])
+    }, [messages]) */
 
     return (
         <div
@@ -189,7 +189,10 @@ export default function Chat() {
                             <div
                                 key = {i}
                                 className = "one-message-content"
-                            >       <div className = "message-replied">
+                            >       <div 
+                                        className = "message-replied"
+                                        style = {{display: msg.messageToReply? 'block' : 'none'}}
+                                    >
                                         <div className = "message-replied-username">
                                             <i className="fas fa-reply"></i>
                                             {msg.messageToReply && msg.messageToReply.username}

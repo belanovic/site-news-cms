@@ -4,9 +4,9 @@ import { context } from './newsContext.js';
 import './style/header.css';
 export default function Header() {
        const [showLinks, setShowLinks] = useState(false);
-       const { newArticleBtn, showFrontend, setFormVisible,
-            activeLink,showMenu, loggedIn, loggedUser, setIsLoggedIn, checkStorageToken,
-            loggedUsername, setShowCalendar } = useContext(context);
+       const { newArticleBtn, showFrontend,
+            activeLink,showMenu, loggedIn, setIsLoggedIn, checkStorageToken,
+            setShowCalendar } = useContext(context);
 
     return (
         <header className="header" onClick = {() => setShowCalendar(false)}>
@@ -92,21 +92,21 @@ export default function Header() {
                     </Link>
                 </div>
                 <div className="login">
-                    <Link to = "/form">
+                    <Link to = "/profile">
                         <i 
                             className="fas fa-user-edit" 
                             onClick={(e) => {
                                 const storageHasToken = checkStorageToken();
                                 setIsLoggedIn(storageHasToken);
                                 if(!storageHasToken) return;
-                                setFormVisible(prev => !prev);
+                              
                             }}
                         >
                          </i>
                     </Link>
                     <div className = "login-info">
                         <div className = "login-info-title">User logged in:</div>
-                        <div className = "login-info-username">{loggedUser.username === ''? loggedUser.username : localStorage.getItem('loggedUsername')}</div>
+                        <div className = "login-info-username">{localStorage.getItem('loggedUsername')}</div>
                     </div>
                 </div>
             </div>

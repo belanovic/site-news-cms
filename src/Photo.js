@@ -10,7 +10,7 @@ export default function Photo({ imgURL, setImgURL, setImgName, setImgFile,
       imgFilter2, setImgFilter2, tabPhotoVisibility, imgDescription, 
       inputHandler, cathegory }) {
 
-    const { articleImgLoaded1, setArticleImgLoaded1, articleImgLoaded2, setArticleImgLoaded2 } = useContext(context);
+    /* const { articleImgLoaded1, setArticleImgLoaded1, articleImgLoaded2, setArticleImgLoaded2 } = useContext(context); */
 
     const [filterStyle1, setFilterStyle1] = useState('none');
     const [filterStyle2, setFilterStyle2] = useState('none');
@@ -56,9 +56,9 @@ export default function Photo({ imgURL, setImgURL, setImgName, setImgFile,
                                 className="article-photo-img"
                                 src={imgURL}
                                 alt="fotka"
-                                onLoad={() => {
+                              /*   onLoad={() => {
                                     setArticleImgLoaded1(true);
-                                }}
+                                }} */
                                 style = {{filter: filterStyle1}}
                             >
                             </img>}
@@ -90,9 +90,9 @@ export default function Photo({ imgURL, setImgURL, setImgName, setImgFile,
                                 className="article-photo-img"
                                 src={imgURL2}
                                 alt="fotka"
-                                onLoad={() => {
+                               /*  onLoad={() => {
                                     setArticleImgLoaded2(true);
-                                }}
+                                }} */
                                 style = {{filter: filterStyle2 }}
                             >
                             </img>}

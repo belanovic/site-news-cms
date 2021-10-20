@@ -9,7 +9,7 @@ import './style/form.css';
 export default function Form() {
 
     const { alphabet, isLoggedIn, setIsLoggedIn, showCmsOverlay,
-            loggedUser, setLoggedUser, setLoggedUsername,
+            setLoggedUsername,
             setNewArticleBtn, setActiveLink, setShowCmsOverlay,
             setShowFrontend, setShowMenu, isNewArticle
         } = useContext(context);
@@ -21,9 +21,7 @@ export default function Form() {
     const [signInisActive, setSignInIsActive] = useState(true);
     const [signUpisActive, setSignUpIsActive] = useState(false);
 
-
-
-    const [firstName, setFirstName] = useState('')
+    const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [usernameSignIn, setUsernameSignIn] = useState('');
     const [usernameSignUp, setUsernameSignUp] = useState('');
@@ -83,38 +81,31 @@ export default function Form() {
         setShowCmsOverlay('block');
         setRequestSent(true);
         const userAndToken = await loginUser(usernameSignIn, passwordSignIn);
-        console.log(userAndToken[2]);
+        /* console.log(userAndToken[2]); */
         if(userAndToken[0] === false) {
-            console.log(userAndToken);
+            /* console.log(userAndToken); */
             setErrorMsg(userAndToken[2])
             setRequestSent(false);
             setShowCmsOverlay('none');
             return;
         };
-        const token = userAndToken[3];
-        localStorage.setItem('x-auth-token', token);
+
+        localStorage.setItem('x-auth-token', userAndToken[3]);
+
+        localStorage.setItem('loggedUsername', userAndToken[2].username); 
+        localStorage.setItem('loggedFirstName', userAndToken[2].firstName); 
+        localStorage.setItem('loggedLastName', userAndToken[2].lastName);
+        localStorage.setItem('loggedEmail', userAndToken[2].email);
+
+        localStorage.setItem('profileImgURLLarge', userAndToken[2].profileImgURLLarge);
+        localStorage.setItem('profileImgNameLarge', userAndToken[2].profileImgNameLarge);
+        localStorage.setItem('profileImgURLSmall', userAndToken[2].profileImgURLSmall);
+        localStorage.setItem('profileImgNameSmall', userAndToken[2].profileImgNameSmall);
          
         setIsLoggedIn((prev) => {
-             console.log(localStorage.getItem('x-auth-token'))
+             /* console.log(localStorage.getItem('x-auth-token')) */
              const v = localStorage.getItem('x-auth-token') === 'none'? false : true;
              return v
-        })
-        setLoggedUser((prom) => {
-            const v = localStorage.getItem('x-auth-token') === 'none'? '' : userAndToken[2];
-            if(v !== 'none') {
-                localStorage.setItem('loggedUsername', userAndToken[2].username); 
-                localStorage.setItem('loggedFirstName', userAndToken[2].firstName); 
-                localStorage.setItem('loggedLastName', userAndToken[2].lastName);
-                localStorage.setItem('loggedEmail', userAndToken[2].email);
-
-
-                localStorage.setItem('profileImgURLLarge', userAndToken[2].profileImgURLLarge);
-                localStorage.setItem('profileImgNameLarge', userAndToken[2].profileImgNameLarge);
-
-                localStorage.setItem('profileImgURLSmall', userAndToken[2].profileImgURLSmall);
-                localStorage.setItem('profileImgNameSmall', userAndToken[2].profileImgNameSmall);
-            }
-            return v
         })
         setRequestSent(false);
         setShowCmsOverlay('none')
@@ -153,9 +144,6 @@ export default function Form() {
         <>
             <div className="form-container">
                 <div className="cmsOverlay" ref={cmsOverlay} style={{ display: showCmsOverlay }}></div>
-                        {isLoggedIn?
-                        <Profile />
-                        :
                         <form className="form">
                             <div className="form-title">
                                 <span 
@@ -335,7 +323,7 @@ export default function Form() {
                                     disabled = {requestSent? true : false}
                                 >{buttonLabel}</button>
                             </div>
-                        </form>}
+                        </form>
             </div>
         </>
     )

@@ -7,9 +7,9 @@ function Provider(props) {
 
     const [listAllArticles, setListAllArticles] = useState([]);
     const [listLoaded, setListLoaded] = useState(true);
-    const [articleDataLoaded, setArticleDataLoaded] = useState(false);
+  /*   const [articleDataLoaded, setArticleDataLoaded] = useState(false);
     const [articleImgLoaded1, setArticleImgLoaded1] = useState(false);
-    const [articleImgLoaded2, setArticleImgLoaded2] = useState(false);
+    const [articleImgLoaded2, setArticleImgLoaded2] = useState(false); */
     /* const [articleVideoLoaded, setArticleVideoLoaded] = useState(false); */
     const [showCmsOverlay, setShowCmsOverlay] = useState('none');
 
@@ -17,9 +17,7 @@ function Provider(props) {
     const [showMenu, setShowMenu] = useState('none');
     const [activeLink, setActiveLink] = useState('none');
     const [showFrontend, setShowFrontend] = useState('none');
-    const [formVisible, setFormVisible] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [loggedUser, setLoggedUser] = useState('');
     const [defaultCathegory, setDefaultCathegory] = useState('allArticles');
     const [activeCriteria, setActiveCriteria] = useState(['dateUpdated', 'down', 3]);
     const [showCalendar, setShowCalendar] = useState(false);
@@ -52,7 +50,7 @@ function Provider(props) {
  */
     useEffect(() => {
         setIsLoggedIn(checkStorageToken());
-    }, [])
+    })
 
     /*   useEffect(() => {
   
@@ -66,18 +64,23 @@ function Provider(props) {
          console.log(n)
      }, [listAllArticles]) */
 
+     useEffect(() => {
+        console.log('from news context');
+        console.log(isLoggedIn);
+    }, [isLoggedIn])
+
     return (
         <context.Provider value={{
             listAllArticles,
             setListAllArticles,
             listLoaded,
             setListLoaded,
-            articleDataLoaded,
+            /* articleDataLoaded,
             setArticleDataLoaded,
             articleImgLoaded1,
             setArticleImgLoaded1,
             articleImgLoaded2,
-            setArticleImgLoaded2,
+            setArticleImgLoaded2, */
             showCmsOverlay,
             setShowCmsOverlay,
             newArticleBtn,
@@ -86,12 +89,8 @@ function Provider(props) {
             setActiveLink,
             showFrontend,
             setShowFrontend,
-            formVisible,
-            setFormVisible,
             isLoggedIn,
             setIsLoggedIn,
-            loggedUser,
-            setLoggedUser,
             defaultCathegory,
             setDefaultCathegory,
             activeCriteria,

@@ -60,6 +60,10 @@ export default function AllArticles() {
         setShowFrontend('none');
     })
 
+    useEffect(() => {
+        console.log('from All articles');
+    }, [])
+
      return (
         <>
                 <div className="allArticles">
@@ -129,8 +133,10 @@ export default function AllArticles() {
                                         <Link to={`/oneArticle/${oneArticle._id}`}>
                                             <h2 
                                                 className="allArticles-item-title-text"
-                                                onClick = {() => setIsLoggedIn(checkStorageToken())
-                                                }
+                                                onClick = {() => {
+                                                    setShowCmsOverlay('block');
+                                                    setIsLoggedIn(checkStorageToken())
+                                                }}
                                             >{oneArticle.title}
                                             </h2>
                                         </Link>

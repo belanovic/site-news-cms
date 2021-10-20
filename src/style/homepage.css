@@ -2,16 +2,16 @@
     /* height: 100%; */
     flex: 1;
     padding: 0.1px;
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnewspaper6.jpg?alt=media&token=cf4a9604-2519-42ca-a882-c47072a061d6');
+ /*    background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnewspaper6.jpg?alt=media&token=cf4a9604-2519-42ca-a882-c47072a061d6');
     background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnp1.png?alt=media&token=d99118a0-dd8e-4013-a977-0c00d4d5e9e0');
     background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnp2.jpg?alt=media&token=5b93c0c0-cd2e-4e6c-9cef-1f25c8bcaa69');
     background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnp3.jpg?alt=media&token=6900d3fa-4dc3-4e2d-ac76-bffdc6a06e19');
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnp4.jpg?alt=media&token=baf725c8-de57-457e-9128-ee9f0825a581');
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnp4.jpg?alt=media&token=baf725c8-de57-457e-9128-ee9f0825a581'); */
 
     background-position-x: right;
     background-position-y: bottom;
-    
 }
+
 .homepage-links {
     width: 90%;
     margin: auto;
@@ -22,27 +22,47 @@
 }
 .homepage-newArticleBtn, .homepage-allArticlesBtn, .homepage-frontpage-order {
     flex: 0 0 30%;
-    border: 5px double rgb(133, 1, 1);
+    /* border: 5px double rgb(133, 1, 1); */
     font-family: cursive;
-    border-radius: 10%;
+    border-radius: 0% 20% 5% 20%;
     box-shadow: 0 0 50px 0px black;
     background: rgb(189, 0, 0, 0.5);
+    background: rgba(56, 55, 55, 0.7);
 }
 .homepage-newArticleBtn:active, .homepage-allArticlesBtn:active, .homepage-frontpage-order:active {
     transform: scale(0.99, 0.98);
 }
 .homepage-newArticleBtn:hover, .homepage-allArticlesBtn:hover, .homepage-frontpage-order:hover {
-    background: rgb(1, 122, 1, 0.5);
-    
+/*     background: rgb(1, 122, 1, 0.5);
+    background: rgba(57, 138, 0, 0.3);
+    background: rgba(233, 233, 233, 0.8);
+    background: rgba(68, 68, 68, 0.8); */
+    background: rgba(32, 32, 32, 0.9);
 }
 .homepage-newArticleBtn a, .homepage-allArticlesBtn a, .homepage-frontpage-order a {
     text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 5em 0.2em 5em 0.2em;
 }
+.homepage-newArticleBtn:hover .homepage-newArticleBtn-text, .homepage-allArticlesBtn:hover .homepage-allArticlesBtn-text, .homepage-frontpage-order:hover .homepage-frontpage-order-text {
+    color: white;
+}
+
 .homepage-newArticleBtn-text, .homepage-allArticlesBtn-text, .homepage-frontpage-order-text {
     color: white;
-    font-size: 2.5rem;
-    padding: 3em 0.2em 3em 0.2em;
+    /* background-color: rgb(32, 32, 32); */
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 3rem;
+    text-decoration: underline;
+    /* margin: 2em 0.2em 2em 0.2em; */
     text-align: center;
+}
+
+.homepage-links .fa-list-ul, .homepage-links .fa-feather-alt, .homepage-links .fa-stream {
+    font-size: 2.5rem;
 }
 
 @media all and (max-width: 768px) {
@@ -59,7 +79,7 @@
         margin-bottom: 3em;
     }
     .homepage-newArticleBtn-text, .homepage-allArticlesBtn-text, .homepage-frontpage-order-text {
-        font-size: 2rem;
+        font-size: 2.5rem;
         padding: 2em 0.5em 2em 0.5em;
     }
 }

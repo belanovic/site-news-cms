@@ -5,9 +5,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(180deg, rgb(80, 0, 0), rgb(216, 0, 0));
+   /*  background: linear-gradient(180deg, rgb(80, 0, 0), rgb(216, 0, 0));
     background: linear-gradient(180deg, rgb(40, 0, 0), rgb(107, 0, 0));
+    background: linear-gradient(180deg, rgb(26, 1, 1), rgb(53, 0, 0)); */
+   /*  box-shadow: 0 0 50px 0px black; */
     padding: 0.7em 1em 0.7em 1em;
+    background: rgba(199, 199, 199, 0.5);
+    background: rgb(32, 32, 32);
+
 }
 
 .header-links-frontend a {
@@ -19,6 +24,7 @@
     margin: 0;
     font-size: 1rem;
     font-style: italic;
+    font-weight: bolder;
     display: inline-block;
 }
 
@@ -37,6 +43,7 @@
 
 .header-title-text {
     font-size: 3rem;
+    font-weight: bold;
     color: white;
     font-family: 'Times New Roman', Times, serif;
 }

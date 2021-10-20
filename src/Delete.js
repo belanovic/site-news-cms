@@ -7,8 +7,8 @@ import Subtitle from './Subtitle.js';
 import Textarea from './Textarea.js';
 import Photo from './Photo.js';
 import firebase from './firebase.js';
-import {removeImageDB} from './handleImageDB';
-import {removeVideoDB} from './handleVideoDB';
+import { removeImageDB } from './handleImageDB';
+import { removeVideoDB } from './handleVideoDB';
 
 const storage = firebase.storage();
 
@@ -24,14 +24,14 @@ export default function Delete() {
     const { id } = useParams();
     const { listAllArticles, setListAllArticles,
         listLoaded, setListLoaded,
-        articleImgLoaded1, setArticleImgLoaded1,
-        articleImgLoaded2, setArticleImgLoaded2,
-        articleVideoLoaded, setArticleVideoLoaded,
-        articleDataLoaded, setArticleDataLoaded,
+        /*  articleImgLoaded1, setArticleImgLoaded1,
+         articleImgLoaded2, setArticleImgLoaded2,
+         articleVideoLoaded, setArticleVideoLoaded,
+         articleDataLoaded, setArticleDataLoaded, */
         showCmsOverlay, setShowCmsOverlay
     } = useContext(context);
 
-    let contentLoaded = articleDataLoaded === true;
+    /* let contentLoaded = articleDataLoaded === true; */
 
     const findSelectedArticle = () => {
         const selectedArticle = listAllArticles.find((prom) => prom._id === id);
@@ -42,7 +42,7 @@ export default function Delete() {
         setImgName(selectedArticle.imgName);
         setVideoURL(selectedArticle.videoURL);
         setVideoName(selectedArticle.videoName);
-        setArticleDataLoaded(true);
+        /* setArticleDataLoaded(true); */
     }
 
     async function handleDelete() {
@@ -67,19 +67,19 @@ export default function Delete() {
 
     useEffect(() => {
         findSelectedArticle();
-        return () => {
+  /*       return () => {
             setArticleImgLoaded1(false);
             setArticleImgLoaded2(false);
             setArticleVideoLoaded(false);
             setArticleDataLoaded(false);
-        }
+        } */
     }, [])
 
     return (
         <div className="delete">
-            <div className="delete-parts" style={{
+            <div className="delete-parts"/*  style={{
                 display: contentLoaded ? 'block' : 'none'
-            }}>
+            }} */>
                 <h1 className="deleteTitle">{title}</h1>
                 <h3 className="deleteSubtitle">{subtitle}</h3>
                 <div className="deleteText">{text}</div>
@@ -87,18 +87,18 @@ export default function Delete() {
                     imgURL={imgURL}
                 />
                 {title !== '' && text !== '' && imgURL !== '' ?
-     
-                        <button className="btn" onClick={handleDelete}>Delete</button>
+
+                    <button className="btn" onClick={handleDelete}>Delete</button>
 
                     :
                     <div></div>}
             </div>
-            <div className="loadingArticle" style={{
+          {/*   <div className="loadingArticle" style={{
                 display: contentLoaded === true ? 'none' : 'block',
                 fontSize: '5rem',
                 fontWeight: 'bold',
                 textAlign: 'center'
-            }}>Loading...</div>
+            }}>Loading...</div> */}
             <Link to='/allArticles'>
                 <button>Lista vesti</button>
             </Link>

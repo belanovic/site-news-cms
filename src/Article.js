@@ -33,9 +33,9 @@ export default function Article({ setShowCmsOverlay, isNew }) {
 
     const { listAllArticles, setListAllArticles,
         listLoaded, setListLoaded,setShowMenu,
-        articleImgLoaded1, setArticleImgLoaded1,
-        articleImgLoaded2, setArticleImgLoaded2,
-        setActiveLink, articleDataLoaded, setArticleDataLoaded,
+        /* articleImgLoaded1, setArticleImgLoaded1,
+        articleImgLoaded2, setArticleImgLoaded2,articleDataLoaded, */
+        setActiveLink, /* setArticleDataLoaded */
         setNewArticleBtn, setShowFrontend, defaultFilter
     } = useContext(context);
 
@@ -92,7 +92,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     const { id } = useParams();
     const [isNewArticle, setIsNewArticle] = useState(true);
 
-    let contentLoaded = articleDataLoaded === true /* && ((articleImgLoaded1 === true && articleImgLoaded2 === true) || (imgURL === 'generic' || imgURL2 === 'generic') )*/;
+   /*  let contentLoaded = articleDataLoaded === true */ /* && ((articleImgLoaded1 === true && articleImgLoaded2 === true) || (imgURL === 'generic' || imgURL2 === 'generic') )*/
 
     function findNewLine() {
         const pasusi = text.split('\n')
@@ -105,10 +105,10 @@ export default function Article({ setShowCmsOverlay, isNew }) {
         if (id === 'new') {
             setShowCmsOverlay('block');
             setIsNewArticle(true);
-            setArticleDataLoaded(true);
+            /* setArticleDataLoaded(true); */
             /* setArticleVideoLoaded(true); */
-            setArticleImgLoaded1(true);
-            setArticleImgLoaded2(true);
+            /* setArticleImgLoaded1(true);*/
+            setShowCmsOverlay('none');
             return
         }
         const selectedArticle = await getArticle(id);
@@ -148,7 +148,9 @@ export default function Article({ setShowCmsOverlay, isNew }) {
         setCurrentPosition(selectedArticle.position);
         setPublished(selectedArticle.published);
         setAlreadyPublished(selectedArticle.published);
-        setArticleDataLoaded(true);
+        
+        setShowCmsOverlay('none');
+
     }
     async function handleSave() {
         if (title.length === 0 || text.length === 0) {
@@ -215,7 +217,7 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                 if (IdArticleToChangePosition !== '') {
                     let changedPositionArticle = await updateArticlePosition(IdArticleToChangePosition, currentPosition);
                 }
-
+                
                 window.location.href = '/allArticles';
                 setShowCmsOverlay('block');
                 return deployedArticle
@@ -321,13 +323,12 @@ export default function Article({ setShowCmsOverlay, isNew }) {
     }
     useEffect(() => {
         findSelectedArticle();
-        setShowCmsOverlay('none');
-        return () => {
+/*         return () => {
             setArticleImgLoaded1(false);
             setArticleImgLoaded2(false);
-            /*  setArticleVideoLoaded(false); */
+             setArticleVideoLoaded(false);
             setArticleDataLoaded(false);
-        }
+        } */
     }, [])
 
     useEffect(() => {
@@ -356,10 +357,15 @@ export default function Article({ setShowCmsOverlay, isNew }) {
         setShowFrontend('none');
     })
 
+ /*    useEffect(() => {
+        setShowCmsOverlay('none');
+        console.log('from Article');
+    }, []) */
+
     return (
-        <div className="article" style={{
+        <div className="article"/*  style={{
             display: contentLoaded ? 'block' : 'none'
-        }}>
+        }} */>
 
             <div className="article-navigation">
                 <Save 
@@ -506,13 +512,13 @@ export default function Article({ setShowCmsOverlay, isNew }) {
                 tabVideoVisibility = {tabVideoVisibility}
             />
 
-            <div className="loadingArticle" style={{
+            {/* <div className="loadingArticle" style={{
                 display: contentLoaded === true || isNewArticle === true ? 'none' : 'block',
                 fontSize: '5rem',
                 fontWeight: 'bold',
                 textAlign: 'center',
                 pointerEvents: 'none'
-            }}>Loading...</div>
+            }}>Loading...</div> */}
 
         </div>
     )

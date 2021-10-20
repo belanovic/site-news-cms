@@ -7,12 +7,11 @@ import Delete from './Delete.js';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { context } from './newsContext';
 import Footer from './Footer'; 
-import Form from './Form.js'; 
+import Form from './Form.js';
+import Profile from './Profile';
 import Order from './Order.js';
 import SearchDate from './SearchDate';
 import Proba from './Proba.js';
-
-
 
 export default function App() {
 
@@ -20,6 +19,10 @@ export default function App() {
     const { showCmsOverlay, setShowCmsOverlay, 
             isLoggedIn, isNewArticle, 
             setIsLoggedIn } = useContext(context);
+
+            useEffect(() => {
+                console.log('from App');
+            }, [])
 
     return (<>
         {isLoggedIn ?
@@ -33,7 +36,7 @@ export default function App() {
                     <Route exact path="/"> 
                         <Homepage /> 
                     </Route>
-                    <Route path="/form"><Form /></Route>
+                    <Route path="/profile"><Profile /></Route>
                     <Route path="/order"><Order /></Route>
                     <Route path="/search-date"><SearchDate /></Route> 
                     <Route path='/allArticles'>  

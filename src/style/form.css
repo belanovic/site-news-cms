@@ -6,11 +6,12 @@
     align-items: flex-start;
     min-height: 100vh;
     padding-top: 2em;
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Ftypewriter6.jpg?alt=media&token=4be6d1d9-f64f-4ca0-a733-94969d18ef15');
+/*     background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Ftypewriter6.jpg?alt=media&token=4be6d1d9-f64f-4ca0-a733-94969d18ef15');
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: right;
-    background-position-y: bottom;
+    background-position-y: bottom; */
+    background:rgb(5, 53, 5)
 }
 
 .form {

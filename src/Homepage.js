@@ -18,10 +18,13 @@ export default function Homepage() {
         setShowMenu('none');
         setShowFrontend('block'); 
     })
+    useEffect(() => {
+        console.log('from Homepage');
+    }, [])
 
     return (
         <div className="homepage">
-            <Chat />
+            {/* <Chat /> */}
             <div className="homepage-links">
                 <div className="homepage-allArticlesBtn" onClick = {() => setShowCmsOverlay('block')}>
                     <Link to={`/allArticles`}>

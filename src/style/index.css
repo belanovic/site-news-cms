@@ -6,12 +6,26 @@ body {
     margin: 0;
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
-
 }
 .cms {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+/*     background-image: url('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-images%2Fnp1.png?alt=media&token=d99118a0-dd8e-4013-a977-0c00d4d5e9e0');
+    background-image: url('https://wallpaperaccess.com/full/6563644.jpg');
+    background-image: url('https://www.halalsocks.com/wp-content/uploads/2017/06/newspaper-background-art-c97d525e62886f4f.jpg');
+    background-image: url('https://i0.wp.com/wallpapercave.com/wp/wp3396910.jpg');
+    background-image: url('https://thumbs.dreamstime.com/b/man-working-computer-internet-journalism-global-media-concept-50804494.jpg');
+    background-image: url('https://sloveniatimes.com/wp-content/uploads/2021/02/Beyond-Bylines-Journalism-Tools.jpg'); 
+    background-image: url('https://online.sbu.edu/sites/default/files/styles/blogfeature_large/public/field/image/shutterstock_430087837.jpg?itok=1Yv5ZmcY');
+    background-image: url('https://www.tinderpoint.com/wp-content/uploads/2017/07/1.-Featured-30.jpg');
+    background-image: url('https://le-cdn.website-editor.net/md/and1/dms3rep/multi/opt/118129-1920w.jpeg'); 
+    background-image: url('https://www.komply.it/wp-content/uploads/2014/09/Progetto-senza-titolo-18.jpg');
+    background-image: url('https://cdn.pixabay.com/photo/2016/02/01/00/56/news-1172463__480.jpg'); */ 
+    background-image: url('https://creditquid.com/wp-content/uploads/2020/04/Revue-de-presse-scaled.jpg');
 }
 
 .cmsOverlay {
