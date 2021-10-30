@@ -20,15 +20,20 @@ const soundPlay = (sound) => {
 
 const socket = io(HOST_CHAT);
 
-const profileImgURLLarge = localStorage.getItem('profileImgURLLarge')
-const profileImgURLSmall = localStorage.getItem('profileImgURLSmall')
+const profileImgURLLarge = localStorage.getItem('profileImgURLLarge');
+const profileImgURLSmall = localStorage.getItem('profileImgURLSmall');
 
 export default function Chat() {
     
+
     const chatMessages = useRef(null);
     const inputText = useRef(null);
 
-    const [usernameLoggedIn, setUsernameLoggedIn] = useState('')
+    const [roomInput, setRoomInput] = useState('');
+    const [rooms, setRooms] = useState(['main', 'second']);
+    const [activeRoom, setActiveRoom] = useState(0);
+
+    const [usernameLoggedIn, setUsernameLoggedIn] = useState('');
     const [text, setText] = useState('')
     const [messages, setMessages] = useState([]);
 
@@ -36,9 +41,30 @@ export default function Chat() {
     const [messageToReplyIndex, setMessageToReplyIndex] = useState('');
     const [displayMessageToReply, setDisplayMessageToReply] = useState(false);
 
+    const addRoom = () => {
+        const hasSameRoom = rooms.some(prom => roomInput === prom);
+        if(hasSameRoom) return;
+        setRooms(prev => {
+            setRoomInput('');
+            return [...prev, roomInput];
+        })
+    }
+/*     useEffect((prom) => {
+        socket.emit('initial-rooms', [rooms])
+    }, [])
+    useEffect((prom) => {
+        socket.emit('add-room', [rooms[rooms.length - 1]])
+    }, [rooms]) */
+
+    const handleClickRoom = (i) => {
+        setActiveRoom(i);
+    }
+
     const sendMessageClick = () => {
         if(text === '') return;
         const payload = {
+            room: rooms[activeRoom],
+            initialRooms: rooms,
             text: text,
             messageToReply: messageToReply,
             username: usernameLoggedIn,
@@ -54,8 +80,9 @@ export default function Chat() {
         
     }
     const sendMessagePress = (e) => {
-        if(e.code !== 'NumpadEnter' && e.code !== 'Enter' ) return; 
+        if(e.code !== 'NumpadEnter' && e.code !== 'Enter' ) return;
         const payload = {
+            room: rooms[activeRoom],
             text: text,
             messageToReply: messageToReply,
             username: usernameLoggedIn,
@@ -96,21 +123,23 @@ export default function Chat() {
             return;
         }
         setDisplayMessageToReply(true);
-        setMessageToReply(messages[messageToReplyIndex]);
+        setMessageToReply(messages[messageToReplyIndex].milliseconds);
         inputText.current.focus()
     }
 
     const handleCheck = (i) => {
         setMessages((prev) => {
-
+            /* console.log(prev); */
             const youAlreadyChecked = prev[i].checked.some(prom => prom === usernameLoggedIn);
             if(youAlreadyChecked) {
                 const indexUsername = prev[i].checked.findIndex((prom) => prom === usernameLoggedIn);
                 prev[i].checked.splice(indexUsername, 1);
                 const payload = {
                     date: messages[i].milliseconds,
-                    checked: prev[i].checked
+                    checked: prev[i].checked,
+                    _id: messages[i]._id
                 }
+                console.log(payload)
                 socket.emit('check', payload);
                 soundPlay(soundUncheck);
                 return [...prev];
@@ -121,8 +150,10 @@ export default function Chat() {
 
             const payload = {
                 date: messages[i].milliseconds,
-                checked: updatedChecked
+                checked: updatedChecked,
+                _id: messages[i]._id
             }
+            console.log(payload)
             socket.emit('check', payload);
             soundPlay(soundCheck);
             return [...prev];
@@ -133,6 +164,9 @@ export default function Chat() {
     useEffect(prom => setUsernameLoggedIn(localStorage.getItem('loggedUsername')), [])
 
     useEffect(() => {
+
+
+        socket.emit('requestMessagesDB');
 
         socket.on('message', (payload) => {
             console.log(chatMessages.current);
@@ -155,8 +189,14 @@ export default function Chat() {
                 return mappedMessages;
             })
         })
+        socket.on('messagesDB', (messagesDB) => {
+            setMessages(messagesDB);
+            chatMessages.current.scrollTop = 1000000;
+        })
         return () => {
-            socket.removeListener('message')
+            socket.removeListener('message');
+            socket.removeListener('check');
+            socket.removeListener('messagesDB');
         }
     }, [])
 
@@ -167,12 +207,43 @@ export default function Chat() {
     return (
         <div
             className="chat"
-        >
+        >   <div className = "chat-rooms">
+                <input
+                    type ="text"
+                    className = "room-input"
+                    value = {roomInput}
+                    onChange = {(e) => setRoomInput(e.target.value)}
+                    onKeyPress = {(e) => {
+                        if(e.code === 'NumpadEnter' || e.code === 'Enter')
+                            addRoom()
+                    }}
+                >
+                </input>
+                <button
+                    className = "add-room"
+                    onClick = {addRoom}
+                >
+                    Add room
+                </button>
+                <div>{rooms.map((prom, i) => 
+                    <div
+                        key = {i}
+                        className = {`room ${i === activeRoom? 'active-room' : ''}`}
+                        onClick = {() => handleClickRoom(i)}
+                    >
+                    {prom}
+                    </div>
+                )}</div>
+            </div>
             <div
                 className = "chat-messages"
                 ref = {chatMessages}
             >
                 {messages && messages.map((msg, i) => {
+                    let messageToReplyFound;
+                    if(msg.messageToReply) {
+                        messageToReplyFound = messages.find((prom) => prom.milliseconds === msg.messageToReply)
+                    }
                     return (
                         <div className ={`one-message ${msg.username === usernameLoggedIn? 'my-message' : 'their-message'}`} key = {i}>
                             {msg.username === usernameLoggedIn? 
@@ -191,19 +262,21 @@ export default function Chat() {
                                 className = "one-message-content"
                             >       <div 
                                         className = "message-replied"
-                                        style = {{display: msg.messageToReply? 'block' : 'none'}}
+                                        style = {{display: messageToReplyFound? 'block' : 'none'}}
                                     >
                                         <div className = "message-replied-username">
                                             <i className="fas fa-reply"></i>
-                                            {msg.messageToReply && msg.messageToReply.username}
+                                            {messageToReplyFound && messageToReplyFound.username}
                                         </div>
                                         <div className = "message-replied-text">
-                                            {msg.messageToReply && shortenSentence( msg.messageToReply.text, 30)}
+                                            {messageToReplyFound && shortenSentence( messageToReplyFound.text, 30)}
                                         </div>
                                     </div>
-                                    <div className = "chat-username">
-                                        {msg.username}
-                                    </div>
+                                    {msg.username === usernameLoggedIn? 
+                                        ''
+                                        :
+                                        <div className = "chat-username">{msg.username}</div>                                        
+                                    }
                                     <div 
                                         className = "one-message-text"
                                     >{msg.text}
