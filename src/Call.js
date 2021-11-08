@@ -185,10 +185,10 @@ export default function Call() {
                     className="call-rooms-input"
                     value = {roomInput}
                     onChange = {(e) => setRoomInput(e.target.value)}
-                  /*   onKeyPress = {(e) => {
+                    onKeyPress = {(e) => {
                         if(e.code === 'NumpadEnter' || e.code === 'Enter')
-                            addRoom()
-                    }} */
+                            handleClick()
+                    }}
                 ></input>
                 <button
                     className="call-rooms-button"
