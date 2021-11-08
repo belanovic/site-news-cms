@@ -61,8 +61,9 @@ export default function Call() {
 
     
     const onAddStream = (event) => {
-        remoteVideo.srcObject = event.streams[0];
+        remoteVideo.current.srcObject = event.streams[0];
         remoteStream = event.streams[0];
+        console.log('on Add stream lsdjflksdjkf sdlkfj lsdkfj ')
     }
 
     const onIceCandidate = (event) => {
@@ -105,8 +106,9 @@ export default function Call() {
                 console.log('evo me meemmem ready')
                 rtcPeerConnection = new RTCPeerConnection(iceServers);
                 rtcPeerConnection.onicecandidate = onIceCandidate;
-                rtcPeerConnection.onTrack = onAddStream;
+                rtcPeerConnection.ontrack = onAddStream;
                 console.log('lokalni strim ' + localStream);
+          
                 rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
                 /* rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream); */
                 try {
@@ -123,7 +125,6 @@ export default function Call() {
                 } catch (err) {
                     console.log(err)
                 }
-
             }
         })
         socket.on('offer', async (event) => {
@@ -132,13 +133,13 @@ export default function Call() {
                 console.log('evo me meemmem offer')
                 rtcPeerConnection = new RTCPeerConnection(iceServers);
                 rtcPeerConnection.onicecandidate = onIceCandidate;
-                rtcPeerConnection.onTrack = onAddStream;
+                rtcPeerConnection.ontrack = onAddStream;
                 console.log('lokalni strim ' + localStream);
+                rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
                 localStream = await navigator.mediaDevices.getUserMedia(streamConstraints);
                 rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
                 /* rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream); */
 
-                rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
                 try {
                     const sessionDescription = await rtcPeerConnection.createAnswer();
                     rtcPeerConnection.setLocalDescription(sessionDescription);
