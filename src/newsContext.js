@@ -21,6 +21,7 @@ function Provider(props) {
     const [defaultCathegory, setDefaultCathegory] = useState('allArticles');
     const [activeCriteria, setActiveCriteria] = useState(['dateUpdated', 'down', 3]);
     const [showCalendar, setShowCalendar] = useState(false);
+    const [activeRoom, setActiveRoom] = useState('');
 
     const defaultFilter = [{
         blur: 0,
@@ -100,7 +101,9 @@ function Provider(props) {
             showCalendar,
             setShowCalendar,
             defaultFilter,
-            checkStorageToken
+            checkStorageToken,
+            activeRoom,
+            setActiveRoom
         }}>
             {props.children}
         </context.Provider>
