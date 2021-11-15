@@ -201,6 +201,7 @@ export default function Call() {
             <div className = "video-container">
                 <video
                     ref = {video}
+                    muted = 'true'
                     className="video local-video"
                     onLoadedMetadata = {() => video.current.play()}
                 >
