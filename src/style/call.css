@@ -4,3 +4,17 @@
     margin: 15px;
     padding: 15px
 }
+
+.video {
+    height: 200px;
+    width: 400px;
+}
+
+.local-video {
+    border: 5px solid green;
+    margin-bottom: 2em;
+}
+
+.remote-video {
+    border: 5px solid red;
+}

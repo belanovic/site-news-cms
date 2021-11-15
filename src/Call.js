@@ -12,7 +12,7 @@ const iceServers = [
   ]
 const streamConstraints = {
     video: true,
-    audio: false,
+    audio: true,
     video: {
         width: { ideal: 4096 },
         height: { ideal: 2160 } 
@@ -56,7 +56,7 @@ export default function Call() {
             alert('Enter room name');
             return;
         }
-        /* alert('clicked'); */
+        
         socket.emit('create or join', roomInput);
     }
 
@@ -111,7 +111,7 @@ export default function Call() {
                 console.log('lokalni strim ' + localStream);
           
                 rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
-                /* rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream); */
+                rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream)
                 try {
                     const sessionDescription = await rtcPeerConnection.createOffer();
                     console.log(sessionDescription)
@@ -139,7 +139,7 @@ export default function Call() {
                 rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
                 localStream = await navigator.mediaDevices.getUserMedia(streamConstraints);
                 rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
-                /* rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream); */
+                rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream);
 
                 try {
                     const sessionDescription = await rtcPeerConnection.createAnswer();
@@ -201,13 +201,13 @@ export default function Call() {
             <div className = "video-container">
                 <video
                     ref = {video}
-                    className="video"
+                    className="video local-video"
                     onLoadedMetadata = {() => video.current.play()}
                 >
                 </video>
                 <video
                     ref = {remoteVideo}
-                    className="remote-video"
+                    className="video remote-video"
                     onLoadedMetadata = {() => remoteVideo.current.play()}
                 >
                 </video>
