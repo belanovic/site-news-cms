@@ -56,6 +56,7 @@ export default function Call() {
             alert('Enter room name');
             return;
         }
+        alert('clicked');
         socket.emit('create or join', roomInput);
     }
 
