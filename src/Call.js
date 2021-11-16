@@ -12,7 +12,7 @@ const iceServers = [
   ]
 const streamConstraints = {
     video: true,
-    audio: false,
+    audio: true,
     video: {
         width: 260,
         facingMode: "user"
@@ -128,7 +128,7 @@ export default function Call() {
                 console.log('lokalni strim ' + localStream);
           
                 rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
-                /* rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream) */
+                rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream)
                 try {
                     const sessionDescription = await rtcPeerConnection.createOffer();
                     console.log(sessionDescription)
@@ -156,7 +156,7 @@ export default function Call() {
                 rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
                 localStream = await navigator.mediaDevices.getUserMedia(streamConstraints);
                 rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
-                /* rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream); */
+                rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream);
 
                 try {
                     const sessionDescription = await rtcPeerConnection.createAnswer();
