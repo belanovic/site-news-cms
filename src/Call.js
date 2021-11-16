@@ -12,10 +12,10 @@ const iceServers = [
   ]
 const streamConstraints = {
     video: true,
-    audio: true,
+    audio: false,
     video: {
-        width: { ideal: 4096 },
-        height: { ideal: 2160 } 
+        width: 260,
+        facingMode: "user"
     } 
 }
 
@@ -33,7 +33,8 @@ export default function Call() {
 
     /* const {activeRoom, setActiveRoom} = useContext(context); */
 
-    const [roomInput, setRoomInput] = useState('');
+    const [roomInput, setRoomInput] = useState(localStorage.getItem('loggedUsername'));
+    const [showAnswer, setShowAnswer] = useState(false);
     /* const [isCaller, setIsCaller] = useState(false); */
     /* const [localStream, setLocalStream] = useState(''); */
     /* const [remoteStream, setRemoteStream] = useState(''); */
@@ -51,15 +52,24 @@ export default function Call() {
         }
     }
 
-    const handleClick = () => {
+    const handleClickConnect = () => {
         if(roomInput.trim() === '') {
             alert('Enter room name');
             return;
         }
         
-        socket.emit('create or join', roomInput);
+        socket.emit('join', roomInput);
+    }
+    const handleClickEnd = () => {
+        socket.emit('end', roomInput);
     }
 
+    const handleClickAnswer = () => {
+        socket.emit('accept', roomInput);
+    }
+    const handleClickReject = () => {
+        socket.emit('reject', roomInput);
+    }
     
     const onAddStream = (event) => {
         remoteVideo.current.srcObject = event.streams[0];
@@ -82,15 +92,22 @@ export default function Call() {
     }
 
     useEffect(() => {
-        socket.on('created', (room) => {
+        socket.emit('create', roomInput);
+        
+        socket.on('joined', (room) => {
             getVideo();
             console.log(room);
             /* setActiveRoom(room); */
             activeRoom = room;
             /* setIsCaller(true); */
             isCaller = true;
+            socket.emit('calling', room);
         })
-        socket.on('joined', (room) => {
+        socket.on('calling', (room) => {
+            setShowAnswer(true);
+            alert('calling')
+        })
+        socket.on('accept', (room) => {
             getVideo();
             console.log(room);
             isCaller = false;
@@ -111,7 +128,7 @@ export default function Call() {
                 console.log('lokalni strim ' + localStream);
           
                 rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
-                rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream)
+                /* rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream) */
                 try {
                     const sessionDescription = await rtcPeerConnection.createOffer();
                     console.log(sessionDescription)
@@ -139,7 +156,7 @@ export default function Call() {
                 rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
                 localStream = await navigator.mediaDevices.getUserMedia(streamConstraints);
                 rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
-                rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream);
+                /* rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream); */
 
                 try {
                     const sessionDescription = await rtcPeerConnection.createAnswer();
@@ -167,11 +184,14 @@ export default function Call() {
             rtcPeerConnection.addIceCandidate(candidate)
             console.log('evo me on candidate')
         })
+        socket.on('end', (room) => {
+             rtcPeerConnection.close();
+        })
         return () => {
             socket.removeListener('created');
             socket.removeListener('joined');
             socket.removeListener('full');
-            console.log(activeRoom)
+            
             socket.emit('leave', activeRoom);
         };
     }, [])
@@ -188,20 +208,36 @@ export default function Call() {
                     onChange = {(e) => setRoomInput(e.target.value)}
                     onKeyPress = {(e) => {
                         if(e.code === 'NumpadEnter' || e.code === 'Enter')
-                            handleClick()
+                            handleClickConnect()
                     }}
                 ></input>
                 <button
                     className="call-rooms-button"
-                    onClick = {() => handleClick()}
+                    onClick = {() => handleClickConnect()}
                 >Enter room
                 </button>
+                <div 
+                    className = "call-answer"
+                    style = {{display: showAnswer? 'block' : 'none'}}
+                >
+                        <button 
+                            className = "answer-button"
+                            onClick = {() => handleClickAnswer()}
+                        >Answer
+                        </button>
+                        <button 
+                            className = "reject-button"
+                            onClick = {() => handleClickReject()}
+                        >Reject
+                        </button>
+                </div>
+                <button onClick = {() => handleClickEnd()}>Disconnect</button>
             </div>
         
             <div className = "video-container">
                 <video
                     ref = {video}
-                    muted = 'true'
+                    muted = {true}
                     className="video local-video"
                     onLoadedMetadata = {() => video.current.play()}
                 >
@@ -210,6 +246,7 @@ export default function Call() {
                     ref = {remoteVideo}
                     className="video remote-video"
                     onLoadedMetadata = {() => remoteVideo.current.play()}
+                   
                 >
                 </video>
             </div>
