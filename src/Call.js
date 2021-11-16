@@ -10,13 +10,14 @@ const iceServers = [
     {urls: "stun:stun.services.mozilla.org"},
     {urls: "stun:stun.l.google.com:19302"}
   ]
+
 const streamConstraints = {
-    video: true,
+    video: false,
     audio: true,
-    video: {
+    /* video: {
         width: 260,
         facingMode: "user"
-    } 
+    } */ 
 }
 
 var isCaller = false;
@@ -27,6 +28,9 @@ var activeRoom;
 
 export default function Call() {
 
+    
+    
+  
 
     const video = useRef(null);
     const remoteVideo = useRef(null);
@@ -127,7 +131,7 @@ export default function Call() {
                 console.log('lokalni strim ' + localStream);
           
                 rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
-                rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream)
+                /* rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream) */
                 try {
                     const sessionDescription = await rtcPeerConnection.createOffer();
                     console.log(sessionDescription)
@@ -155,7 +159,7 @@ export default function Call() {
                 rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
                 localStream = await navigator.mediaDevices.getUserMedia(streamConstraints);
                 rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
-                rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream);
+                /* rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream); */
 
                 try {
                     const sessionDescription = await rtcPeerConnection.createAnswer();
@@ -248,6 +252,11 @@ export default function Call() {
                    
                 >
                 </video>
+                {/* <audio
+                    className="video remote-video"
+                    onLoadedMetadata = {() => remoteVideo.current.play()}
+                >
+                </audio> */}
             </div>
         </div>
     );
