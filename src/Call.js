@@ -105,7 +105,6 @@ export default function Call() {
         })
         socket.on('calling', (room) => {
             setShowAnswer(true);
-            alert('calling')
         })
         socket.on('accept', (room) => {
             getVideo();
