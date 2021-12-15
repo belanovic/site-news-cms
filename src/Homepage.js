@@ -25,7 +25,6 @@ export default function Homepage() {
 
     return (
         <div className="homepage">
-            <Call />
             <Chat />
             <div className="homepage-links">
                 <div className="homepage-allArticlesBtn" onClick = {() => setShowCmsOverlay('block')}>

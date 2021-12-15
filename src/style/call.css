@@ -1,4 +1,4 @@
-.call {
+.call-test {
     background: white;
     border: solid black 5px;
     margin: 15px;
@@ -7,7 +7,6 @@
 
 .video {
     height: 400px;
- 
 }
 
 .local-video {

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import './style/call.css';
-import io from 'socket.io-client';
 import {context} from './newsContext';
 import HOST_CALL from './hostCall.js';
 
+import io from 'socket.io-client';
 const socket = io(HOST_CALL);
 
 const iceServers = [
@@ -12,12 +12,34 @@ const iceServers = [
   ]
 
 const streamConstraints = {
-    video: false,
-    audio: true,
+    video: true,
+    audio: false,
     /* video: {
         width: 260,
         facingMode: "user"
     } */ 
+}
+
+function stopVideo(video) {
+    const stream = video.current.srcObject;
+    const tracks = stream.getTracks();
+    
+    tracks.forEach(function(track) {
+        track.stop();
+    });
+    
+    video.current.srcObject = null;
+    }
+
+const getVideo = async (video, streamConstraints) => {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia(streamConstraints);
+        /* setLocalStream(stream); */
+        localStream = stream;
+        video.current.srcObject = stream;
+    } catch(err) {
+        console.log("An error has happened" + err);
+    }
 }
 
 var isCaller = false;
@@ -25,54 +47,31 @@ var rtcPeerConnection;
 var localStream;
 var remoteStream;
 var activeRoom;
+var caller;
 
-export default function Call() {
-
+export default function Call({
+        callee, showCall, setShowCall, 
+        makeCall, setMakeCall}) {
     
     
-  
-
     const video = useRef(null);
     const remoteVideo = useRef(null);
 
-    /* const {activeRoom, setActiveRoom} = useContext(context); */
-
-    const [roomInput, setRoomInput] = useState(localStorage.getItem('loggedUsername'));
+    const {usersOnline, setUsersOnline} = useContext(context);
     const [showAnswer, setShowAnswer] = useState(false);
-    /* const [isCaller, setIsCaller] = useState(false); */
-    /* const [localStream, setLocalStream] = useState(''); */
-    /* const [remoteStream, setRemoteStream] = useState(''); */
-    /* const [rtcPeerConnection, setRtcPeerConnection] = useState('') */
 
-    
-    const getVideo = async () => {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia(streamConstraints);
-            /* setLocalStream(stream); */
-            localStream = stream;
-            video.current.srcObject = stream;
-        } catch(err) {
-            console.log("An error has happened" + err);
-        }
+    const connect = () => {
+        socket.emit('join', callee);
+    }
+    const handleEnd = () => {
+        socket.emit('end', callee);
     }
 
-    const handleClickConnect = () => {
-        if(roomInput.trim() === '') {
-            alert('Enter room name');
-            return;
-        }
-        
-        socket.emit('join', roomInput);
+    const handleAnswer = () => {
+        socket.emit('accept', caller);
     }
-    const handleClickEnd = () => {
-        socket.emit('end', roomInput);
-    }
-
-    const handleClickAnswer = () => {
-        socket.emit('accept', roomInput);
-    }
-    const handleClickReject = () => {
-        socket.emit('reject', roomInput);
+    const handleReject = () => {
+        socket.emit('reject', caller);
     }
     
     const onAddStream = (event) => {
@@ -96,10 +95,16 @@ export default function Call() {
     }
 
     useEffect(() => {
-        socket.emit('create', roomInput);
+        if(makeCall === true) {
+            connect();
+        }
+    }, [makeCall])
+
+    useEffect(() => {
+        socket.emit('create', localStorage.getItem('loggedUsername'));
         
         socket.on('joined', (room) => {
-            getVideo();
+            getVideo(video, streamConstraints);
             console.log(room);
             /* setActiveRoom(room); */
             activeRoom = room;
@@ -108,10 +113,13 @@ export default function Call() {
             socket.emit('calling', room);
         })
         socket.on('calling', (room) => {
+            caller = room;
+            console.log('callling...')       
+            setShowCall(true);
             setShowAnswer(true);
         })
         socket.on('accept', (room) => {
-            getVideo();
+            getVideo(video, streamConstraints);
             console.log(room);
             isCaller = false;
            /*  setActiveRoom(room); */
@@ -172,7 +180,6 @@ export default function Call() {
                 } catch (err) {
                     console.log(err)
                 }
-
             }
         })
         socket.on('answer', (event) => {
@@ -189,25 +196,46 @@ export default function Call() {
         })
         socket.on('end', (room) => {
              rtcPeerConnection.close();
+             stopVideo(video);
+             stopVideo(remoteVideo);
         })
+        socket.on('reject', (room) => {
+            socket.emit('leaveRoom', activeRoom);
+            stopVideo(video);
+        })
+        socket.on('reloadUsers', (usersServer) => {
+            console.log(usersServer)
+            setUsersOnline([...usersServer])
+        })
+        socket.on('leftCall', (usersServer) => {
+            setUsersOnline([...usersServer])
+        })
+
+        
+       /*  socket.on('end', (room) => {
+             rtcPeerConnection.close();
+        }) */
         return () => {
             socket.removeListener('created');
             socket.removeListener('joined');
             socket.removeListener('full');
             
-            socket.emit('leave', activeRoom);
+            socket.emit('leaveRoom', activeRoom);
         };
     }, [])
 
-
+   /*  useEffect(() => {
+        setUsersOnline()
+    }, [usersOnline]) */
     return (
         <div
-          className="call"
+          className="call-test"
+          style = {{display: showCall? 'block' : 'none'}}
         >
-            <div  className="call-rooms">
+            {/* <div  className="call-rooms">
                 <input
                     className="call-rooms-input"
-                    value = {roomInput}
+                    value = {callee}
                     onChange = {(e) => setRoomInput(e.target.value)}
                     onKeyPress = {(e) => {
                         if(e.code === 'NumpadEnter' || e.code === 'Enter')
@@ -225,18 +253,38 @@ export default function Call() {
                 >
                         <button 
                             className = "answer-button"
-                            onClick = {() => handleClickAnswer()}
+                            onClick = {() => handleAnswer()}
                         >Answer
                         </button>
                         <button 
                             className = "reject-button"
-                            onClick = {() => handleClickReject()}
+                            onClick = {() => handleReject()}
                         >Reject
                         </button>
                 </div>
-                <button onClick = {() => handleClickEnd()}>Disconnect</button>
+                <button onClick = {() => handleEnd()}>Disconnect</button>
+            </div> */}
+
+            <div  className="call-rooms">
+                <div className = "callee">Calling {callee}</div>
+                <div 
+                    className = "call-answer"
+                    style = {{display: showAnswer? 'block' : 'none'}}
+                >
+                        <button 
+                            className = "answer-button"
+                            onClick = {() => handleAnswer()}
+                        >Answer
+                        </button>
+                        <button 
+                            className = "reject-button"
+                            onClick = {() => handleReject()}
+                        >Reject
+                        </button>
+                </div>
+                <button onClick = {() => handleEnd()}>Disconnect</button>
             </div>
-        
+  
             <div className = "video-container">
                 <video
                     ref = {video}

@@ -7,6 +7,7 @@ import dateFormat from './dateFormat';
 import imageCompression from 'browser-image-compression';
 import shortenSentence from './shortenSentence';
 import HOST_CHAT from './hostChat.js';
+import Call from './Call';
 
 const soundCheck = new Audio('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-sounds%2F590274__mrfossy__sfx-stickerripper-cluckbuttons-06.wav?alt=media&token=7e31eb83-1283-46ea-bfa3-302cba453d70')
 const soundUncheck = new Audio('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-sounds%2F589940__mrfossy__sfx-squelch-slayer-impulse-72.wav?alt=media&token=95b7f193-a27b-4467-9b41-5b65a92a52d1')
@@ -25,6 +26,7 @@ const profileImgURLSmall = localStorage.getItem('profileImgURLSmall');
 
 export default function Chat() {
     
+    const {usersOnline, setUsersOnline} = useContext(context);
 
     const chatMessages = useRef(null);
     const inputText = useRef(null);
@@ -40,6 +42,18 @@ export default function Chat() {
     const [messageToReply, setMessageToReply] = useState('');
     const [messageToReplyIndex, setMessageToReplyIndex] = useState('');
     const [displayMessageToReply, setDisplayMessageToReply] = useState(false);
+
+    const [showCall, setShowCall] = useState(false);
+    const [callee, setCallee] = useState('');
+    const [makeCall, setMakeCall] = useState(false);
+    const [userIsOnline, setUserIsOnline] = useState(false);
+
+    const handleClickCall = (usernameToCall) => {
+        setCallee(usernameToCall);
+        setShowCall(true);
+        setMakeCall(true)
+    }
+
 
     const addRoom = () => {
         const hasSameRoom = rooms.some(prom => roomInput === prom);
@@ -200,14 +214,22 @@ export default function Chat() {
         }
     }, [])
 
- /*    useEffect(() => {
-        chatMessages.current.scrollTop = 1000000;
-    }, [messages]) */
+/*     useEffect(() => {
+       usersOnline.some(prom => )
+    }, [usersOnline]) */
 
     return (
         <div
             className="chat"
-        >   <div className = "chat-rooms">
+        >   
+            <Call           
+                callee = {callee} 
+                showCall = {showCall} 
+                setShowCall = {setShowCall}
+                makeCall = {makeCall}
+                setMakeCall = {setMakeCall}
+            />
+            <div className = "chat-rooms">
                 <input
                     type ="text"
                     className = "room-input"
@@ -256,6 +278,27 @@ export default function Chat() {
                                         <i className="fas fa-user"></i> 
                                         : 
                                         <img src = {msg.profileImgURLSmall}></img>}
+                                    <i 
+                                        className="fas fa-globe"
+                                        style = {{display: usersOnline.some(prom => prom === msg.username)? 'block' : 'none'}}
+                                    ></i>
+                                    <div 
+                                        className = "chat-profile"
+                                    >
+                                        <div className = "chat-profile-content">
+                                            {profileImgURLLarge === 'generic'? 
+                                                <i className="fas fa-user"></i> 
+                                                : 
+                                                <img src = {msg.profileImgURLLarge}></img>}
+                                            <div className = "chat-profile-name">{msg.username}</div>
+                                            <div className = "call">
+                                                <i 
+                                                    className="fas fa-phone-square-alt"
+                                                    onClick = {() => handleClickCall(msg.username)}
+                                                ></i>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>}
                             <div
                                 key = {i}

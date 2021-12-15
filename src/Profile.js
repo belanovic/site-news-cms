@@ -4,6 +4,10 @@ import './style/profile.css';
 import ChooseImage from './ChooseImage.js';
 import {uploadImageDB, removeImageDB} from './handleImageDB.js';
 import {updateProfileImg} from './getUser';
+import io from 'socket.io-client';
+import HOST_CALL from './hostCall.js';
+
+const socket = io(HOST_CALL);
 
 export default function Profile() {
 
@@ -71,6 +75,7 @@ export default function Profile() {
 
     const handleSignOut = (e) => {
         e.preventDefault();
+        socket.emit('leaveCall', localStorage.getItem('loggedUsername'));
         localStorage.setItem('x-auth-token', 'none');
         localStorage.setItem('loggedUsername', null);
         window.location.href = '/';
