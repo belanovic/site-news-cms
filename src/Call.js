@@ -39,7 +39,7 @@ const getVideo = async (video, streamConstraints) => {
         localStream = stream;
         video.current.srcObject = stream;
     } catch(err) {
-        console.log("An error haaaaaaaaaaas happened" + err);
+        console.log("An error haaaaaaaaaaaaas happened" + err);
     }
 }
 
