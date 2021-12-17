@@ -5,13 +5,14 @@ import HOST_CALL from './hostCall.js';
 
 import io from 'socket.io-client';
 const socket = io(HOST_CALL);
+socket.emit('create', localStorage.getItem('loggedUsername'));
 
-const iceServers = [
+const iceServers = [  
     {urls: "stun:stun.services.mozilla.org"},
     {urls: "stun:stun.l.google.com:19302"}
   ]
 
-const streamConstraints = {
+const streamConstraints = {  
     video: true,
     audio: false,
     /* video: {
@@ -27,9 +28,9 @@ function stopVideo(video) {
     tracks.forEach(function(track) {
         track.stop();
     });
-    
+      
     video.current.srcObject = null;
-    }
+    }  
 
 const getVideo = async (video, streamConstraints) => {
     try {
@@ -38,7 +39,7 @@ const getVideo = async (video, streamConstraints) => {
         localStream = stream;
         video.current.srcObject = stream;
     } catch(err) {
-        console.log("An error has happened" + err);
+        console.log("An error haaaaas happened" + err);
     }
 }
 
@@ -101,8 +102,10 @@ export default function Call({
     }, [makeCall])
 
     useEffect(() => {
-        socket.emit('create', localStorage.getItem('loggedUsername'));
         
+        socket.on('full', (room) => {
+            alert(room + ' ' + 'is busy at the moment');
+        })
         socket.on('joined', (room) => {
             getVideo(video, streamConstraints);
             console.log(room);
@@ -125,9 +128,6 @@ export default function Call({
            /*  setActiveRoom(room); */
             activeRoom = room;
             socket.emit('ready', room);
-        })
-        socket.on('full', (room) => {
-            alert('room is full')
         })
         socket.on('ready', async (event) => {
             console.log(isCaller)
@@ -224,47 +224,11 @@ export default function Call({
         };
     }, [])
 
-   /*  useEffect(() => {
-        setUsersOnline()
-    }, [usersOnline]) */
     return (
         <div
           className="call-test"
           style = {{display: showCall? 'block' : 'none'}}
         >
-            {/* <div  className="call-rooms">
-                <input
-                    className="call-rooms-input"
-                    value = {callee}
-                    onChange = {(e) => setRoomInput(e.target.value)}
-                    onKeyPress = {(e) => {
-                        if(e.code === 'NumpadEnter' || e.code === 'Enter')
-                            handleClickConnect()
-                    }}
-                ></input>
-                <button
-                    className="call-rooms-button"
-                    onClick = {() => handleClickConnect()}
-                >Enter room
-                </button>
-                <div 
-                    className = "call-answer"
-                    style = {{display: showAnswer? 'block' : 'none'}}
-                >
-                        <button 
-                            className = "answer-button"
-                            onClick = {() => handleAnswer()}
-                        >Answer
-                        </button>
-                        <button 
-                            className = "reject-button"
-                            onClick = {() => handleReject()}
-                        >Reject
-                        </button>
-                </div>
-                <button onClick = {() => handleEnd()}>Disconnect</button>
-            </div> */}
-
             <div  className="call-rooms">
                 <div className = "callee">Calling {callee}</div>
                 <div 

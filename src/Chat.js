@@ -49,11 +49,14 @@ export default function Chat() {
     const [userIsOnline, setUserIsOnline] = useState(false);
 
     const handleClickCall = (usernameToCall) => {
+        if(!usersOnline.some(prom => prom === usernameToCall)) {
+            alert(usernameToCall + ' ' + 'is not logged in');
+            return
+        }
         setCallee(usernameToCall);
         setShowCall(true);
         setMakeCall(true)
     }
-
 
     const addRoom = () => {
         const hasSameRoom = rooms.some(prom => roomInput === prom);
@@ -278,10 +281,10 @@ export default function Chat() {
                                         <i className="fas fa-user"></i> 
                                         : 
                                         <img src = {msg.profileImgURLSmall}></img>}
-                                    <i 
-                                        className="fas fa-globe"
+                                    <div 
+                                        className="light"
                                         style = {{display: usersOnline.some(prom => prom === msg.username)? 'block' : 'none'}}
-                                    ></i>
+                                    ></div>
                                     <div 
                                         className = "chat-profile"
                                     >
