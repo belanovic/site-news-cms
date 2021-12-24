@@ -5,7 +5,7 @@ import HOST_CALL from './hostCall.js';
 
 import io from 'socket.io-client';
 const socket = io(HOST_CALL);
-socket.emit('create', localStorage.getItem('loggedUsername'));
+
 
 const iceServers = [  
     {urls: "stun:stun.services.mozilla.org"},
@@ -28,63 +28,64 @@ function stopVideo(video) {
     tracks.forEach(function(track) {
         track.stop();
     });
-      
     video.current.srcObject = null;
-    }  
+    }
 
 const getVideo = async (video, streamConstraints) => {
     try {
         const stream = await navigator.mediaDevices.getUserMedia(streamConstraints);
-        /* setLocalStream(stream); */
         localStream = stream;
         video.current.srcObject = stream;
+        return true;
     } catch(err) {
-        console.log("An error haaaaaaaaaaaaaaaaaaaaaaaaas happened" + err);
+        console.log("An error has happened" + err);
+        return false;
     }
 }
 
+var callPhase = 'notInCall';
 var isCaller = false;
 var rtcPeerConnection;
 var localStream;
 var remoteStream;
 var activeRoom;
-var caller;
+var activeCaller;
 
 export default function Call({
-        callee, showCall, setShowCall, 
-        makeCall, setMakeCall}) {
-    
-    
+        callee, makeCall, setMakeCall, anotherSocketAlreadyInRoom, setAnotherSocketAlreadyInRoom,
+        connectedCall, setConnectedCall}) {
+
     const video = useRef(null);
     const remoteVideo = useRef(null);
 
-    const {usersOnline, setUsersOnline} = useContext(context);
+    const {roomsCall, setRoomsCall} = useContext(context);
+    const [showCall, setShowCall] = useState(false);
     const [showAnswer, setShowAnswer] = useState(false);
+    const [showDisconnect, setShowDisconnect] = useState(false);
+    const [showCallee, setShowCallee] = useState(false);
+    const [showCaller, setShowCaller] = useState(false);
+    const [talker, setTalker] = useState('');
 
     const connect = () => {
         socket.emit('join', callee);
     }
-    const handleEnd = () => {
-        socket.emit('end', callee);
+    const handleDisconnect = (event) => {
+        socket.emit(event, activeRoom);
     }
-
-    const handleAnswer = () => {
-        socket.emit('accept', caller);
+    const handleAccept = () => {
+        socket.emit('accept', activeRoom);
     }
     const handleReject = () => {
-        socket.emit('reject', caller);
+        socket.emit('reject', activeRoom);
     }
     
     const onAddStream = (event) => {
         remoteVideo.current.srcObject = event.streams[0];
         remoteStream = event.streams[0];
-        console.log('on Add stream lsdjflksdjkf sdlkfj lsdkfj ')
     }
 
-    const onIceCandidate = (event) => {
-        
+    const onIceCandidate = async (event) => {
         if(event.candidate) {
-            console.log('evo ga kandidat')
             socket.emit('candidate', {
                 type: 'candidate',
                 label: event.candidate.sdpMLineIndex,
@@ -98,53 +99,164 @@ export default function Call({
     useEffect(() => {
         if(makeCall === true) {
             connect();
+            setShowCall(true);
+            setShowDisconnect(true);
+            setShowCallee(true);
+            activeCaller = localStorage.getItem('loggedUsername');
         }
     }, [makeCall])
 
     useEffect(() => {
+
+        setConnectedCall(socket.connected);
+
+        socket.emit('create', localStorage.getItem('loggedUsername'))
+
+        socket.on('created', (room) => {setAnotherSocketAlreadyInRoom(false)});
+
+        socket.on('socketAlreadyInRoom', (room) => {
+            setAnotherSocketAlreadyInRoom(false);
+        })
+        socket.on('anotherSocketAlreadyInRoom', (room) => {
+            setAnotherSocketAlreadyInRoom(true);
+        })
+
+        socket.on('disconnect', () => {
+            setConnectedCall(socket.connected);
+        })
+        socket.on('connect', () => {
+            setConnectedCall(socket.connected);
+            socket.emit('create', localStorage.getItem('loggedUsername'));
+        })
         
-        socket.on('full', (room) => {
+        socket.on('roomIsBusy', (room) => {
             alert(room + ' ' + 'is busy at the moment');
         })
-        socket.on('joined', (room) => {
-            getVideo(video, streamConstraints);
-            console.log(room);
-            /* setActiveRoom(room); */
-            activeRoom = room;
-            /* setIsCaller(true); */
-            isCaller = true;
-            socket.emit('calling', room);
+
+        socket.on('reloadUsers', (roomsActive) => {
+            setRoomsCall([...roomsActive])
         })
-        socket.on('calling', (room) => {
-            caller = room;
-            console.log('callling...')       
-            setShowCall(true);
-            setShowAnswer(true);
-        })
-        socket.on('accept', (room) => {
-            getVideo(video, streamConstraints);
-            console.log(room);
-            isCaller = false;
-           /*  setActiveRoom(room); */
+
+        socket.on('joined', async (room) => {
             activeRoom = room;
+            callPhase = 'joinedRoom';
+            const hasVideo = await getVideo(video, streamConstraints);
+            if(!hasVideo) {
+                socket.emit('leaveRoom', activeRoom);
+                setShowCall(false);
+                setShowDisconnect(false);
+                setShowCallee(false);
+                activeCaller = '';
+                activeRoom = '';
+                callPhase = 'notInCall';
+                setMakeCall(false);
+                alert("Couldn't get your media");
+            } else {
+                setTalker(room);
+                isCaller = true;
+                socket.emit('calling', activeRoom, activeCaller);
+            }
+           
+        })
+        socket.on('calling', (room, caller) => {
+            callPhase = 'calling';
+            if(!isCaller) {
+                activeRoom = room;
+                activeCaller = caller;
+                setTalker(caller);
+                setShowCall(true);
+                setShowAnswer(true);
+                setShowCaller(true);
+            }
+        })
+        socket.on('rejectToCaller', (room) => {
+            setMakeCall(false);
+            stopVideo(video);
+            setShowDisconnect(false);
+            setShowCaller(false);
+            setShowCall(false);
+            socket.emit('leaveRoom', activeRoom);
+        })
+        socket.on('rejectToCallee', (room) => {
+            setShowCall(false);
+            setShowAnswer(false);
+            setShowCaller(true);
+        })
+        socket.on('accept', async (room) => {
+            await getVideo(video, streamConstraints);
+            setShowDisconnect(true);
+            setShowAnswer(false);
             socket.emit('ready', room);
         })
-        socket.on('ready', async (event) => {
-            console.log(isCaller)
+
+        socket.on('oneDisconnected', (userDisconnected) => {
+
+            if(callPhase !== 'notInCall' && userDisconnected === activeCaller) {
+                activeRoom = '';
+                activeCaller = '';
+                setTalker('');
+                setShowCall(false);
+                setShowAnswer(false);
+                setShowCaller(false);
+ 
+                if(callPhase === 'inCall') {
+                    setShowDisconnect(false);
+                    stopVideo(remoteVideo);
+                    stopVideo(video);
+                }
+                callPhase = 'notInCall';
+                alert('Caller was disconnected');
+            }
+        })
+
+        socket.on('abort', (room) => {
             if(isCaller) {
-                console.log('evo me meemmem ready')
+                stopVideo(video);
+                setMakeCall(false);
+                setShowDisconnect(false);
+                setShowCall(false);
+                socket.emit('leaveRoom', activeRoom);
+                isCaller = false;
+            } else {
+                setShowDisconnect(false);
+                setShowCaller(false);
+                setShowCall(false);
+            }
+            callPhase = 'notInCall';
+        })
+
+        socket.on('endTalk', (room) => {
+
+            rtcPeerConnection.close();
+            stopVideo(remoteVideo);
+            stopVideo(video);
+
+            if(isCaller) {
+                setMakeCall(false);
+                setShowDisconnect(false);
+                setShowCall(false);
+                socket.emit('leaveRoom', activeRoom);
+                isCaller = false;
+            } else {
+                setShowDisconnect(false);
+                setShowCaller(false);
+                setShowCall(false);
+            }
+            callPhase = 'notInCall';
+        })
+
+        socket.on('ready', async (event) => {
+            callPhase = 'creatingConnection';
+            if(isCaller) {
                 rtcPeerConnection = new RTCPeerConnection(iceServers);
                 rtcPeerConnection.onicecandidate = onIceCandidate;
                 rtcPeerConnection.ontrack = onAddStream;
-                console.log('lokalni strim ' + localStream);
-          
                 rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
                 /* rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream) */
                 try {
                     const sessionDescription = await rtcPeerConnection.createOffer();
-                    console.log(sessionDescription)
                     rtcPeerConnection.setLocalDescription(sessionDescription);
-                    console.log('evo me opoet sldkjflkasjdf lsadfj ')
+  
 
                     socket.emit('offer', {
                         type: 'offer',
@@ -157,13 +269,12 @@ export default function Call({
             }
         })
         socket.on('offer', async (event) => {
-            console.log('evo me on offer')
+            callPhase = 'creatingConnection';
             if(!isCaller) {
-                console.log('evo me meemmem offer')
                 rtcPeerConnection = new RTCPeerConnection(iceServers);
                 rtcPeerConnection.onicecandidate = onIceCandidate;
                 rtcPeerConnection.ontrack = onAddStream;
-                console.log('lokalni strim ' + localStream);
+                
                 rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
                 localStream = await navigator.mediaDevices.getUserMedia(streamConstraints);
                 rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
@@ -177,14 +288,16 @@ export default function Call({
                         sdp: sessionDescription,
                         room: activeRoom
                     })
+                    callPhase = 'inCall';
+    
                 } catch (err) {
                     console.log(err)
                 }
             }
         })
         socket.on('answer', (event) => {
-            console.log('evo me on answer')
             rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event));
+            callPhase = 'inCall';
         })
         socket.on('candidate', (event) => {
             const candidate = new RTCIceCandidate({
@@ -192,52 +305,54 @@ export default function Call({
                 candidate: event.candidate
             })
             rtcPeerConnection.addIceCandidate(candidate)
-            console.log('evo me on candidate')
         })
-        socket.on('end', (room) => {
-             rtcPeerConnection.close();
-             stopVideo(video);
-             stopVideo(remoteVideo);
-        })
-        socket.on('reject', (room) => {
-            socket.emit('leaveRoom', activeRoom);
-            stopVideo(video);
-        })
-        socket.on('reloadUsers', (usersServer) => {
-            console.log(usersServer)
-            setUsersOnline([...usersServer])
-        })
-        socket.on('leftCall', (usersServer) => {
-            setUsersOnline([...usersServer])
-        })
-
         
-       /*  socket.on('end', (room) => {
-             rtcPeerConnection.close();
-        }) */
-        return () => {
+        /* return () => {
             socket.removeListener('created');
             socket.removeListener('joined');
-            socket.removeListener('full');
-            
-            socket.emit('leaveRoom', activeRoom);
-        };
+        }; */
     }, [])
 
     return (
         <div
-          className="call-test"
-          style = {{display: showCall? 'block' : 'none'}}
+          className="call"
+          style = {{
+              display: showCall? 'block' : 'none'
+            }}
         >
-            <div  className="call-rooms">
-                <div className = "callee">Calling {callee}</div>
+            <div  className="call-display">
+                <div 
+                    className = "calling-callee"
+                    style = {{display: showCallee? 'block' : 'none'}}
+                >Calling {callee}...
+                </div>
+                <div 
+                    className = "calling-caller"
+                    style = {{display: showCaller? 'block' : 'none'}}
+                >{activeCaller} is calling
+                </div>
+
+                <div className = "talker">{talker}</div>
+                <div className = "duration"></div>
+                <button 
+                    onClick = {() => {
+                        let event;
+                        if(callPhase === 'joinedRoom') return;
+                        if(callPhase === 'calling') {event = 'abort'}
+                        if(callPhase === 'inCall') {event = 'endTalk'}
+                        handleDisconnect(event);
+                    }}
+                    style = {{display: showDisconnect? 'block' : 'none'}}
+                >Disconnect
+                </button>
+   
                 <div 
                     className = "call-answer"
                     style = {{display: showAnswer? 'block' : 'none'}}
                 >
                         <button 
-                            className = "answer-button"
-                            onClick = {() => handleAnswer()}
+                            className = "accept-button"
+                            onClick = {() => handleAccept()}
                         >Answer
                         </button>
                         <button 
@@ -246,7 +361,7 @@ export default function Call({
                         >Reject
                         </button>
                 </div>
-                <button onClick = {() => handleEnd()}>Disconnect</button>
+
             </div>
   
             <div className = "video-container">

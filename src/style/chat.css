@@ -5,7 +5,18 @@
     padding: 15px;
     background: white;
     width: 450px;
-    height: 600px;  
+    height: 600px;
+    position: relative;
+}
+
+.chat-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    background-color: blue; 
+    z-index: 2;
 }
 
 .room:hover {
@@ -138,12 +149,17 @@
     font-size: 1.25rem;
     padding: 5px;
 }
-.call {
+.call-icon {
     text-align: center;
 }
-.call .fa-phone-square-alt {
+.call-icon .fa-phone-square-alt {
     font-size: 3rem;
     color: red;
+}
+
+.call-icon .fa-phone-slash {
+    font-size: 2rem;
+    color: grey
 }
 
 .light {

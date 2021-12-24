@@ -26,7 +26,7 @@ const profileImgURLSmall = localStorage.getItem('profileImgURLSmall');
 
 export default function Chat() {
     
-    const {usersOnline, setUsersOnline} = useContext(context);
+    const {roomsCall, setRoomsCall} = useContext(context);
 
     const chatMessages = useRef(null);
     const inputText = useRef(null);
@@ -43,18 +43,20 @@ export default function Chat() {
     const [messageToReplyIndex, setMessageToReplyIndex] = useState('');
     const [displayMessageToReply, setDisplayMessageToReply] = useState(false);
 
-    const [showCall, setShowCall] = useState(false);
     const [callee, setCallee] = useState('');
     const [makeCall, setMakeCall] = useState(false);
-    const [userIsOnline, setUserIsOnline] = useState(false);
+
+    const [connectedChat, setConnectedChat] = useState(false);
+    const [connectedCall, setConnectedCall] = useState(false);
+    const [anotherSocketAlreadyInRoom, setAnotherSocketAlreadyInRoom] = useState(false);
+
 
     const handleClickCall = (usernameToCall) => {
-        if(!usersOnline.some(prom => prom === usernameToCall)) {
-            alert(usernameToCall + ' ' + 'is not logged in');
+        if(!roomsCall.some(prom => prom === usernameToCall)) {
+            alert(usernameToCall + ' ' + 'is not logged innnnn');
             return
         }
         setCallee(usernameToCall);
-        setShowCall(true);
         setMakeCall(true)
     }
 
@@ -66,12 +68,6 @@ export default function Chat() {
             return [...prev, roomInput];
         })
     }
-/*     useEffect((prom) => {
-        socket.emit('initial-rooms', [rooms])
-    }, [])
-    useEffect((prom) => {
-        socket.emit('add-room', [rooms[rooms.length - 1]])
-    }, [rooms]) */
 
     const handleClickRoom = (i) => {
         setActiveRoom(i);
@@ -181,7 +177,15 @@ export default function Chat() {
     useEffect(prom => setUsernameLoggedIn(localStorage.getItem('loggedUsername')), [])
 
     useEffect(() => {
+        
+        setConnectedChat(socket.connected);
 
+        socket.on('disconnect', () => {
+            setConnectedChat(socket.connected);
+        })
+        socket.on('connect', () => {
+            setConnectedChat(socket.connected);
+        })
 
         socket.emit('requestMessagesDB');
 
@@ -210,6 +214,7 @@ export default function Chat() {
             setMessages(messagesDB);
             chatMessages.current.scrollTop = 1000000;
         })
+    
         return () => {
             socket.removeListener('message');
             socket.removeListener('check');
@@ -218,19 +223,23 @@ export default function Chat() {
     }, [])
 
 /*     useEffect(() => {
-       usersOnline.some(prom => )
-    }, [usersOnline]) */
+       roomsCall.some(prom => )
+    }, [roomsCall]) */
 
     return (
         <div
             className="chat"
-        >   
-            <Call           
-                callee = {callee} 
-                showCall = {showCall} 
-                setShowCall = {setShowCall}
+            style = {{background: connectedChat? 'green' : 'black'}}
+        >
+            <div className = "chat-overlay" style = {{display: anotherSocketAlreadyInRoom? 'block' : 'none'}}></div>
+            <Call
+                callee = {callee}
                 makeCall = {makeCall}
                 setMakeCall = {setMakeCall}
+                connectedCall = {connectedCall}
+                setConnectedCall = {setConnectedCall}
+                anotherSocketAlreadyInRoom = {anotherSocketAlreadyInRoom}
+                setAnotherSocketAlreadyInRoom = {setAnotherSocketAlreadyInRoom} 
             />
             <div className = "chat-rooms">
                 <input
@@ -283,7 +292,7 @@ export default function Chat() {
                                         <img src = {msg.profileImgURLSmall}></img>}
                                     <div 
                                         className="light"
-                                        style = {{display: usersOnline.some(prom => prom === msg.username)? 'block' : 'none'}}
+                                        style = {{display: roomsCall.some(prom => prom === msg.username)? 'block' : 'none'}}
                                     ></div>
                                     <div 
                                         className = "chat-profile"
@@ -294,11 +303,16 @@ export default function Chat() {
                                                 : 
                                                 <img src = {msg.profileImgURLLarge}></img>}
                                             <div className = "chat-profile-name">{msg.username}</div>
-                                            <div className = "call">
-                                                <i 
-                                                    className="fas fa-phone-square-alt"
-                                                    onClick = {() => handleClickCall(msg.username)}
-                                                ></i>
+                                            <div className = "call-icon">
+                                                {roomsCall.some(prom => prom === msg.username)?
+
+                                                    <i 
+                                                        className="fas fa-phone-square-alt"
+                                                        onClick = {() => handleClickCall(msg.username)}
+                                                    ></i>
+                                                    :
+                                                    <i className="fas fa-phone-slash"></i>
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -381,6 +395,6 @@ export default function Chat() {
                 >Pošalji
                 </button>
             </div>
-        </div>
+        </div>        
     );
 }

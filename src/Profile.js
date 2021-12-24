@@ -75,7 +75,7 @@ export default function Profile() {
 
     const handleSignOut = (e) => {
         e.preventDefault();
-        socket.emit('leaveCall', localStorage.getItem('loggedUsername'));
+        socket.emit('logout', localStorage.getItem('loggedUsername'));
         localStorage.setItem('x-auth-token', 'none');
         localStorage.setItem('loggedUsername', null);
         window.location.href = '/';
@@ -92,8 +92,6 @@ export default function Profile() {
         setDeployedImgNameSmall(localStorage.getItem('profileImgNameSmall'));
 
     }, [])
-
-
 
     return (
         <div  className = "profile-container">

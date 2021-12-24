@@ -22,7 +22,8 @@ function Provider(props) {
     const [activeCriteria, setActiveCriteria] = useState(['dateUpdated', 'down', 3]);
     const [showCalendar, setShowCalendar] = useState(false);
     const [activeRoom, setActiveRoom] = useState('');
-    const [usersOnline, setUsersOnline] = useState([]);
+    const [roomsCall, setRoomsCall] = useState([]);
+
 
     const defaultFilter = [{
         blur: 0,
@@ -105,8 +106,8 @@ function Provider(props) {
             checkStorageToken,
             activeRoom,
             setActiveRoom,
-            usersOnline, 
-            setUsersOnline
+            roomsCall,
+            setRoomsCall
         }}>
             {props.children}
         </context.Provider>

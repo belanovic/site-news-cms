@@ -5,6 +5,10 @@ import {registerUser} from './getUser.js';
 import {loginUser} from './getUser.js';
 import Profile from './Profile.js';
 import './style/form.css';
+/* import io from 'socket.io-client';
+import HOST_CALL from './hostCall.js';
+
+const socket = io(HOST_CALL); */
 
 export default function Form() {
 
@@ -73,7 +77,6 @@ export default function Form() {
         } else if (tab === 'sign-in') {
             setSignUpIsActive(false);
             setSignInIsActive(true);
-            
         }        
     }
     const handleClickSignIn = async (e) => {
@@ -101,7 +104,10 @@ export default function Form() {
         localStorage.setItem('profileImgNameLarge', userAndToken[2].profileImgNameLarge);
         localStorage.setItem('profileImgURLSmall', userAndToken[2].profileImgURLSmall);
         localStorage.setItem('profileImgNameSmall', userAndToken[2].profileImgNameSmall);
-         
+
+        
+        /* socket.emit('create', localStorage.getItem('loggedUsername')); */
+
         setIsLoggedIn((prev) => {
              /* console.log(localStorage.getItem('x-auth-token')) */
              const v = localStorage.getItem('x-auth-token') === 'none'? false : true;
@@ -135,7 +141,7 @@ export default function Form() {
         setNewArticleBtn('inline-block');
         setShowMenu('block');
         setShowFrontend('none');
-        setActiveLink('none') 
+        setActiveLink('none');
     }) 
 
     useEffect(changeButtonLabel, [signInisActive, signUpisActive, requestSent])
@@ -143,6 +149,7 @@ export default function Form() {
     return (
         <>
             <div className="form-container">
+               {/*  <button onClick = {() => console.log('connected ' + socket.connected)}>Konektovan?</button> */}
                 <div className="cmsOverlay" ref={cmsOverlay} style={{ display: showCmsOverlay }}></div>
                         <form className="form">
                             <div className="form-title">
