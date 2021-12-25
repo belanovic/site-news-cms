@@ -52,7 +52,8 @@ var activeRoom;
 var activeCaller;
 
 export default function Call({
-        callee, makeCall, setMakeCall, anotherSocketAlreadyInRoom, setAnotherSocketAlreadyInRoom,
+        callee, makeCall, setMakeCall, setShowOverlay,
+        roomAlreadyCreated, setRoomAlreadyCreatedByAnotherSocket,
         connectedCall, setConnectedCall}) {
 
     const video = useRef(null);
@@ -112,15 +113,14 @@ export default function Call({
 
         socket.emit('create', localStorage.getItem('loggedUsername'))
 
-        socket.on('created', (room) => {setAnotherSocketAlreadyInRoom(false)});
+        socket.on('created', (room) => {setRoomAlreadyCreatedByAnotherSocket(false)});
 
-        socket.on('socketAlreadyInRoom', (room) => {
-            setAnotherSocketAlreadyInRoom(false);
+        socket.on('roomAlreadyCreatedByThisSocket', (room) => {
+            setRoomAlreadyCreatedByAnotherSocket(false);
         })
-        socket.on('anotherSocketAlreadyInRoom', (room) => {
-            setAnotherSocketAlreadyInRoom(true);
+        socket.on('roomAlreadyCreatedByAnotherSocket', (room) => {
+            setRoomAlreadyCreatedByAnotherSocket(true);
         })
-
         socket.on('disconnect', () => {
             setConnectedCall(socket.connected);
         })
@@ -130,6 +130,12 @@ export default function Call({
         })
         
         socket.on('roomIsBusy', (room) => {
+            setShowCall(false);
+            setShowDisconnect(false);
+            setShowCallee(false);
+            activeCaller = '';
+            setMakeCall(false);
+            /* setShowOverlay(true) */
             alert(room + ' ' + 'is busy at the moment');
         })
 
@@ -159,6 +165,7 @@ export default function Call({
            
         })
         socket.on('calling', (room, caller) => {
+            
             callPhase = 'calling';
             if(!isCaller) {
                 activeRoom = room;
@@ -190,20 +197,21 @@ export default function Call({
         })
 
         socket.on('oneDisconnected', (userDisconnected) => {
-
-            if(callPhase !== 'notInCall' && userDisconnected === activeCaller) {
-                activeRoom = '';
-                activeCaller = '';
+            if(callPhase !== 'notInCall' && (userDisconnected === activeCaller || userDisconnected === activeRoom)) {
+                setMakeCall(false);
                 setTalker('');
                 setShowCall(false);
                 setShowAnswer(false);
                 setShowCaller(false);
- 
+                
                 if(callPhase === 'inCall') {
                     setShowDisconnect(false);
                     stopVideo(remoteVideo);
                     stopVideo(video);
                 }
+                socket.emit('leaveRoom', activeRoom);
+                activeRoom = '';
+                activeCaller = '';
                 callPhase = 'notInCall';
                 alert('Caller was disconnected');
             }

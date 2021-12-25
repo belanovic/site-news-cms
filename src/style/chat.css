@@ -15,7 +15,7 @@
     left: 0;
     top: 0;
     right: 0;
-    background-color: blue; 
+    background-color: rgba(0, 0, 0, 0.5); 
     z-index: 2;
 }
 

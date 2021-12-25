@@ -28,6 +28,8 @@ export default function Chat() {
     
     const {roomsCall, setRoomsCall} = useContext(context);
 
+    const [showOverlay, setShowOverlay] = useState(false);
+
     const chatMessages = useRef(null);
     const inputText = useRef(null);
 
@@ -48,7 +50,7 @@ export default function Chat() {
 
     const [connectedChat, setConnectedChat] = useState(false);
     const [connectedCall, setConnectedCall] = useState(false);
-    const [anotherSocketAlreadyInRoom, setAnotherSocketAlreadyInRoom] = useState(false);
+    const [roomAlreadyCreatedByAnotherSocket, setRoomAlreadyCreatedByAnotherSocket] = useState(false);
 
 
     const handleClickCall = (usernameToCall) => {
@@ -174,7 +176,10 @@ export default function Chat() {
     }
 
     useEffect(prom => handleReply(), [messageToReplyIndex]);
-    useEffect(prom => setUsernameLoggedIn(localStorage.getItem('loggedUsername')), [])
+    useEffect(prom => setUsernameLoggedIn(localStorage.getItem('loggedUsername')), []);
+    useEffect(() => {
+        setShowOverlay(roomAlreadyCreatedByAnotherSocket)
+    }, [roomAlreadyCreatedByAnotherSocket])
 
     useEffect(() => {
         
@@ -231,15 +236,16 @@ export default function Chat() {
             className="chat"
             style = {{background: connectedChat? 'green' : 'black'}}
         >
-            <div className = "chat-overlay" style = {{display: anotherSocketAlreadyInRoom? 'block' : 'none'}}></div>
+            <div className = "chat-overlay" style = {{display: showOverlay? 'block' : 'none'}}></div>
             <Call
                 callee = {callee}
                 makeCall = {makeCall}
                 setMakeCall = {setMakeCall}
                 connectedCall = {connectedCall}
                 setConnectedCall = {setConnectedCall}
-                anotherSocketAlreadyInRoom = {anotherSocketAlreadyInRoom}
-                setAnotherSocketAlreadyInRoom = {setAnotherSocketAlreadyInRoom} 
+                roomAlreadyCreatedByAnotherSocket = {roomAlreadyCreatedByAnotherSocket}
+                setRoomAlreadyCreatedByAnotherSocket = {setRoomAlreadyCreatedByAnotherSocket} 
+                setShowOverlay = {setShowOverlay}
             />
             <div className = "chat-rooms">
                 <input
