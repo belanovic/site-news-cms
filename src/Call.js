@@ -15,7 +15,7 @@ const iceServers = [
 
 const streamConstraints = {  
     video: true,
-    audio: false,
+    audio: true,
     /* video: {
         width: 260,
         facingMode: "user"
@@ -274,7 +274,7 @@ export default function Call({
                 rtcPeerConnection.onicecandidate = onIceCandidate;
                 rtcPeerConnection.ontrack = onAddStream;
                 rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
-                /* rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream) */
+                rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream)
                 try {
                     const sessionDescription = await rtcPeerConnection.createOffer();
                     rtcPeerConnection.setLocalDescription(sessionDescription);
@@ -300,7 +300,7 @@ export default function Call({
                 rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
                 localStream = await navigator.mediaDevices.getUserMedia(streamConstraints);
                 rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
-                /* rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream); */
+                rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream);
 
                 try {
                     const sessionDescription = await rtcPeerConnection.createAnswer();
@@ -431,7 +431,7 @@ export default function Call({
             <div className = "video-container">
                 <video
                     ref = {video}
-                    muted = {true}
+                    /* muted = {true} */
                     className="video local-video"
                     onLoadedMetadata = {() => video.current.play()}
                 >
