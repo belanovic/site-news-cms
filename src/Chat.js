@@ -29,6 +29,7 @@ export default function Chat() {
     const {roomsCall, setRoomsCall} = useContext(context);
 
     const [showOverlay, setShowOverlay] = useState(false);
+    const [overlayMessage, setOverlayMessage] = useState('');
 
     const chatMessages = useRef(null);
     const inputText = useRef(null);
@@ -178,7 +179,8 @@ export default function Chat() {
     useEffect(prom => handleReply(), [messageToReplyIndex]);
     useEffect(prom => setUsernameLoggedIn(localStorage.getItem('loggedUsername')), []);
     useEffect(() => {
-        setShowOverlay(roomAlreadyCreatedByAnotherSocket)
+        setShowOverlay(roomAlreadyCreatedByAnotherSocket);
+        setOverlayMessage('You have already connected to the chat server. Close connected tab and reload this page')
     }, [roomAlreadyCreatedByAnotherSocket])
 
     useEffect(() => {
@@ -236,7 +238,12 @@ export default function Chat() {
             className="chat"
             style = {{background: connectedChat? 'green' : 'black'}}
         >
-            <div className = "chat-overlay" style = {{display: showOverlay? 'block' : 'none'}}></div>
+            <div 
+                className = "chat-overlay" 
+                style = {{display: showOverlay? 'block' : 'none'}}
+            >
+                <div className = "overlay-message" >{overlayMessage}</div>
+            </div>
             <Call
                 callee = {callee}
                 makeCall = {makeCall}
@@ -246,6 +253,8 @@ export default function Chat() {
                 roomAlreadyCreatedByAnotherSocket = {roomAlreadyCreatedByAnotherSocket}
                 setRoomAlreadyCreatedByAnotherSocket = {setRoomAlreadyCreatedByAnotherSocket} 
                 setShowOverlay = {setShowOverlay}
+                overlayMessage = {overlayMessage}
+                setOverlayMessage = {setOverlayMessage}                 
             />
             <div className = "chat-rooms">
                 <input

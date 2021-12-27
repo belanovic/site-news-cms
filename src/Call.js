@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import './style/call.css';
 import {context} from './newsContext';
 import HOST_CALL from './hostCall.js';
+import CallTimer from './CallTimer.js';
 
 import io from 'socket.io-client';
 const socket = io(HOST_CALL);
@@ -66,6 +67,8 @@ export default function Call({
     const [showCallee, setShowCallee] = useState(false);
     const [showCaller, setShowCaller] = useState(false);
     const [talker, setTalker] = useState('');
+    const [showTalker, setShowTalker] = useState(false);
+    const [showTimer, setShowTimer] = useState(false);
 
     const connect = () => {
         socket.emit('join', callee);
@@ -179,37 +182,43 @@ export default function Call({
         socket.on('rejectToCaller', (room) => {
             setMakeCall(false);
             stopVideo(video);
+            isCaller = false;
             setShowDisconnect(false);
             setShowCaller(false);
+            setTalker('');
+            setShowCallee(false);
             setShowCall(false);
             socket.emit('leaveRoom', activeRoom);
         })
         socket.on('rejectToCallee', (room) => {
             setShowCall(false);
             setShowAnswer(false);
-            setShowCaller(true);
+            setTalker('');
         })
         socket.on('accept', async (room) => {
             await getVideo(video, streamConstraints);
-            setShowDisconnect(true);
+            
             setShowAnswer(false);
+            setShowCaller(false);
+
             socket.emit('ready', room);
         })
 
         socket.on('oneDisconnected', (userDisconnected) => {
-            if(callPhase !== 'notInCall' && (userDisconnected === activeCaller || userDisconnected === activeRoom)) {
+            if(callPhase !== 'notInCall' && (userDisconnected === activeCaller /* || userDisconnected === activeRoom */)) {
                 setMakeCall(false);
-                setTalker('');
                 setShowCall(false);
                 setShowAnswer(false);
                 setShowCaller(false);
+                setTalker('');
                 
                 if(callPhase === 'inCall') {
                     setShowDisconnect(false);
                     stopVideo(remoteVideo);
                     stopVideo(video);
+                    setShowTimer(false);
+                    setShowTalker(false);
                 }
-                socket.emit('leaveRoom', activeRoom);
                 activeRoom = '';
                 activeCaller = '';
                 callPhase = 'notInCall';
@@ -223,12 +232,14 @@ export default function Call({
                 setMakeCall(false);
                 setShowDisconnect(false);
                 setShowCall(false);
+                setShowCallee(false);
                 socket.emit('leaveRoom', activeRoom);
                 isCaller = false;
             } else {
                 setShowDisconnect(false);
                 setShowCaller(false);
                 setShowCall(false);
+                setShowAnswer(false);
             }
             callPhase = 'notInCall';
         })
@@ -238,17 +249,20 @@ export default function Call({
             rtcPeerConnection.close();
             stopVideo(remoteVideo);
             stopVideo(video);
-
+            
+            setShowTimer(false);
+            setShowDisconnect(false);
+            setShowCall(false);
+            setShowTalker(false);
+            
             if(isCaller) {
                 setMakeCall(false);
-                setShowDisconnect(false);
-                setShowCall(false);
+                setShowCallee(false);
                 socket.emit('leaveRoom', activeRoom);
                 isCaller = false;
             } else {
-                setShowDisconnect(false);
                 setShowCaller(false);
-                setShowCall(false);
+                setShowAnswer(false);
             }
             callPhase = 'notInCall';
         })
@@ -296,6 +310,10 @@ export default function Call({
                         sdp: sessionDescription,
                         room: activeRoom
                     })
+                    setShowCaller(false);
+                    setShowTalker(true);
+                    setShowTimer(true);
+                    setShowDisconnect(true);
                     callPhase = 'inCall';
     
                 } catch (err) {
@@ -305,6 +323,10 @@ export default function Call({
         })
         socket.on('answer', (event) => {
             rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event));
+            setShowCallee(false);
+            setShowTalker(true);
+            setShowTimer(true);
+            
             callPhase = 'inCall';
         })
         socket.on('candidate', (event) => {
@@ -329,45 +351,79 @@ export default function Call({
             }}
         >
             <div  className="call-display">
-                <div 
-                    className = "calling-callee"
-                    style = {{display: showCallee? 'block' : 'none'}}
-                >Calling {callee}...
+                <div
+                    className = "calling-callee" 
+                    style = {{display: showCallee? 'flex' : 'none'}}
+                >
+                    <div 
+                        className = "callee-name"
+                    >Calling {callee}...
+                    </div>
                 </div>
-                <div 
-                    className = "calling-caller"
-                    style = {{display: showCaller? 'block' : 'none'}}
-                >{activeCaller} is calling
+                <div
+                    className = "calling-caller" 
+                    style = {{display: showCaller? 'flex' : 'none'}}
+                >
+                    <div 
+                        className = "caller-name"
+                    >{activeCaller} is calling...
+                    </div>
                 </div>
 
-                <div className = "talker">{talker}</div>
-                <div className = "duration"></div>
-                <button 
-                    onClick = {() => {
-                        let event;
-                        if(callPhase === 'joinedRoom') return;
-                        if(callPhase === 'calling') {event = 'abort'}
-                        if(callPhase === 'inCall') {event = 'endTalk'}
-                        handleDisconnect(event);
-                    }}
+                <div 
+                    className = "talker"
+                    style = {{display: showTalker? 'flex' : 'none'}}
+                >
+                    <div className = "talker-caption">{talker}</div>
+                </div>
+                
+                <div className = "call-duration">{showTimer? <CallTimer /> : ''}</div>
+
+                <div 
+                    className = "disconnect"
                     style = {{display: showDisconnect? 'block' : 'none'}}
-                >Disconnect
-                </button>
-   
+                > 
+                    <div 
+                        className = "disconnect-button"
+                        onClick = {() => {
+                            let event;
+                            if(callPhase === 'joinedRoom') return;
+                            if(callPhase === 'calling') {event = 'abort'}
+                            if(callPhase === 'inCall') {event = 'endTalk'}
+                            handleDisconnect(event);
+                        }}
+                    >
+                        <i  className = "fas fa-phone-slash"></i>
+                    </div>
+                    <div className = "disconnect-caption" >Disconnect</div>
+                </div>
+                
                 <div 
                     className = "call-answer"
-                    style = {{display: showAnswer? 'block' : 'none'}}
+                    style = {{display: showAnswer? 'flex' : 'none'}}
                 >
-                        <button 
+                    <div 
+                        className = "accept"
+                    >
+                        <div  
                             className = "accept-button"
                             onClick = {() => handleAccept()}
-                        >Answer
-                        </button>
-                        <button 
-                            className = "reject-button"
-                            onClick = {() => handleReject()}
-                        >Reject
-                        </button>
+                        >
+                            <i className = "fas fa-phone"></i>
+                        </div>
+                        <div className = "accept-caption" >Accept</div>
+                    </div>
+
+                    <div 
+                        className = "reject"
+                        onClick = {() => handleReject()}
+                    >
+                        <div className = "reject-button">
+                            <i className = "fas fa-phone-slash"></i>
+                        </div>
+                        <div className = "reject-caption" >Reject</div>
+                    </div>
+                    
                 </div>
 
             </div>

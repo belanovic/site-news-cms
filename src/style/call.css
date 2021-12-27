@@ -2,9 +2,132 @@
     background: white;
     border: solid black 5px;
     margin: 15px;
-    padding: 15px
+    padding: 15px;
 }
 
+.call-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+    background-color: black;
+    padding: 2em;
+    height: 230px;
+}
+
+.calling-callee, .calling-caller {
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 0.5em;
+}
+
+.disconnect {
+   margin-top: auto;
+}
+
+.disconnect-button {
+    background:linear-gradient(rgb(218, 0, 0), rgb(255, 110, 110));
+    color: white;
+    padding: 0.75em;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+.disconnect-button:hover {
+    cursor: pointer;
+    background:linear-gradient(rgb(133, 0, 0), rgb(246, 68, 68));
+}
+
+.disconnect-button:active {
+    transform: scale(0.99, 0.99);
+}
+
+.disconnect-caption {
+    text-align: center;
+    color: white;
+}
+
+.disconnect .fa-phone-slash {
+    font-size: 1.5rem;
+}
+
+.call-answer {
+    justify-content: space-around;
+    align-items: center;
+}
+
+.accept, .reject {
+    flex: 0 0 30%;
+    text-align: center;
+}
+
+.accept-button {
+    background: linear-gradient(green, rgb(0, 184, 0));
+    padding: 0.75em;
+    border-radius: 50%;
+    margin-bottom: 0.5em;
+}
+.reject-button {
+    background: linear-gradient(rgb(218, 0, 0), rgb(255, 82, 82));
+    padding: 0.75em;
+    border-radius: 50%;
+    margin-bottom: 0.5em;
+}
+
+.accept-button:hover {
+    cursor: pointer;
+    background: linear-gradient(rgb(0, 97, 0), rgb(0, 156, 0));
+}
+ .reject-button:hover {
+    cursor: pointer;
+    background: linear-gradient(rgb(161, 0, 0), rgb(253, 50, 50));
+}
+.accept-button:active, .reject-button:active {
+    transform: scale(0.99, 0.99);
+}
+
+.accept-button .fa-phone {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.reject-button .fa-phone-slash {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.accept-caption, .reject-caption {
+    text-align: center;
+    color: white;
+}
+.talker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+}
+.talker-caption {
+    border: 2px dotted white;
+    border-radius: 50%;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    padding: 1em;
+}
+.call-duration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+}
+.duration-numbers {
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+}
 .video {
     height: 400px;
 }
