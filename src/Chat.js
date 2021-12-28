@@ -47,20 +47,20 @@ export default function Chat() {
     const [displayMessageToReply, setDisplayMessageToReply] = useState(false);
 
     const [callee, setCallee] = useState('');
-    const [makeCall, setMakeCall] = useState(false);
+    const [makeCall, setMakeCall] = useState({start: false, type: ''});
 
     const [connectedChat, setConnectedChat] = useState(false);
     const [connectedCall, setConnectedCall] = useState(false);
     const [roomAlreadyCreatedByAnotherSocket, setRoomAlreadyCreatedByAnotherSocket] = useState(false);
 
 
-    const handleClickCall = (usernameToCall) => {
+    const handleClickCall = (usernameToCall, callType) => {
         if(!roomsCall.some(prom => prom === usernameToCall)) {
             alert(usernameToCall + ' ' + 'is not logged innnnn');
             return
         }
         setCallee(usernameToCall);
-        setMakeCall(true)
+        setMakeCall({start: true, type: callType});
     }
 
     const addRoom = () => {
@@ -318,16 +318,35 @@ export default function Chat() {
                                                 : 
                                                 <img src = {msg.profileImgURLLarge}></img>}
                                             <div className = "chat-profile-name">{msg.username}</div>
-                                            <div className = "call-icon">
-                                                {roomsCall.some(prom => prom === msg.username)?
+                                            <div className = "call-icons">
+                                                <div className = "audio-icon">
+                                                    {roomsCall.some(prom => prom === msg.username)?
 
-                                                    <i 
-                                                        className="fas fa-phone-square-alt"
-                                                        onClick = {() => handleClickCall(msg.username)}
-                                                    ></i>
-                                                    :
-                                                    <i className="fas fa-phone-slash"></i>
-                                                }
+                                                        <i 
+                                                            className="fas fa-phone-alt"                                                           
+                                                            onClick = {() => {
+                                                                if(makeCall.start === true) {return}
+                                                                handleClickCall(msg.username, 'audio');
+                                                            }}
+                                                        ></i>
+                                                        :
+                                                        <i className="fas fa-phone-slash"></i>
+                                                    }
+                                                </div>
+                                                <div className = "video-icon">
+                                                    {roomsCall.some(prom => prom === msg.username)?
+                                                    
+                                                        <i 
+                                                            className="fas fa-video"
+                                                            onClick = {() => {
+                                                                if(makeCall.start === true) {return}
+                                                                handleClickCall(msg.username, 'video');
+                                                            }}
+                                                        ></i>
+                                                        :
+                                                        <i className="fas fa-phone-slash"></i>
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

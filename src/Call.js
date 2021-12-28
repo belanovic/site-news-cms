@@ -13,26 +13,8 @@ const iceServers = [
     {urls: "stun:stun.l.google.com:19302"}
   ]
 
-const streamConstraints = {  
-    video: true,
-    audio: true,
-    /* video: {
-        width: 260,
-        facingMode: "user"
-    } */ 
-}
-
-function stopVideo(video) {
-    const stream = video.current.srcObject;
-    const tracks = stream.getTracks();
-    
-    tracks.forEach(function(track) {
-        track.stop();
-    });
-    video.current.srcObject = null;
-    }
-
 const getVideo = async (video, streamConstraints) => {
+    console.log(streamConstraints)
     try {
         const stream = await navigator.mediaDevices.getUserMedia(streamConstraints);
         localStream = stream;
@@ -43,6 +25,18 @@ const getVideo = async (video, streamConstraints) => {
         return false;
     }
 }
+
+function stopVideo(video) {
+    const stream = video.current.srcObject;
+    const tracks = stream.getTracks();
+    
+    tracks.forEach(function(track) {
+        track.stop();
+    });
+    video.current.srcObject = null;
+}
+
+var streamConstraints;
 
 var callPhase = 'notInCall';
 var isCaller = false;
@@ -56,6 +50,7 @@ export default function Call({
         callee, makeCall, setMakeCall, setShowOverlay,
         roomAlreadyCreated, setRoomAlreadyCreatedByAnotherSocket,
         connectedCall, setConnectedCall}) {
+
 
     const video = useRef(null);
     const remoteVideo = useRef(null);
@@ -101,7 +96,16 @@ export default function Call({
     }
 
     useEffect(() => {
-        if(makeCall === true) {
+        if(makeCall.start === true) {
+            streamConstraints = {
+                audio: true,
+                video: makeCall.type === 'video'? {
+                    width: 260,
+                    facingMode: "user",
+                    aspectRatio: 1.5
+                } : false
+                /* video: makeCall.type === 'video'? true : false */
+            }
             connect();
             setShowCall(true);
             setShowDisconnect(true);
@@ -114,7 +118,7 @@ export default function Call({
 
         setConnectedCall(socket.connected);
 
-        socket.emit('create', localStorage.getItem('loggedUsername'))
+        socket.emit('create', localStorage.getItem('loggedUsername'));
 
         socket.on('created', (room) => {setRoomAlreadyCreatedByAnotherSocket(false)});
 
@@ -137,7 +141,9 @@ export default function Call({
             setShowDisconnect(false);
             setShowCallee(false);
             activeCaller = '';
-            setMakeCall(false);
+            setMakeCall((prev) => {
+                return {...prev, start: false}
+            });
             /* setShowOverlay(true) */
             alert(room + ' ' + 'is busy at the moment');
         })
@@ -158,19 +164,22 @@ export default function Call({
                 activeCaller = '';
                 activeRoom = '';
                 callPhase = 'notInCall';
-                setMakeCall(false);
+                setMakeCall((prev) => {
+                    return {...prev, start: false}
+                });
                 alert("Couldn't get your media");
             } else {
                 setTalker(room);
                 isCaller = true;
-                socket.emit('calling', activeRoom, activeCaller);
+                socket.emit('calling', activeRoom, activeCaller, streamConstraints);
             }
            
         })
-        socket.on('calling', (room, caller) => {
+        socket.on('calling', (room, caller, constraints) => {
             
             callPhase = 'calling';
             if(!isCaller) {
+                streamConstraints = constraints;
                 activeRoom = room;
                 activeCaller = caller;
                 setTalker(caller);
@@ -180,7 +189,9 @@ export default function Call({
             }
         })
         socket.on('rejectToCaller', (room) => {
-            setMakeCall(false);
+            setMakeCall((prev) => {
+                return {...prev, start: false}
+            });
             stopVideo(video);
             isCaller = false;
             setShowDisconnect(false);
@@ -205,8 +216,10 @@ export default function Call({
         })
 
         socket.on('oneDisconnected', (userDisconnected) => {
-            if(callPhase !== 'notInCall' && (userDisconnected === activeCaller /* || userDisconnected === activeRoom */)) {
-                setMakeCall(false);
+            if(callPhase !== 'notInCall' && (userDisconnected === activeCaller || userDisconnected === activeRoom)) {
+                setMakeCall((prev) => {
+                    return {...prev, start: false}
+                });
                 setShowCall(false);
                 setShowAnswer(false);
                 setShowCaller(false);
@@ -219,6 +232,7 @@ export default function Call({
                     setShowTimer(false);
                     setShowTalker(false);
                 }
+                socket.emit('leaveRoom', activeRoom);
                 activeRoom = '';
                 activeCaller = '';
                 callPhase = 'notInCall';
@@ -229,7 +243,9 @@ export default function Call({
         socket.on('abort', (room) => {
             if(isCaller) {
                 stopVideo(video);
-                setMakeCall(false);
+                setMakeCall((prev) => {
+                    return {...prev, start: false}
+                });
                 setShowDisconnect(false);
                 setShowCall(false);
                 setShowCallee(false);
@@ -256,7 +272,9 @@ export default function Call({
             setShowTalker(false);
             
             if(isCaller) {
-                setMakeCall(false);
+                setMakeCall((prev) => {
+                    return {...prev, start: false}
+                });
                 setShowCallee(false);
                 socket.emit('leaveRoom', activeRoom);
                 isCaller = false;
@@ -273,8 +291,12 @@ export default function Call({
                 rtcPeerConnection = new RTCPeerConnection(iceServers);
                 rtcPeerConnection.onicecandidate = onIceCandidate;
                 rtcPeerConnection.ontrack = onAddStream;
-                rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
-                rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream)
+                if(streamConstraints.video === false) {
+                    rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
+                } else if(streamConstraints.video !== false) {
+                    rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
+                    rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream)
+                }
                 try {
                     const sessionDescription = await rtcPeerConnection.createOffer();
                     rtcPeerConnection.setLocalDescription(sessionDescription);
@@ -297,10 +319,16 @@ export default function Call({
                 rtcPeerConnection.onicecandidate = onIceCandidate;
                 rtcPeerConnection.ontrack = onAddStream;
                 
-                rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
+                rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event));
+                console.log(streamConstraints + 'pre getUserMedia');
                 localStream = await navigator.mediaDevices.getUserMedia(streamConstraints);
-                rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
-                rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream);
+                console.log(streamConstraints + 'posle getUserMedia');
+                if(streamConstraints.video === false) {
+                    rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
+                } else if(streamConstraints.video !== false) {
+                    rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
+                    rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream)
+                }
 
                 try {
                     const sessionDescription = await rtcPeerConnection.createAnswer();
@@ -431,7 +459,7 @@ export default function Call({
             <div className = "video-container">
                 <video 
                     ref = {video}
-                    muted = {true}   
+                    muted = {true} 
                     className="video local-video"
                     onLoadedMetadata = {() => video.current.play()}
                 >
