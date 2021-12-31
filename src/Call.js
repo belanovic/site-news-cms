@@ -6,7 +6,7 @@ import CallTimer from './CallTimer.js';
 
 import io from 'socket.io-client';
 const socket = io(HOST_CALL);
-
+ 
 
 const iceServers = [  
     {urls: "stun:stun.services.mozilla.org"},
@@ -468,7 +468,7 @@ export default function Call({
                     ref = {remoteVideo}
                     className="video remote-video"
                     onLoadedMetadata = {() => remoteVideo.current.play()}
-                   
+                    muted = {true} 
                 >
                 </video>
                 {/* <audio

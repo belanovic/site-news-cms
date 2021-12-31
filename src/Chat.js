@@ -8,7 +8,7 @@ import imageCompression from 'browser-image-compression';
 import shortenSentence from './shortenSentence';
 import HOST_CHAT from './hostChat.js';
 import Call from './Call';
-
+ 
 const soundCheck = new Audio('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-sounds%2F590274__mrfossy__sfx-stickerripper-cluckbuttons-06.wav?alt=media&token=7e31eb83-1283-46ea-bfa3-302cba453d70')
 const soundUncheck = new Audio('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-sounds%2F589940__mrfossy__sfx-squelch-slayer-impulse-72.wav?alt=media&token=95b7f193-a27b-4467-9b41-5b65a92a52d1')
 const soundSendMessage = new Audio('https://firebasestorage.googleapis.com/v0/b/site-news-storage.appspot.com/o/site-news-sounds%2F589135__mrfossy__sfx-simplesnaps-singles-01.wav?alt=media&token=8c219a05-5cf3-4b84-9df6-6d48c17b45a5')
