@@ -133,7 +133,6 @@
 
 .video-container {
     position: relative;
-    background: black;
 }
 
 .video {
@@ -141,14 +140,51 @@
 }
 
 .local-video {
-    width: 30%;
     position: absolute;
-    top: 0;
-    right: 0;
-    border: 2px solid black;
+    top: 3px;
+    right: 3px;
+    /* border: 2px solid black; */;
+    box-shadow: inset 0px 0px 0px 5px rgb(49, 49, 49);
+    transition: width 250ms;
+    background: rgb(0, 0, 0);
+}
+
+.local-video.show {
+    width: 30%;
+}
+.local-video.hide {
+    width: 0;
+}
+
+.local-video video {
+    width: 100%;
+}
+
+.toggle-video  {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1;
+}
+
+.video-container:hover .toggle-video {
+    display: block;
+}
+
+.toggle-video .fa-eye, .toggle-video .fa-eye-slash {
+    color: white;
+    font-size: 1rem;
+}
+
+.toggle-video .fa-eye:hover, .toggle-video .fa-eye-slash:hover {
+    cursor: pointer;
 }
 
 .remote-video {
+    background: rgb(31, 31, 31);
+}
+
+.remote-video video {
     width: 100%;
-    border: 5px solid red;
 }

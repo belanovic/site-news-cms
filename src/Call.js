@@ -56,14 +56,16 @@ export default function Call({
     const remoteVideo = useRef(null);
 
     const {roomsCall, setRoomsCall} = useContext(context);
-    const [showCall, setShowCall] = useState(false);
+    const [showCall,  ] = useState(false);
     const [showAnswer, setShowAnswer] = useState(false);
     const [showDisconnect, setShowDisconnect] = useState(false);
-    const [showCallee, setShowCallee] = useState(false);
-    const [showCaller, setShowCaller] = useState(false);
+    const [showCallee,  ee] = useState(false);
+    const [showCaller,  er] = useState(false);
     const [talker, setTalker] = useState('');
     const [showTalker, setShowTalker] = useState(false);
     const [showTimer, setShowTimer] = useState(false);
+    const [showVideo, setShowVideo] = useState(false);
+    const [showLocalVideo, setShowLocalVideo] = useState(false);
 
     const connect = () => {
         socket.emit('join', callee);
@@ -107,9 +109,9 @@ export default function Call({
                 /* video: makeCall.type === 'video'? true : false */
             }
             connect();
-            setShowCall(true);
+             (true);
             setShowDisconnect(true);
-            setShowCallee(true);
+             ee(true);
             activeCaller = localStorage.getItem('loggedUsername');
         }
     }, [makeCall])
@@ -137,9 +139,10 @@ export default function Call({
         })
         
         socket.on('roomIsBusy', (room) => {
-            setShowCall(false);
+             (false);
+
             setShowDisconnect(false);
-            setShowCallee(false);
+             ee(false);
             activeCaller = '';
             setMakeCall((prev) => {
                 return {...prev, start: false}
@@ -158,9 +161,9 @@ export default function Call({
             const hasVideo = await getVideo(video, streamConstraints);
             if(!hasVideo) {
                 socket.emit('leaveRoom', activeRoom);
-                setShowCall(false);
+                 (false);
                 setShowDisconnect(false);
-                setShowCallee(false);
+                 ee(false);
                 activeCaller = '';
                 activeRoom = '';
                 callPhase = 'notInCall';
@@ -169,6 +172,10 @@ export default function Call({
                 });
                 alert("Couldn't get your media");
             } else {
+                if(streamConstraints.video) {
+                    setShowVideo(true);
+                    setShowLocalVideo(true);
+                }
                 setTalker(room);
                 isCaller = true;
                 socket.emit('calling', activeRoom, activeCaller, streamConstraints);
@@ -176,16 +183,18 @@ export default function Call({
            
         })
         socket.on('calling', (room, caller, constraints) => {
-            
             callPhase = 'calling';
             if(!isCaller) {
                 streamConstraints = constraints;
                 activeRoom = room;
                 activeCaller = caller;
                 setTalker(caller);
-                setShowCall(true);
+                 (true);
+                if(constraints.video) {
+                    setShowVideo(true);
+                }
                 setShowAnswer(true);
-                setShowCaller(true);
+                 er(true);
             }
         })
         socket.on('rejectToCaller', (room) => {
@@ -193,15 +202,19 @@ export default function Call({
                 return {...prev, start: false}
             });
             stopVideo(video);
+
+            
             isCaller = false;
             setShowDisconnect(false);
-            setShowCaller(false);
+             er(false);
             setTalker('');
-            setShowCallee(false);
-            setShowCall(false);
+             ee(false);
+             (false);
+            setShowVideo(false);
             socket.emit('leaveRoom', activeRoom);
         })
         socket.on('rejectToCallee', (room) => {
+            setShowVideo(false);
             setShowCall(false);
             setShowAnswer(false);
             setTalker('');
@@ -221,6 +234,7 @@ export default function Call({
                     return {...prev, start: false}
                 });
                 setShowCall(false);
+                setShowVideo(false);
                 setShowAnswer(false);
                 setShowCaller(false);
                 setTalker('');
@@ -229,6 +243,7 @@ export default function Call({
                     setShowDisconnect(false);
                     stopVideo(remoteVideo);
                     stopVideo(video);
+               
                     setShowTimer(false);
                     setShowTalker(false);
                 }
@@ -243,11 +258,13 @@ export default function Call({
         socket.on('abort', (room) => {
             if(isCaller) {
                 stopVideo(video);
+     
                 setMakeCall((prev) => {
                     return {...prev, start: false}
                 });
                 setShowDisconnect(false);
                 setShowCall(false);
+                setShowVideo(false);
                 setShowCallee(false);
                 socket.emit('leaveRoom', activeRoom);
                 isCaller = false;
@@ -255,6 +272,7 @@ export default function Call({
                 setShowDisconnect(false);
                 setShowCaller(false);
                 setShowCall(false);
+                setShowVideo(false);
                 setShowAnswer(false);
             }
             callPhase = 'notInCall';
@@ -265,21 +283,22 @@ export default function Call({
             rtcPeerConnection.close();
             stopVideo(remoteVideo);
             stopVideo(video);
-            
+
             setShowTimer(false);
             setShowDisconnect(false);
-            setShowCall(false);
+             (false);
+            setShowVideo(false);
             setShowTalker(false);
             
             if(isCaller) {
                 setMakeCall((prev) => {
                     return {...prev, start: false}
                 });
-                setShowCallee(false);
+                 ee(false);
                 socket.emit('leaveRoom', activeRoom);
                 isCaller = false;
             } else {
-                setShowCaller(false);
+                 er(false);
                 setShowAnswer(false);
             }
             callPhase = 'notInCall';
@@ -338,7 +357,7 @@ export default function Call({
                         sdp: sessionDescription,
                         room: activeRoom
                     })
-                    setShowCaller(false);
+                     er(false);
                     setShowTalker(true);
                     setShowTimer(true);
                     setShowDisconnect(true);
@@ -351,7 +370,7 @@ export default function Call({
         })
         socket.on('answer', (event) => {
             rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event));
-            setShowCallee(false);
+             ee(false);
             setShowTalker(true);
             setShowTimer(true);
             
@@ -456,21 +475,43 @@ export default function Call({
 
             </div>
   
-            <div className = "video-container">
-                <video 
-                    ref = {video}
-                    muted = {true} 
-                    className="video local-video"
-                    onLoadedMetadata = {() => video.current.play()}
-                >
-                </video>
-                <video
+            <div className = "video-container"
+                 style = {{display: showVideo? 'block' : 'none'}}
+            
+            >
+                <div className= {`video local-video ${showLocalVideo? 'show' : 'hide'}`}>
+                    <video 
+                        ref = {video}
+                        muted = {true} 
+                        onLoadedMetadata = {() => video.current.play()}
+                    >
+                    </video>
+                    <div 
+                        className= {`toggle-video`}
+                    >
+                        <i 
+                            className= "fas fa-eye-slash"
+                            onClick = {() => setShowLocalVideo(false)}
+                            style = {{display: showLocalVideo? 'block' : 'none'}}
+                            ></i>
+                        <i 
+                            className= "fas fa-eye"
+                            onClick = {() => setShowLocalVideo(true)}
+                            style = {{display: showLocalVideo? 'none' : 'block'}}
+                        ></i>
+                    </div>
+                </div>
+
+                <div className= {`video remote-video ${showLocalVideo? 'show' : 'hide'}`}>
+                   <video
                     ref = {remoteVideo}
-                    className="video remote-video"
+                    
                     onLoadedMetadata = {() => remoteVideo.current.play()}
                     muted = {true} 
                 >
-                </video>
+                    </video>  
+                </div>
+               
                 {/* <audio
                     className="video remote-video"
                     onLoadedMetadata = {() => remoteVideo.current.play()}
