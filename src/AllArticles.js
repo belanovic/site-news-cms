@@ -11,6 +11,7 @@ import './style/all-articles-item.css';
 import {alphabet} from './cirilizatorDecirilizator.js';
 import FindLabel from './FindLabel.js'
 
+
 const NEWS_PER_PAGE = 10; 
 
 export default function AllArticles() {
