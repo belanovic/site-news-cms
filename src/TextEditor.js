@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-
+///
 
 export default function TextEditor({text, setText, initialText}) {
    const editorRef = useRef(null);
