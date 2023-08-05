@@ -56,11 +56,11 @@ export default function Call({
     const remoteVideo = useRef(null);
 
     const {roomsCall, setRoomsCall} = useContext(context);
-    const [showCall,  ] = useState(false);
+    const [showCall,setShowCall] = useState(false);
     const [showAnswer, setShowAnswer] = useState(false);
     const [showDisconnect, setShowDisconnect] = useState(false);
-    const [showCallee,  ee] = useState(false);
-    const [showCaller,  er] = useState(false);
+    const [showCallee, setShowCallee] = useState(false);
+    const [showCaller, setShowCaller] = useState(false);
     const [talker, setTalker] = useState('');
     const [showTalker, setShowTalker] = useState(false);
     const [showTimer, setShowTimer] = useState(false);
@@ -111,7 +111,7 @@ export default function Call({
             connect();
              (true);
             setShowDisconnect(true);
-             ee(true);
+            setShowCallee(true);
             activeCaller = localStorage.getItem('loggedUsername');
         }
     }, [makeCall])
@@ -142,7 +142,7 @@ export default function Call({
              (false);
 
             setShowDisconnect(false);
-             ee(false);
+            setShowCallee(false);
             activeCaller = '';
             setMakeCall((prev) => {
                 return {...prev, start: false}
@@ -163,7 +163,7 @@ export default function Call({
                 socket.emit('leaveRoom', activeRoom);
                  (false);
                 setShowDisconnect(false);
-                 ee(false);
+                setShowCallee(false);
                 activeCaller = '';
                 activeRoom = '';
                 callPhase = 'notInCall';
@@ -194,7 +194,7 @@ export default function Call({
                     setShowVideo(true);
                 }
                 setShowAnswer(true);
-                 er(true);
+                setShowCaller(true);
             }
         })
         socket.on('rejectToCaller', (room) => {
@@ -206,9 +206,9 @@ export default function Call({
             
             isCaller = false;
             setShowDisconnect(false);
-             er(false);
+            setShowCaller(false);
             setTalker('');
-             ee(false);
+            setShowCallee(false);
              (false);
             setShowVideo(false);
             socket.emit('leaveRoom', activeRoom);
@@ -294,11 +294,11 @@ export default function Call({
                 setMakeCall((prev) => {
                     return {...prev, start: false}
                 });
-                 ee(false);
+                setShowCallee(false);
                 socket.emit('leaveRoom', activeRoom);
                 isCaller = false;
             } else {
-                 er(false);
+                setShowCaller(false);
                 setShowAnswer(false);
             }
             callPhase = 'notInCall';
@@ -357,7 +357,7 @@ export default function Call({
                         sdp: sessionDescription,
                         room: activeRoom
                     })
-                     er(false);
+                    setShowCaller(false);
                     setShowTalker(true);
                     setShowTimer(true);
                     setShowDisconnect(true);
@@ -370,7 +370,7 @@ export default function Call({
         })
         socket.on('answer', (event) => {
             rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event));
-             ee(false);
+            setShowCallee(false);
             setShowTalker(true);
             setShowTimer(true);
             
